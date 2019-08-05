@@ -4,12 +4,12 @@ using CheckCheque.ViewModels;
 using Plugin.Media;
 using Xamarin.Forms;
 
-namespace CheckCheque
+namespace CheckCheque.Views
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(true)]
-    public partial class MainPage : ContentPage
+    public partial class InvoicesPage : ContentPage
     {
         #region Properties and indexers
         /// <summary>
@@ -20,9 +20,9 @@ namespace CheckCheque
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainPage"/> class.
+        /// Initializes a new instance of the <see cref="InvoicesPage"/> class.
         /// </summary>
-        public MainPage()
+        public InvoicesPage()
         {
             InitializeComponent();
 

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace CheckCheque
+namespace CheckCheque.Views
 {
     public partial class LoginPage : ContentPage
     {
@@ -9,7 +9,7 @@ namespace CheckCheque
             InitializeComponent();
         }
 
-        void Handle_Clicked(object sender, System.EventArgs e)
+        protected void Handle_Clicked(object sender, System.EventArgs e)
         {
             if (string.IsNullOrEmpty(this.PasswordEntry.Text))
             {
@@ -24,8 +24,6 @@ namespace CheckCheque
                 this.PasswordEntry.Text = "";
                 return;
             }
-
-            this.Navigation.PushAsync(new MainPage());
         }
     }
 }
