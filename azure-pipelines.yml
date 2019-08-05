@@ -65,7 +65,3 @@ jobs:
       configuration: '$(buildConfiguration)'
       buildForSimulator: true
       packageApp: false
-  
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathtoPublish: '$(outputDirectory)'
