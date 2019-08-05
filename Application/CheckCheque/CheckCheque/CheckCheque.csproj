@@ -14,12 +14,10 @@
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
-    <PackageReference Include="ReactiveUI" Version="9.19.5" />
     <PackageReference Include="Splat" Version="8.1.1" />
     <PackageReference Include="Splat.ReactiveUIExtensions" Version="1.0.2" />
     <PackageReference Include="Xamarin.HotReload" Version="1.4.15" />
     <PackageReference Include="Plugin.CrossPlatformTintedImage" Version="1.0.0" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
