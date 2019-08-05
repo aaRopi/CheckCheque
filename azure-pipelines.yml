@@ -25,7 +25,7 @@ jobs:
 
   - task: XamarinAndroid@1
     inputs:
-      projectFile: 'CheckCheque/Application/CheckCheque/CheckCheque.Android/CheckCheque.Android.csproj'
+      projectFile: '**/*droid*.csproj'
       outputDirectory: '$(outputDirectory)'
       configuration: '$(buildConfiguration)'
 
@@ -58,7 +58,7 @@ jobs:
 
   - task: XamariniOS@2
     inputs:
-      projectFile: 'CheckCheque.iOS.csproj'
+      projectFile: '**/*iOS.csproj'
       configuration: '$(buildConfiguration)'
       buildForSimulator: true
       packageApp: false
