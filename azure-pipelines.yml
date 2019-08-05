@@ -25,7 +25,7 @@ jobs:
 
   - task: XamarinAndroid@1
     inputs:
-      projectFile: '/Application/CheckCheque/CheckCheque.Android/CheckCheque.Android.csproj'
+      projectFile: 'CheckCheque/CheckCheque.Android/CheckCheque.Android.csproj'
       outputDirectory: '$(outputDirectory)'
       configuration: '$(buildConfiguration)'
 
