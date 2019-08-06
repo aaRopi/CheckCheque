@@ -36,11 +36,17 @@ jobs:
     inputs:
       secureFile: 'pRopiaAndroidSigningCertificate.keystore'
 
+  # - task: AndroidSigning@3
+  #   inputs:
+  #     apkFiles: '$(outputDirectory)/*.apk'
+  #     apksign: true
+  #     apksignerKeystoreFile: '$(androidKeyStore.secureFilePath)'
+  #     apksignerKeystorePassword: '
   - task: AndroidSigning@3
     inputs:
-      apkFiles: '$(outputDirectory)/*.apk'
+      apkFiles: '**/*.apk'
       apksign: true
-      apksignerKeystoreFile: '$(androidKeyStore.secureFilePath)'
+      apksignerKeystoreFile: 'pRopiaAndroidSigningCertificate.keystore'
       apksignerKeystorePassword: '$(androidKeyStorePassword)'
 
   - task: PublishBuildArtifacts@1
