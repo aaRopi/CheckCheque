@@ -30,11 +30,18 @@ jobs:
       outputDirectory: '$(outputDirectory)'
       configuration: '$(buildConfiguration)'
 
+  - task: DownloadSecureFile@1
+    name: androidKeyStore
+    displayName: 'Download Android KeyStore file'
+    inputs:
+      secureFile: 'pRopiaAndroidSigningCertificate.keystore'
+
   - task: AndroidSigning@3
     inputs:
-      apksign: false
-      zipalign: false
       apkFiles: '$(outputDirectory)/*.apk'
+      apksign: true
+      apksignerKeystoreFile: $(androidKeyStore.secureFilePath)
+      apksignerKeystorePassword: $(androidKeyStorePassword)
 
   - task: PublishBuildArtifacts@1
     inputs:
