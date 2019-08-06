@@ -5,7 +5,8 @@
     xmlns:converters="clr-namespace:CheckCheque.Converters"
     xmlns:controls="clr-namespace:Plugin.CrossPlatformTintedImage.Abstractions;assembly=Plugin.CrossPlatformTintedImage.Abstractions"
     x:Class="CheckCheque.Views.InvoicesPage"
-    Title="Invoices">
+    Title="Invoices"
+    BackgroundColor="White">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBoolConverter" />
@@ -19,7 +20,9 @@
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
         <!-- Search bar for invoices -->
-        <SearchBar Placeholder="Search for invoices.." PlaceholderColor="LightGray" />
+        <SearchBar
+            Placeholder="Search for invoices.."
+            PlaceholderColor="LightGray" />
 
         <!-- List of invoices -->
         <ListView
@@ -35,9 +38,8 @@
                 <DataTemplate>
                     <ViewCell>
                         <Frame
-                            Margin="5"
+                            Margin="20, 5"
                             CornerRadius="5"
-                            BorderColor="Black"
                             HeightRequest="60" >
                             <Grid 
                                 HorizontalOptions="FillAndExpand"

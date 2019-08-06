@@ -1,23 +1,24 @@
 ﻿using CheckCheque.Views;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using XFApplication = Xamarin.Forms.Application;
+using XFTabbedPage = Xamarin.Forms.TabbedPage;
 
 namespace CheckCheque
 {
-    public partial class App : Application
+    public partial class App : XFApplication
     {
         public App()
         {
             InitializeComponent();
 
-#if DEBUG
-            HotReloader.Current.Run(this);
-#endif
+            var tabPage = new XFTabbedPage();
+            tabPage.Children.Add(new NavigationPage(new InvoicesPage()) { Title = "Invoices", IconImageSource = "invoice_icon_30" });
+            tabPage.Children.Add(new NavigationPage(new AddInvoicesPage()) { Title = "Add Invoices", IconImageSource = "add_invoice_icon_30" });
+            tabPage.Children.Add(new NavigationPage(new Page()) { Title = "Settings", IconImageSource = "settings_icon_30" });
 
-            // this.MainPage = new NavigationPage(new LoginPage());
-            var tabPage = new TabbedPage();
-            tabPage.Children.Add(new NavigationPage(new InvoicesPage()) { Title = "Invoices", Icon = "invoice_icon_30" });
-            tabPage.Children.Add(new NavigationPage(new AddInvoicesPage()) { Title = "Add Invoices", Icon = "add_invoice_icon_30" });
-            tabPage.Children.Add(new NavigationPage(new Page()) { Title = "Settings", Icon = "settings_icon_30" });
+            tabPage.On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
 
             this.MainPage = tabPage;
         }

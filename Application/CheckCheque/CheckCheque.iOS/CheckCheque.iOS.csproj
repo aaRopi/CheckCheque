@@ -165,6 +165,8 @@
       <BundleResource Include="Resources\invoice_icon_30.png" />
       <BundleResource Include="Resources\settings_icon_30.png" />
       <BundleResource Include="Resources\forward_icon.png" />
+      <BundleResource Include="Resources\camera_icon.png" />
+      <BundleResource Include="Resources\folder_icon.png" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
