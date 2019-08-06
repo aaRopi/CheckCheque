@@ -49,6 +49,7 @@ jobs:
       apksignerKeystoreFile: 'pRopiaAndroidSigningCertificate.keystore'
       apksignerKeystorePassword: '$(androidKeyStorePassword)'
       apksignerKeystoreAlias: 'pRopiaAndroidSigningCertificate'
+      apksignerKeyPassword: '$(androidKeyPassword)'
 
   - task: PublishBuildArtifacts@1
     inputs:
