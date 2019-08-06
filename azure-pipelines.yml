@@ -40,8 +40,8 @@ jobs:
     inputs:
       apkFiles: '$(outputDirectory)/*.apk'
       apksign: true
-      apksignerKeystoreFile: $(androidKeyStore.secureFilePath)
-      apksignerKeystorePassword: $(androidKeyStorePassword)
+      apksignerKeystoreFile: '$(androidKeyStore.secureFilePath)'
+      apksignerKeystorePassword: '$(androidKeyStorePassword)'
 
   - task: PublishBuildArtifacts@1
     inputs:
