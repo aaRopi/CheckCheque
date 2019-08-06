@@ -1,4 +1,3 @@
-# Xamarin.Android
 # Build a Xamarin.Android project.
 # Add steps that test, sign, and distribute an app, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
@@ -39,6 +38,19 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(outputDirectory)'
+
+# Xamarin.Android
+  - task: AppCenterDistribute@3
+    inputs:
+      serverEndpoint: 'App Center'
+      appSlug: 'pratik.ropia/CheckCheque-1'
+      appFile: '$(outputDirectory)'
+      symbolsOption: 'Android'
+      releaseNotesOption: 'input'
+      releaseNotesInput: 'New UI for CheckCheque! Check it out!'
+      destinationType: 'groups'
+      distributionGroupId: '01140a84-1e64-486d-8d44-144932b6df22'
+
 
 - job: iOS
   pool:
