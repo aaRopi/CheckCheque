@@ -4,6 +4,7 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 [![BCH compliance](https://bettercodehub.com/edge/badge/odysseyhack/chainmix?branch=master)](https://bettercodehub.com/)
+[![Build Status](https://dev.azure.com/pratikropia/Check%20Cheque/_apis/build/status/aaRopi.CheckCheque?branchName=master)](https://dev.azure.com/pratikropia/Check%20Cheque/_build/latest?definitionId=1&branchName=master)
 
 Check Cheque is a system based on IOTA and KVK authentication to prevent invoice fraud in the Netherlands. The long-term goal is to expand this system to a smart contract-based fraud prevention and risk minimization service, in which KVK is one of many different oracles.    
 
