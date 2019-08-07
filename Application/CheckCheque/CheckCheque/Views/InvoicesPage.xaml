@@ -6,7 +6,7 @@
     xmlns:controls="clr-namespace:Plugin.CrossPlatformTintedImage.Abstractions;assembly=Plugin.CrossPlatformTintedImage.Abstractions"
     x:Class="CheckCheque.Views.InvoicesPage"
     Title="Invoices"
-    BackgroundColor="White">
+    BackgroundColor="Indigo">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBoolConverter" />

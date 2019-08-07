@@ -7,7 +7,7 @@
     <Grid
         VerticalOptions="FillAndExpand"
         HorizontalOptions="FillAndExpand"
-        BackgroundColor="Green">
+        BackgroundColor="Violet">
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
             <RowDefinition Height="100" />
@@ -20,6 +20,7 @@
         <Label
             Grid.Row="0"
             Text="Use your camera to scan the invoice:"
+            FontSize="Large"
             TextColor="White"
             Margin="20, 20, 20, 0"
             HorizontalOptions="Center"/>
@@ -42,6 +43,7 @@
         <Label
             Grid.Row="3"
             Text="Select the invoice from the file storage:"
+            FontSize="Large"
             TextColor="White"
             Margin="20, 20, 20, 0"
             HorizontalOptions="Center"/>
