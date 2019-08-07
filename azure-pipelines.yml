@@ -42,7 +42,7 @@ jobs:
       apksign: true
       apksignerKeystoreFile: 'pRopiaAndroidSigningCertificate.keystore'
       apksignerKeystorePassword: '$(androidKeyStorePassword)'
-      apksignerKeystoreAlias: '$(androidKeyStoreAlias)'
+      apksignerKeystoreAlias: 'propiaandroidsigningcertificate'
       apksignerKeyPassword: '$(androidKeyPassword)'
       apksignerArguments: '--verbose'
       zipalign: true
