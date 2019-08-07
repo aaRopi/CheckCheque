@@ -34,7 +34,7 @@ jobs:
     name: androidKeyStore
     displayName: 'Download Android KeyStore file'
     inputs:
-      secureFile: '$(androidKeyStoreFileName)'
+      secureFile: 'pRopiaAndroidSigningCertificate.keystore'
 
   - task: AndroidSigning@3
     inputs:
