@@ -30,11 +30,11 @@ jobs:
       outputDirectory: '$(outputDirectory)'
       configuration: '$(buildConfiguration)'
 
-  - task: DownloadSecureFile@1
-    name: androidKeyStore
-    displayName: 'Download Android KeyStore file'
-    inputs:
-      secureFile: 'pRopiaAndroidSigningCertificate.keystore'
+  # - task: DownloadSecureFile@1
+  #   name: androidKeyStore
+  #   displayName: 'Download Android KeyStore file'
+  #   inputs:
+  #     secureFile: 'pRopiaAndroidSigningCertificate.keystore'
 
   - task: AndroidSigning@3
     inputs:
