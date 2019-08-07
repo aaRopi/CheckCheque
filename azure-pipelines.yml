@@ -34,22 +34,18 @@ jobs:
     name: androidKeyStore
     displayName: 'Download Android KeyStore file'
     inputs:
-      secureFile: 'pRopiaAndroidSigningCertificate.keystore'
+      secureFile: '$(androidKeyStoreFileName)'
 
-  # - task: AndroidSigning@3
-  #   inputs:
-  #     apkFiles: '$(outputDirectory)/*.apk'
-  #     apksign: true
-  #     apksignerKeystoreFile: '$(androidKeyStore.secureFilePath)'
-  #     apksignerKeystorePassword: '
   - task: AndroidSigning@3
     inputs:
       apkFiles: '**/*.apk'
       apksign: true
-      apksignerKeystoreFile: 'pRopiaAndroidSigningCertificate.keystore'
+      apksignerKeystoreFile: '$(androidKeyStoreFileName)'
       apksignerKeystorePassword: '$(androidKeyStorePassword)'
-      apksignerKeystoreAlias: 'pRopiaAndroidSigningCertificate'
+      apksignerKeystoreAlias: '$(androidKeyStoreAlias)'
       apksignerKeyPassword: '$(androidKeyPassword)'
+      apksignerArguments: '--verbose'
+      zipalign: true
 
   - task: PublishBuildArtifacts@1
     inputs:
