@@ -40,7 +40,7 @@ jobs:
     inputs:
       apkFiles: '**/*.apk'
       apksign: true
-      apksignerKeystoreFile: '$(androidKeyStoreFileName)'
+      apksignerKeystoreFile: 'pRopiaAndroidSigningCertificate.keystore'
       apksignerKeystorePassword: '$(androidKeyStorePassword)'
       apksignerKeystoreAlias: '$(androidKeyStoreAlias)'
       apksignerKeyPassword: '$(androidKeyPassword)'
