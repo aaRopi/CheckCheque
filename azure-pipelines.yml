@@ -45,7 +45,7 @@ jobs:
       apksignerKeystoreAlias: 'propiaandroidsigningcertificate'
       apksignerKeyPassword: '$(androidKeyPassword)'
       apksignerArguments: '--verbose'
-      zipalign: true
+      zipalign: false
 
   - task: PublishBuildArtifacts@1
     inputs:
