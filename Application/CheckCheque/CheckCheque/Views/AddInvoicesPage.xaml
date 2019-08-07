@@ -7,7 +7,7 @@
     <Grid
         VerticalOptions="FillAndExpand"
         HorizontalOptions="FillAndExpand"
-        BackgroundColor="Violet">
+        BackgroundColor="Yellow">
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
             <RowDefinition Height="100" />
@@ -21,7 +21,7 @@
             Grid.Row="0"
             Text="Use your camera to scan the invoice:"
             FontSize="Large"
-            TextColor="White"
+            TextColor="Indigo"
             Margin="20, 20, 20, 0"
             HorizontalOptions="Center"/>
         <BoxView
@@ -44,7 +44,7 @@
             Grid.Row="3"
             Text="Select the invoice from the file storage:"
             FontSize="Large"
-            TextColor="White"
+            TextColor="Indigo"
             Margin="20, 20, 20, 0"
             HorizontalOptions="Center"/>
         <BoxView

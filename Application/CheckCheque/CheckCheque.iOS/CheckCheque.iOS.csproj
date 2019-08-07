@@ -167,6 +167,15 @@
       <BundleResource Include="Resources\forward_icon.png" />
       <BundleResource Include="Resources\camera_icon.png" />
       <BundleResource Include="Resources\folder_icon.png" />
+      <BundleResource Include="Resources\profile_icon.png" />
+      <BundleResource Include="Resources\upgrade_1_icon.png" />
+      <BundleResource Include="Resources\settings_sync_icon.png" />
+      <BundleResource Include="Resources\settings_scan_icon.png" />
+      <BundleResource Include="Resources\settings_docExport_icon.png" />
+      <BundleResource Include="Resources\settings_ocr_icon.png" />
+      <BundleResource Include="Resources\settings_secnback_icon.png" />
+      <BundleResource Include="Resources\settings_help_icon.png" />
+      <BundleResource Include="Resources\settings_feedback_icon.png" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

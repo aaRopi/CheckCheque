@@ -21,11 +21,13 @@
         VerticalOptions="FillAndExpand">
         <!-- Search bar for invoices -->
         <SearchBar
+            BackgroundColor="White"
             Placeholder="Search for invoices.."
             PlaceholderColor="LightGray" />
 
         <!-- List of invoices -->
         <ListView
+            BackgroundColor="Indigo"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             x:Name="ListOfInvoices"
