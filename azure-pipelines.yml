@@ -11,7 +11,7 @@ jobs:
 
 - job: Android
   pool:
-    vmImage: 'Prateeks-MacBook-Pro'
+    vmImage: 'Default'
 
   variables:
     buildConfiguration: 'Release'
