@@ -11,7 +11,7 @@ jobs:
 
 - job: Android
   pool:
-    vmImage: 'Default'
+    name: 'Default'
 
   variables:
     buildConfiguration: 'Release'
