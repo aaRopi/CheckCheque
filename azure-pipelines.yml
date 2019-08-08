@@ -11,7 +11,7 @@ jobs:
 
 - job: Android
   pool:
-    name: 'Default'
+    vmImage: 'macOS-latest'
 
   variables:
     buildConfiguration: 'Release'
@@ -29,23 +29,6 @@ jobs:
       projectFile: '**/*droid*.csproj'
       outputDirectory: '$(outputDirectory)'
       configuration: '$(buildConfiguration)'
-
-  # - task: DownloadSecureFile@1
-  #   name: androidKeyStore
-  #   displayName: 'Download Android KeyStore file'
-  #   inputs:
-  #     secureFile: 'pRopiaAndroidSigningCertificate.keystore'
-
-  # - task: AndroidSigning@3
-  #   inputs:
-  #     apkFiles: '**/*.apk'
-  #     apksign: true
-  #     apksignerKeystoreFile: 'pRopiaAndroidSigningCertificate.keystore'
-  #     apksignerKeystorePassword: '$(androidKeyStorePassword)'
-  #     apksignerKeystoreAlias: 'propiaandroidsigningcertificate'
-  #     apksignerKeyPassword: '$(androidKeyPassword)'
-  #     apksignerArguments: '--verbose'
-  #     zipalign: false
 
   - task: AndroidSigning@3
     inputs:
