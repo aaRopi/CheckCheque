@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace CheckCheque.Views
 {
-    public partial class VerifyInvoicesPage : ContentPage
+    public partial class SendInvoicesPage : ContentPage
     {
-        public VerifyInvoicesPage()
+        public SendInvoicesPage()
         {
             InitializeComponent();
         }

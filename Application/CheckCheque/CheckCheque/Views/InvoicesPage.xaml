@@ -5,8 +5,7 @@
     xmlns:converters="clr-namespace:CheckCheque.Converters"
     xmlns:controls="clr-namespace:Plugin.CrossPlatformTintedImage.Abstractions;assembly=Plugin.CrossPlatformTintedImage.Abstractions"
     x:Class="CheckCheque.Views.InvoicesPage"
-    Title="Invoices"
-    BackgroundColor="Indigo">
+    Title="Invoices">
     <ContentPage.ToolbarItems>
         <ToolbarItem
             x:Name="SettingsButton"
@@ -34,7 +33,6 @@
 
         <!-- List of invoices -->
         <ListView
-            BackgroundColor="Indigo"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             x:Name="ListOfInvoices"

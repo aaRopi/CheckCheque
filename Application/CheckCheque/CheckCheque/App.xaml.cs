@@ -15,10 +15,10 @@ namespace CheckCheque
 
             var tabPage = new XFTabbedPage();
             tabPage.Children.Add(
-                new NavigationPage(new CheckInvoicesPage())
+                new NavigationPage(new SendInvoicesPage())
                 {
-                    Title = "Check Invoices",
-                    IconImageSource = "add_invoice_icon_30",
+                    Title = "Send Invoices",
+                    IconImageSource = "send_invoice_icon_30",
                     BarBackgroundColor = Color.GhostWhite,
                     BarTextColor = Color.Black
                 });
@@ -27,7 +27,7 @@ namespace CheckCheque
                 new NavigationPage(new VerifyInvoicesPage())
                 {
                     Title = "Verify Invoices",
-                    IconImageSource = "add_invoice_icon_30",
+                    IconImageSource = "verify_invoice_icon_30",
                     BarBackgroundColor = Color.GhostWhite,
                     BarTextColor = Color.Black
                 });
@@ -42,6 +42,7 @@ namespace CheckCheque
                 });
 
             tabPage.On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+            tabPage.CurrentPage = tabPage.Children[1]; // Start with Verify Invoices Page.
 
             this.MainPage = tabPage;
         }

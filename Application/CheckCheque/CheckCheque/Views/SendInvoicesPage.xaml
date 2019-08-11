@@ -2,8 +2,8 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="CheckCheque.Views.VerifyInvoicesPage"
-    Title="Verify Invoices">
+    x:Class="CheckCheque.Views.SendInvoicesPage"
+    Title="Send Invoices">
     <Grid
         VerticalOptions="FillAndExpand"
         HorizontalOptions="FillAndExpand"
@@ -24,11 +24,11 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            BackgroundColor="#CBD1F3"
+            BackgroundColor="#A9F6C3"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
             <Label
-                Text="Verify invoices that you have received."
+                Text="Select invoices that you would like to send."
                 FontAttributes="Bold"
                 FontFamily="Montserrat"
                 FontSize="Large"
@@ -49,7 +49,7 @@
                 WidthRequest="100"
                 HeightRequest="100"
                 Padding="5"
-                BackgroundColor="#CBD1F3"
+                BackgroundColor="#A9F6C3"
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
                 <ImageButton
@@ -61,7 +61,7 @@
                     Clicked="OnClicked"/>
             </Frame>
             <Label
-                Text="Use your camera to scan the received invoice"
+                Text="Use your camera to scan the invoice to be sent"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"
                 FontSize="Medium"
@@ -108,7 +108,7 @@
                 WidthRequest="100"
                 HeightRequest="100"
                 Padding="5"
-                BackgroundColor="#CBD1F3"
+                BackgroundColor="#A9F6C3"
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
                 <ImageButton
@@ -120,7 +120,7 @@
                     Clicked="OnClicked"/>
             </Frame>
             <Label
-                Text="Select the received invoice from the file storage"
+                Text="Select the invoice to be sent from the file storage"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"
                 FontSize="Medium"
