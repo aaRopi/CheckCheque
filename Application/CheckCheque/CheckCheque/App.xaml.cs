@@ -41,15 +41,6 @@ namespace CheckCheque
                     BarTextColor = Color.Black
                 });
 
-            //tabPage.Children.Add(
-            //    new NavigationPage(new SettingsPage())
-            //    {
-            //        Title = "Settings",
-            //        IconImageSource = "settings_icon_30",
-            //        BarBackgroundColor = Color.GhostWhite,
-            //        BarTextColor = Color.Black
-            //    });
-
             tabPage.On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
 
             this.MainPage = tabPage;
