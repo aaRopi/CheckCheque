@@ -7,6 +7,13 @@
     x:Class="CheckCheque.Views.InvoicesPage"
     Title="Invoices"
     BackgroundColor="Indigo">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="SettingsButton"
+            IconImageSource="settings_icon_30"
+            Text="Settings"
+            Clicked="OnClicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBoolConverter" />

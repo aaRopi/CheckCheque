@@ -69,6 +69,14 @@ namespace CheckCheque.Views
             this.ListOfInvoices.ItemsSource = null;
             this.ListOfInvoices.ItemsSource = this.ViewModel.Invoices;
         }
+
+        private void OnClicked(object sender, EventArgs args)
+        {
+            if (sender == SettingsButton)
+            {
+                Navigation.PushAsync(new SettingsPage());
+            }
+        }
         #endregion Event handlers
 
     }

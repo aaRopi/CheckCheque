@@ -2,9 +2,9 @@
 
 namespace CheckCheque.Views
 {
-    public partial class AddInvoicesPage : ContentPage
+    public partial class VerifyInvoicesPage : ContentPage
     {
-        public AddInvoicesPage()
+        public VerifyInvoicesPage()
         {
             InitializeComponent();
         }

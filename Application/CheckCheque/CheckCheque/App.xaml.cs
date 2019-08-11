@@ -15,31 +15,40 @@ namespace CheckCheque
 
             var tabPage = new XFTabbedPage();
             tabPage.Children.Add(
-                new NavigationPage(new InvoicesPage())
+                new NavigationPage(new CheckInvoicesPage())
                 {
-                    Title = "Invoices",
-                    IconImageSource = "invoice_icon_30",
-                    BarBackgroundColor = Color.GhostWhite,
-                    BarTextColor = Color.Black
-                });
-
-            tabPage.Children.Add(
-                new NavigationPage(new AddInvoicesPage())
-                {
-                    Title = "Add Invoices",
+                    Title = "Check Invoices",
                     IconImageSource = "add_invoice_icon_30",
                     BarBackgroundColor = Color.GhostWhite,
                     BarTextColor = Color.Black
                 });
 
             tabPage.Children.Add(
-                new NavigationPage(new SettingsPage())
+                new NavigationPage(new VerifyInvoicesPage())
                 {
-                    Title = "Settings",
-                    IconImageSource = "settings_icon_30",
+                    Title = "Verify Invoices",
+                    IconImageSource = "add_invoice_icon_30",
                     BarBackgroundColor = Color.GhostWhite,
                     BarTextColor = Color.Black
                 });
+
+            tabPage.Children.Add(
+                new NavigationPage(new InvoicesPage())
+                {
+                    Title = "Your Invoices",
+                    IconImageSource = "invoice_icon_30",
+                    BarBackgroundColor = Color.GhostWhite,
+                    BarTextColor = Color.Black
+                });
+
+            //tabPage.Children.Add(
+            //    new NavigationPage(new SettingsPage())
+            //    {
+            //        Title = "Settings",
+            //        IconImageSource = "settings_icon_30",
+            //        BarBackgroundColor = Color.GhostWhite,
+            //        BarTextColor = Color.Black
+            //    });
 
             tabPage.On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
 
