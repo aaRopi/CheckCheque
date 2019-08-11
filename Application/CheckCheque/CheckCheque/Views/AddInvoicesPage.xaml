@@ -2,52 +2,86 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     x:Class="CheckCheque.Views.AddInvoicesPage"
     Title="Add Invoices">
     <Grid
         VerticalOptions="FillAndExpand"
         HorizontalOptions="FillAndExpand"
-        BackgroundColor="Yellow">
+        BackgroundColor="DarkCyan">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
             <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="80" />
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <!-- UI for taking a photo -->
         <Label
             Grid.Row="0"
-            Text="Use your camera to scan the invoice:"
-            FontSize="Large"
+            Grid.Column="0"
+            Text="Use your camera to scan the invoice"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            FontSize="Small"
             TextColor="Indigo"
             Margin="20, 20, 20, 0"
             HorizontalOptions="Center"/>
-        <BoxView
+        <!--<BoxView
             Grid.Row="1"
             CornerRadius="5"
             BackgroundColor="White"
-            HeightRequest="100"
-            WidthRequest="100"
-            HorizontalOptions="CenterAndExpand"/>
+            HeightRequest="50"
+            WidthRequest="50"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
         <ImageButton
             Grid.Row="1"
             Source="camera_icon"
-            HeightRequest="80"
-            WidthRequest="80"
+            HeightRequest="40"
+            WidthRequest="40"
             BackgroundColor="White"
-            HorizontalOptions="CenterAndExpand" />
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>-->
+        <lottie:AnimationView
+            Grid.Row="1"
+            Grid.Column="0"
+            Animation="lottie_camera_invoice_scan.json"
+            Loop="True"
+            AutoPlay="True"
+            HeightRequest="200"
+            WidthRequest="200"
+            VerticalOptions="Start"
+            HorizontalOptions="Start"/>
+
+        <BoxView
+            Grid.Row="0"
+            Grid.Column="1"
+            WidthRequest="1"
+            Color="DarkGray"
+            VerticalOptions="FillAndExpand"/>
+        <BoxView
+            Grid.Row="1"
+            Grid.Column="1"
+            WidthRequest="1"
+            Color="DarkGray"
+            VerticalOptions="FillAndExpand"/>
 
         <!-- UI for selecting from the file storage -->
         <Label
-            Grid.Row="3"
-            Text="Select the invoice from the file storage:"
-            FontSize="Large"
+            Grid.Row="0"
+            Grid.Column="2"
+            Text="Select the invoice from the file storage"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            FontSize="Small"
             TextColor="Indigo"
             Margin="20, 20, 20, 0"
             HorizontalOptions="Center"/>
-        <BoxView
+        <!--<BoxView
             Grid.Row="4"
             CornerRadius="5"
             BackgroundColor="White"
@@ -60,6 +94,16 @@
             HeightRequest="80"
             WidthRequest="80"
             BackgroundColor="White"
-            HorizontalOptions="CenterAndExpand" />
+            HorizontalOptions="CenterAndExpand" />-->
+        <lottie:AnimationView
+            Grid.Row="1"
+            Grid.Column="2"
+            Animation="lottie_file_folder_transfer.json"
+            Loop="True"
+            AutoPlay="True"
+            HeightRequest="200"
+            WidthRequest="200"
+            VerticalOptions="Start"
+            HorizontalOptions="Start"/>
     </Grid>
 </ContentPage>
