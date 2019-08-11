@@ -30,23 +30,6 @@ jobs:
       outputDirectory: '$(outputDirectory)'
       configuration: '$(buildConfiguration)'
 
-  # - task: DownloadSecureFile@1
-  #   name: androidKeyStore
-  #   displayName: 'Download Android KeyStore file'
-  #   inputs:
-  #     secureFile: 'pRopiaAndroidSigningCertificate.keystore'
-
-  # - task: AndroidSigning@3
-  #   inputs:
-  #     apkFiles: '**/*.apk'
-  #     apksign: true
-  #     apksignerKeystoreFile: 'pRopiaAndroidSigningCertificate.keystore'
-  #     apksignerKeystorePassword: '$(androidKeyStorePassword)'
-  #     apksignerKeystoreAlias: 'propiaandroidsigningcertificate'
-  #     apksignerKeyPassword: '$(androidKeyPassword)'
-  #     apksignerArguments: '--verbose'
-  #     zipalign: false
-
   - task: AndroidSigning@3
     inputs:
       apkFiles: '$(outputDirectory)/*.apk'
@@ -55,7 +38,7 @@ jobs:
       apksignerKeystoreAlias: 'propiaandroidsigningcertificate'
       apksignerKeyPassword: '$(androidKeyPassword)'
       apksignerArguments: '--verbose'
-      zipalign: false
+      zipalign: true
 
   - task: PublishBuildArtifacts@1
     inputs:
