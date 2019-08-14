@@ -37,34 +37,10 @@ namespace CheckCheque.Views
         /// </summary>
         /// <param name="sender">The <see cref="object"/> that triggered the event.</param>
         /// <param name="e">Provides details on the event.</param>
-        protected virtual async void Handle_AddInvoice_ClickedAsync(object sender, EventArgs e)
+        protected virtual void Handle_AddInvoice_ClickedAsync(object sender, EventArgs e)
         {
-            await CrossMedia.Current.Initialize();
 
-            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-            {
-                await DisplayAlert("No Camera", ":( No camera available.", "OK");
-                return;
-            }
-
-            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-            {
-                Directory = "Sample",
-                Name = "test.jpg"
-            });
-
-            if (file == null)
-                return;
-
-            await DisplayAlert("File Location", file.Path, "OK");
-
-            ImageSource imageSource = ImageSource.FromStream(() =>
-            {
-                var stream = file.GetStream();
-                return stream;
-            });
-
-            this.ViewModel.CreateNewInvoice(imageSource);
+            //this.ViewModel.CreateNewInvoice(imageSource);
 
             this.ListOfInvoices.ItemsSource = null;
             this.ListOfInvoices.ItemsSource = this.ViewModel.Invoices;

@@ -6,10 +6,6 @@
 	<string>CheckCheque.iOS</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.chainmix.CheckCheque</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -46,5 +42,15 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleName</key>
 	<string>Check Cheque</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs access to the camera to scan invoices.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to the photo library to select photos of invoices.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app needs to be able to add photos to the photo library for later comparisons.</string>
+	<key>CFBundleVersion</key>
+	<string>5</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.2</string>
 </dict>
 </plist>

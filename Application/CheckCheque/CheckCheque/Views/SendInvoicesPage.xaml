@@ -59,7 +59,7 @@
                     Source="camera_icon"
                     BackgroundColor="#A9F6C3"
                     Aspect="AspectFit"
-                    Clicked="OnClicked"/>
+                    Clicked="OnClickedAsync"/>
             </Frame>
             <Label
                 Text="Use your camera to scan the invoice to be sent"
@@ -81,7 +81,7 @@
             HeightRequest="50"
             HorizontalOptions="Center"
             VerticalOptions="Start"
-            Clicked="OnClicked"/>
+            Clicked="OnClickedAsync"/>
 
         <!-- Boxviews acting as borders -->
         <!-- Vertical border -->
@@ -119,7 +119,7 @@
                     Source="file_upload_icon"
                     BackgroundColor="#A9F6C3"
                     Aspect="AspectFit"
-                    Clicked="OnClicked"/>
+                    Clicked="OnClickedAsync"/>
             </Frame>
             <Label
                 Text="Select the invoice to be sent from the file storage"
