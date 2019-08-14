@@ -2,8 +2,8 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="CheckCheque.Views.SendInvoicesPage"
-    Title="Send Invoices">
+    x:Class="CheckCheque.Views.AddInvoicesPage"
+    Title="Add Invoices">
     <Grid
         VerticalOptions="FillAndExpand"
         HorizontalOptions="FillAndExpand"
@@ -28,7 +28,7 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
             <Label
-                Text="Select invoices that you would like to send."
+                Text="Take a photo or select a file."
                 FontAttributes="Bold"
                 FontFamily="Montserrat"
                 FontSize="Large"
@@ -56,13 +56,13 @@
                     x:Name="OpenCameraButton"
                     WidthRequest="60"
                     HeightRequest="60"
-                    Source="camera_icon"
+                    Source="camera_icon_100"
                     BackgroundColor="#A9F6C3"
                     Aspect="AspectFit"
                     Clicked="OnClickedAsync"/>
             </Frame>
             <Label
-                Text="Use your camera to scan the invoice to be sent"
+                Text="Scan invoice"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"
                 FontSize="Medium"
@@ -116,13 +116,13 @@
                     x:Name="OpenFilesButton"
                     WidthRequest="60"
                     HeightRequest="60"
-                    Source="file_upload_icon"
+                    Source="file_upload_icon_100"
                     BackgroundColor="#A9F6C3"
                     Aspect="AspectFit"
                     Clicked="OnClickedAsync"/>
             </Frame>
             <Label
-                Text="Select the invoice to be sent from the file storage"
+                Text="Select invoice"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"
                 FontSize="Medium"

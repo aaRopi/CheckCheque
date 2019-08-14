@@ -115,7 +115,7 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\add_invoice_icon.png">
+    <AndroidResource Include="Resources\drawable\add_invoice_icon_100.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -204,6 +204,18 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\send_invoice_icon_30.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\add_invoice_icon_50.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\camera_icon_100.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\file_upload_icon_100.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

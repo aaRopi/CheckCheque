@@ -159,7 +159,7 @@
     </ItemGroup>
     <ItemGroup>
       <BundleResource Include="Resources\invoice_icon.png" />
-      <BundleResource Include="Resources\add_invoice_icon.png" />
+      <BundleResource Include="Resources\add_invoice_icon_100.png" />
       <BundleResource Include="Resources\settings_icon.png" />
       <BundleResource Include="Resources\check_icon.png" />
       <BundleResource Include="Resources\question_icon.png" />
@@ -185,6 +185,9 @@
       <BundleResource Include="Resources\file_upload_icon.png" />
       <BundleResource Include="Resources\verify_invoice_icon_30.png" />
       <BundleResource Include="Resources\send_invoice_icon_30.png" />
+      <BundleResource Include="Resources\add_invoice_icon_50.png" />
+      <BundleResource Include="Resources\camera_icon_100.png" />
+      <BundleResource Include="Resources\file_upload_icon_100.png" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

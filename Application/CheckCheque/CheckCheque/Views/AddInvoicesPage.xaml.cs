@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace CheckCheque.Views
 {
-    public partial class VerifyInvoicesPage : ContentPage
+    public partial class AddInvoicesPage : ContentPage
     {
-        public VerifyInvoicesPage()
+        public AddInvoicesPage()
         {
             InitializeComponent();
         }
@@ -50,6 +50,8 @@ namespace CheckCheque.Views
                     var stream = file.GetStream();
                     return stream;
                 });
+
+                // TODO do something with the imagesource!
 
                 return;
             }
