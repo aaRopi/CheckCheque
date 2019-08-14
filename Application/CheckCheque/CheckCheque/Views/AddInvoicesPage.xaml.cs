@@ -55,6 +55,14 @@ namespace CheckCheque.Views
 
                 return;
             }
+
+            if (sender == OpenFilesButton)
+            {
+                // HACK - remove later!
+                await Navigation.PushAsync(new InvoiceSelectedPage());
+
+                return;
+            }
         }
     }
 }

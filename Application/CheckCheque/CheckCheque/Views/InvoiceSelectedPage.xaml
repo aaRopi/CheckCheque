@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CheckCheque.Views.InvoiceSelectedPage"
+    Title="After invoice is selected">
+    <ContentPage.Content>
+        <Grid
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand"
+        BackgroundColor="White"
+        RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+            </Grid.RowDefinitions>
+
+            <!-- Invoice icon and name (later move to a thumbnail) -->
+            <StackLayout
+                Grid.Row="0"
+                Margin="0, 20"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                <Frame
+                    WidthRequest="100"
+                    HeightRequest="100"
+                    Padding="5"
+                    BorderColor="#A9F6C3"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Image
+                        Source="invoice_icon"
+                        WidthRequest="60"
+                        HeightRequest="60"
+                        Aspect="AspectFit"/>
+                </Frame>
+                <Label
+                    x:Name="InvoiceName"
+                    Text="Invoice_Name-1"
+                    Margin="15"
+                    FontAttributes="Italic"
+                    FontSize="Medium"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"/>
+            </StackLayout>
+
+            <!-- Invoice name changing ability -->
+            <StackLayout
+                Grid.Row="1"
+                Margin="20"
+                Spacing="10"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                <Label
+                    Text="Name your invoice:"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Start"/>
+                <Entry
+                    x:Name="InvoiceNameEntry"
+                    Text="Invoice_Name-1"
+                    TextChanged="OnEntryTextChanged"
+                    Placeholder="Enter the name of the invoice..."
+                    PlaceholderColor="LightGray"
+                    VerticalOptions="Center"
+                    HorizontalOptions="StartAndExpand"
+                    HorizontalTextAlignment="Start"/>
+            </StackLayout>
+
+            <!-- Sign and send invoice button -->
+            <Frame
+                Grid.Row="2"
+                Margin="20, 0"
+                x:Name="SignAndSendButton"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center"
+                WidthRequest="220"
+                BorderColor="Red">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapped" />
+                </Frame.GestureRecognizers>
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        Source="sign_and_send_invoice_icon"/>
+                    <Label
+                        Text="Sign and send invoice"
+                        Margin="10, 0"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Verify invoice button -->
+            <Frame
+                Grid.Row="3"
+                Margin="20, 0"
+                x:Name="VerifyButton"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center"
+                WidthRequest="220"
+                BorderColor="Purple">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapped" />
+                </Frame.GestureRecognizers>
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        Source="verify_invoice_icon"/>
+                    <Label
+                        Text="Verify invoice"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

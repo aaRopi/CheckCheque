@@ -188,6 +188,8 @@
       <BundleResource Include="Resources\add_invoice_icon_50.png" />
       <BundleResource Include="Resources\camera_icon_100.png" />
       <BundleResource Include="Resources\file_upload_icon_100.png" />
+      <BundleResource Include="Resources\sign_and_send_invoice_icon.png" />
+      <BundleResource Include="Resources\verify_invoice_icon.png" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
