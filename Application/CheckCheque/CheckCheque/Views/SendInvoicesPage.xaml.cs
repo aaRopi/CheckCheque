@@ -16,6 +16,9 @@ namespace CheckCheque.Views
             if (sender == ShowMeHowButton)
             {
                 Console.WriteLine("show lottie animation how");
+
+                await Navigation.PushAsync(new LottieAnimationPage("lottie_camera_invoice_scan.json", "Scan invoices"));
+
                 return;
             }
 

@@ -48,9 +48,9 @@
 	<string>This app needs access to the photo library to select photos of invoices.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This app needs to be able to add photos to the photo library for later comparisons.</string>
-	<key>CFBundleVersion</key>
-	<string>5</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.2</string>
+	<key>CFBundleVersion</key>
+	<string>6</string>
 </dict>
 </plist>
