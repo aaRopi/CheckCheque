@@ -15,6 +15,12 @@ namespace CheckCheque.Views
 
         async void OnClickedAsync(object sender, EventArgs eventArgs)
         {
+            if (sender == DemoUIButton)
+            {
+                await Navigation.PushAsync(new InvoiceSelectedPage());
+                return;
+            }
+
             if (sender == ShowMeHowButton)
             {
                 Console.WriteLine("show lottie animation how");
