@@ -4,6 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="CheckCheque.Views.AddInvoicesPage"
     Title="Add Invoices">
+    <ContentPage.Resources>
+        <Color x:Key="BackgroundColor">Purple</Color>
+        <Color x:Key="LightBackgroundColor">#9932CC</Color>
+    </ContentPage.Resources>
     <ScrollView>
         <Grid
             VerticalOptions="FillAndExpand"
@@ -25,7 +29,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
-                BackgroundColor="#A9F6C3"
+                BackgroundColor="{x:StaticResource BackgroundColor}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
                 <Label
@@ -33,7 +37,7 @@
                     FontAttributes="Bold"
                     FontFamily="Montserrat"
                     FontSize="Large"
-                    TextColor="Black"
+                    TextColor="Yellow"
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand"
                     HorizontalTextAlignment="Center"
@@ -50,7 +54,7 @@
                     WidthRequest="80"
                     HeightRequest="80"
                     Padding="5"
-                    BackgroundColor="#A9F6C3"
+                    BackgroundColor="{x:StaticResource LightBackgroundColor}"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <ImageButton
@@ -58,7 +62,7 @@
                         WidthRequest="50"
                         HeightRequest="50"
                         Source="camera_icon_100"
-                        BackgroundColor="#A9F6C3"
+                        BackgroundColor="{x:StaticResource LightBackgroundColor}"
                         Aspect="AspectFit"
                         Clicked="OnClickedAsync"/>
                 </Frame>
@@ -124,7 +128,7 @@
                     WidthRequest="80"
                     HeightRequest="80"
                     Padding="5"
-                    BackgroundColor="#A9F6C3"
+                    BackgroundColor="{x:StaticResource LightBackgroundColor}"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <ImageButton
@@ -132,7 +136,7 @@
                         WidthRequest="50"
                         HeightRequest="50"
                         Source="file_upload_icon_100"
-                        BackgroundColor="#A9F6C3"
+                        BackgroundColor="{x:StaticResource LightBackgroundColor}"
                         Aspect="AspectFit"
                         Clicked="OnClickedAsync"/>
                 </Frame>

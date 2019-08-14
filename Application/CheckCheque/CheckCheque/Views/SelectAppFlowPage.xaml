@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CheckCheque.Views.SelectAppFlowPage"
+    Title="Send or Verify Invoices">
+    <ContentPage.Content>
+        <Grid
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="Purple"
+            RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Sign and send invoice button -->
+            <Frame
+                Grid.Row="0"
+                Margin="20, 0"
+                x:Name="SignAndSendButton"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center"
+                HeightRequest="75"
+                BackgroundColor="Yellow">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapped" />
+                </Frame.GestureRecognizers>
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        Source="sign_and_send_invoice_icon"/>
+                    <Label
+                        Text="Sign and send invoice"
+                        Margin="10, 0"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Verify invoice button -->
+            <Frame
+                Grid.Row="1"
+                Margin="20, 0"
+                x:Name="VerifyButton"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center"
+                HeightRequest="75"
+                BackgroundColor="Yellow">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapped" />
+                </Frame.GestureRecognizers>
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        Source="verify_invoice_icon"/>
+                    <Label
+                        Text="Verify invoice"
+                        Margin="10, 0"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

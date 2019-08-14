@@ -49,8 +49,8 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This app needs to be able to add photos to the photo library for later comparisons.</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2</string>
+	<string>0.3</string>
 	<key>CFBundleVersion</key>
-	<string>9</string>
+	<string>1</string>
 </dict>
 </plist>

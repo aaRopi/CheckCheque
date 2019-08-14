@@ -3,18 +3,23 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="CheckCheque.Views.InvoiceSelectedPage"
-    Title="After invoice is selected">
+    Title="After invoice is selected"
+    x:Name="Self">
+    <ContentPage.Resources>
+        <Color x:Key="BackgroundColor">Purple</Color>
+        <Color x:Key="LightBackgroundColor">#9932CC</Color>
+        <Color x:Key="ForegroundColor">Yellow</Color>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid
-        VerticalOptions="FillAndExpand"
-        HorizontalOptions="FillAndExpand"
-        BackgroundColor="White"
-        RowSpacing="20">
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="White"
+            RowSpacing="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="200"/>
                 <RowDefinition Height="100" />
-                <RowDefinition Height="75" />
-                <RowDefinition Height="75" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <!-- Invoice icon and name (later move to a thumbnail) -->
@@ -27,7 +32,7 @@
                     WidthRequest="100"
                     HeightRequest="100"
                     Padding="5"
-                    BorderColor="#A9F6C3"
+                    BorderColor="{x:StaticResource BackgroundColor}"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <Image
@@ -74,36 +79,32 @@
                     HorizontalTextAlignment="Start"/>
             </StackLayout>
 
-            <!-- Sign and send invoice button -->
+            <!-- Action button -->
             <Frame
                 Grid.Row="2"
-                Margin="20, 0"
-                x:Name="SignAndSendButton"
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="Center"
-                WidthRequest="220"
-                BorderColor="Red">
+                VerticalOptions="End"
+                HeightRequest="40"
+                CornerRadius="0"
+                HasShadow="False"
+                BackgroundColor="{x:StaticResource BackgroundColor}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped" />
                 </Frame.GestureRecognizers>
-                <StackLayout
-                    Orientation="Horizontal"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand">
-                    <Image
-                        Source="sign_and_send_invoice_icon"/>
-                    <Label
-                        Text="Sign and send invoice"
-                        Margin="10, 0"
-                        VerticalOptions="Center"
-                        VerticalTextAlignment="Center"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"/>
-                </StackLayout>
+                <Label
+                    x:Name="InvoiceButton"
+                    Text="{Binding InvoiceButtonText, Source={x:Reference Self}}"
+                    TextColor="{x:StaticResource ForegroundColor}"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"/>
             </Frame>
 
             <!-- Verify invoice button -->
-            <Frame
+            <!--<Frame
                 Grid.Row="3"
                 Margin="20, 0"
                 x:Name="VerifyButton"
@@ -127,7 +128,7 @@
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"/>
                 </StackLayout>
-            </Frame>
+            </Frame>-->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

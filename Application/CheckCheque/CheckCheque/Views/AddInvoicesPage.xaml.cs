@@ -1,4 +1,5 @@
 ﻿using System;
+using CheckCheque.Enums;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
@@ -8,16 +9,36 @@ namespace CheckCheque.Views
 {
     public partial class AddInvoicesPage : ContentPage
     {
-        public AddInvoicesPage()
+        private InvoiceReason _invoiceReason = InvoiceReason.Unknown;
+
+        public AddInvoicesPage(InvoiceReason invoiceReason)
         {
             InitializeComponent();
+
+            if (invoiceReason == InvoiceReason.Unknown)
+            {
+                throw new ArgumentException($"{nameof(invoiceReason)} cannot be unknown.");
+            }
+
+            _invoiceReason = invoiceReason;
+
+            Title = "Add Invoices";
+            switch (_invoiceReason)
+            {
+                case InvoiceReason.SignAndSend:
+                    Title = Title + " - Send";
+                    break;
+                case InvoiceReason.Verify:
+                    Title = Title + " - Verify";
+                    break;
+            }
         }
 
         async void OnClickedAsync(object sender, EventArgs eventArgs)
         {
             if (sender == DemoUIButton)
             {
-                await Navigation.PushAsync(new InvoiceSelectedPage());
+                await Navigation.PushAsync(new InvoiceSelectedPage(_invoiceReason));
                 return;
             }
 

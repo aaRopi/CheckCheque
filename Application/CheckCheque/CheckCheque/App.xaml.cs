@@ -15,9 +15,9 @@ namespace CheckCheque
 
             var tabPage = new XFTabbedPage();
             tabPage.Children.Add(
-                new NavigationPage(new AddInvoicesPage())
+                new NavigationPage(new SelectAppFlowPage())
                 {
-                    Title = "Add Invoices",
+                    Title = "Send/Verify Invoices",
                     IconImageSource = "add_invoice_icon_30",
                     BarBackgroundColor = Color.GhostWhite,
                     BarTextColor = Color.Black
