@@ -1,4 +1,6 @@
 ﻿using System;
+using Plugin.FilePicker;
+using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
 using Xamarin.Forms;
 
@@ -58,8 +60,22 @@ namespace CheckCheque.Views
 
             if (sender == OpenFilesButton)
             {
-                // HACK - remove later!
-                await Navigation.PushAsync(new InvoiceSelectedPage());
+                try
+                {
+                    FileData fileData = await CrossFilePicker.Current.PickFile();
+                    if (fileData == null)
+                        return; // user canceled file picking
+
+                    string fileName = fileData.FileName;
+                    string contents = System.Text.Encoding.UTF8.GetString(fileData.DataArray);
+
+                    Console.WriteLine("File name chosen: " + fileName);
+                    Console.WriteLine("File data: " + contents);
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine("Exception choosing file: " + ex.ToString());
+                }
 
                 return;
             }

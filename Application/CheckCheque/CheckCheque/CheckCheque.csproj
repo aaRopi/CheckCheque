@@ -19,6 +19,7 @@
     <PackageReference Include="Xamarin.HotReload" Version="1.4.15" />
     <PackageReference Include="Plugin.CrossPlatformTintedImage" Version="1.0.0" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="3.0.0" />
+    <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.18" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
