@@ -54,7 +54,8 @@ jobs:
       releaseNotesOption: 'input'
       releaseNotesInput: 'New UI for CheckCheque! Check it out!'
       destinationType: 'groups'
-      distributionGroupId: 'b81b4640-14de-401d-b4db-24b3ebb567d3'
+      # distributionGroupId: 'b81b4640-14de-401d-b4db-24b3ebb567d3' # android chainmix team
+      distributionGroupId: '01140a84-1e64-486d-8d44-144932b6df22' # sirf mera wala
 
 - job: iOS
   pool:
