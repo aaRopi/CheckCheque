@@ -97,6 +97,14 @@ jobs:
       signingIdentity: $(APPLE_CERTIFICATE_SIGNING_IDENTITY)
       signingProvisioningProfileID: $(APPLE_PROV_PROFILE_UUID)
 
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '/Users/vsts/agent/2.155.1/work/1/s/Application/CheckCheque/CheckCheque.iOS/bin/iPhone/Release/'
+      Contents: 'CheckCheque.iOS.ipa'
+      TargetFolder: '$(outputDirectory)'
+      CleanTargetFolder: true
+      OverWrite: true
+      
   - task: PublishBuildArtifacts@1
     inputs:
         pathtoPublish: '$(outputDirectory)'
