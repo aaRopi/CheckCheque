@@ -78,13 +78,14 @@ jobs:
 
   - task: InstallAppleCertificate@2
     inputs:
-      certSecureFile: 'Signing_info_AppCenter_AdHoc_distribution_PR.p12'
+      certSecureFile: 'development_signing_info.p12'
       certPwd: '$(P12password)'
       keychain: 'temp'
+
   - task: InstallAppleProvisioningProfile@1
     inputs:
       provisioningProfileLocation: 'secureFiles'
-      provProfileSecureFile: 'CheckCheque_Distribution.mobileprovision'
+      provProfileSecureFile: 'Wildcard_provisioning_profile.mobileprovision'
       removeProfile: true
 
   - task: XamariniOS@2
