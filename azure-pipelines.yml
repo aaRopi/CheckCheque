@@ -27,7 +27,7 @@ jobs:
 # update version number
   - task: android-manifest-version@1
     inputs:
-      sourcePath: '**/*Manifest.xml'
+      sourcePath: 'AndroidManifest.xml'
       versionCodeOption: 'buildid'
       versionCode: '$(Build.BuildId)'
       versionCodeOffset: '10'
@@ -100,7 +100,7 @@ jobs:
 # update version number
   - task: ios-bundle-version@1
     inputs:
-      sourcePath: '**/*.plist'
+      sourcePath: 'Info.plist'
       versionCodeOption: 'buildid'
       versionCode: '$(Build.BuildId)'
       versionCodeOffset: '10'
