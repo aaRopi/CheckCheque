@@ -24,6 +24,15 @@ jobs:
     inputs:
       restoreSolution: '**/*.sln'
 
+# update version number
+  - task: android-manifest-version@1
+    inputs:
+      sourcePath: '**/Properties/AndroidManifest.xml'
+      versionCodeOption: 'buildid'
+      versionCode: '$(Build.BuildId)'
+      versionCodeOffset: '10'
+      printFile: true
+
   - task: XamarinAndroid@1
     inputs:
       projectFile: '**/*droid*.csproj'
@@ -87,6 +96,16 @@ jobs:
       provisioningProfileLocation: 'secureFiles'
       provProfileSecureFile: 'Wildcard_provisioning_profile.mobileprovision'
       removeProfile: true
+
+# update version number
+  - task: ios-bundle-version@1
+    inputs:
+      sourcePath: '**/Info.plist'
+      versionCodeOption: 'buildid'
+      versionCode: '$(Build.BuildId)'
+      versionCodeOffset: '10'
+      printFile: true
+
 
   - task: XamariniOS@2
     inputs:
