@@ -76,12 +76,25 @@ jobs:
     inputs:
       restoreSolution: '**/*.sln'
 
+  - task: InstallAppleCertificate@2
+    inputs:
+      certSecureFile: 'Signing_info_AppCenter_AdHoc_distribution_PR.p12'
+      certPwd: '$(P12password)'
+      keychain: 'temp'
+  - task: InstallAppleProvisioningProfile@1
+    inputs:
+      provisioningProfileLocation: 'secureFiles'
+      provProfileSecureFile: 'CheckCheque_Distribution.mobileprovision'
+      removeProfile: true
+
   - task: XamariniOS@2
     inputs:
       projectFile: '**/*iOS.csproj'
       configuration: '$(buildConfiguration)'
       buildForSimulator: false
-      packageApp: false
+      packageApp: true
+      signingIdentity: $(APPLE_CERTIFICATE_SIGNING_IDENTITY)
+      signingProvisioningProfileID: $(APPLE_PROV_PROFILE_UUID)
 
   - task: PublishBuildArtifacts@1
     inputs:
