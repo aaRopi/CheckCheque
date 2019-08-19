@@ -5,8 +5,8 @@
     x:Class="CheckCheque.Views.AddInvoicesPage"
     Title="Add Invoices">
     <ContentPage.Resources>
-        <Color x:Key="BackgroundColor">Purple</Color>
-        <Color x:Key="LightBackgroundColor">#9932CC</Color>
+        <Color x:Key="BackgroundColor">#FFFFE0</Color>
+        <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
     </ContentPage.Resources>
     <ScrollView>
         <Grid
@@ -37,7 +37,7 @@
                     FontAttributes="Bold"
                     FontFamily="Montserrat"
                     FontSize="Large"
-                    TextColor="Yellow"
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand"
                     HorizontalTextAlignment="Center"

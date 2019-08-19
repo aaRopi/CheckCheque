@@ -6,15 +6,15 @@
     Title="After invoice is selected"
     x:Name="Self">
     <ContentPage.Resources>
-        <Color x:Key="BackgroundColor">Purple</Color>
-        <Color x:Key="LightBackgroundColor">#9932CC</Color>
+        <Color x:Key="BackgroundColor">#FFFFE0</Color>
+        <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
         <Color x:Key="ForegroundColor">Yellow</Color>
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
-            BackgroundColor="White"
+            BackgroundColor="{StaticResource BackgroundColor}"
             RowSpacing="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="200"/>
@@ -32,7 +32,7 @@
                     WidthRequest="100"
                     HeightRequest="100"
                     Padding="5"
-                    BorderColor="{x:StaticResource BackgroundColor}"
+                    BackgroundColor="{StaticResource LightBackgroundColor}"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <Image
@@ -87,14 +87,14 @@
                 HeightRequest="40"
                 CornerRadius="0"
                 HasShadow="False"
-                BackgroundColor="{x:StaticResource BackgroundColor}">
+                BackgroundColor="{StaticResource LightBackgroundColor}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped" />
                 </Frame.GestureRecognizers>
                 <Label
                     x:Name="InvoiceButton"
                     Text="{Binding InvoiceButtonText, Source={x:Reference Self}}"
-                    TextColor="{x:StaticResource ForegroundColor}"
+                    TextColor="Black"
                     FontAttributes="Bold"
                     FontSize="Large"
                     VerticalOptions="Center"
@@ -102,33 +102,6 @@
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"/>
             </Frame>
-
-            <!-- Verify invoice button -->
-            <!--<Frame
-                Grid.Row="3"
-                Margin="20, 0"
-                x:Name="VerifyButton"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="Center"
-                WidthRequest="220"
-                BorderColor="Purple">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnTapped" />
-                </Frame.GestureRecognizers>
-                <StackLayout
-                    Orientation="Horizontal"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand">
-                    <Image
-                        Source="verify_invoice_icon"/>
-                    <Label
-                        Text="Verify invoice"
-                        VerticalOptions="Center"
-                        VerticalTextAlignment="Center"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"/>
-                </StackLayout>
-            </Frame>-->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

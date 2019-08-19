@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace CheckCheque.ViewModels
 {
-    internal class SettingsViewModel : BindableObject
+    public class SettingsViewModel : BindableObject
     {
         private ObservableCollection<Setting> _settings;
 

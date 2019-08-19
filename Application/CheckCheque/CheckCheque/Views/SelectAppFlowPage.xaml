@@ -4,11 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="CheckCheque.Views.SelectAppFlowPage"
     Title="Send or Verify Invoices">
+    <ContentPage.Resources>
+        <Color x:Key="BackgroundColor">#FFFFE0</Color>
+        <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
-            BackgroundColor="Purple"
+            BackgroundColor="#FFFFE0"
             RowSpacing="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -23,7 +27,7 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="Center"
                 HeightRequest="75"
-                BackgroundColor="Yellow">
+                BackgroundColor="{x:StaticResource LightBackgroundColor}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped" />
                 </Frame.GestureRecognizers>
@@ -51,7 +55,7 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="Center"
                 HeightRequest="75"
-                BackgroundColor="Yellow">
+                BackgroundColor="{x:StaticResource LightBackgroundColor}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped" />
                 </Frame.GestureRecognizers>
