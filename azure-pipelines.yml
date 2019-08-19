@@ -44,7 +44,6 @@ jobs:
     inputs:
       pathtoPublish: '$(outputDirectory)'
 
-# Xamarin.Android
   - task: AppCenterDistribute@3
     inputs:
       serverEndpoint: 'App Center'
@@ -81,5 +80,20 @@ jobs:
     inputs:
       projectFile: '**/*iOS.csproj'
       configuration: '$(buildConfiguration)'
-      buildForSimulator: true
+      buildForSimulator: false
       packageApp: false
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+        pathtoPublish: '$(outputDirectory)'
+
+  - task: AppCenterDistribute@3
+    inputs:
+      serverEndpoint: 'App Center'
+      appSlug: 'pratik.ropia/CheckCheque'
+      appFile: '$(outputDirectory)/*.ipa'
+      releaseNotesOption: 'input'
+      releaseNotesInput: 'New UI for CheckCheque! Check it out!'
+      destinationType: 'groups'
+      # distributionGroupId: 'b81b4640-14de-401d-b4db-24b3ebb567d3' # ios chainmix team
+      distributionGroupId: '63bf7b6b-09b7-4b15-a3af-b777705f31cc' # sirf mera wala
