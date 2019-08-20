@@ -4,6 +4,8 @@
     {
         Unknown,
 
+        Concept = 5,
+
         SignAndSend = 10,
 
         Verify = 20

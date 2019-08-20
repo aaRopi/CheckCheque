@@ -3,7 +3,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:converters="clr-namespace:CheckCheque.Converters"
-    xmlns:controls="clr-namespace:Plugin.CrossPlatformTintedImage.Abstractions;assembly=Plugin.CrossPlatformTintedImage.Abstractions"
     x:Class="CheckCheque.Views.InvoicesPage"
     Title="Invoices">
     <ContentPage.ToolbarItems>
@@ -40,7 +39,7 @@
             SelectionMode="None"
             RowHeight="100"
             IsPullToRefreshEnabled="True"
-            ItemsSource="{Binding Invoices}">
+            ItemsSource="{Binding InvoiceViewModels}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -63,24 +62,6 @@
                                     HeightRequest="50"
                                     WidthRequest="50"
                                     Source="invoice_icon"/>
-                                <controls:TintedImage
-                                    Grid.Column="0"
-                                    VerticalOptions="Start"
-                                    HorizontalOptions="End"
-                                    HeightRequest="20"
-                                    WidthRequest="20"
-                                    BackgroundColor="White"
-                                    Source="{Binding IsValid, Converter={StaticResource ValidityToImageSourceConverter}}"
-                                    TintColor="{Binding IsValid, Converter={StaticResource ValidityToColorConverter}}"
-                                    IsVisible="{Binding IsVerifying, Converter={StaticResource InverseBoolConverter}}"/>
-                                <ActivityIndicator
-                                    Grid.Column="0"
-                                    VerticalOptions="Start"
-                                    HorizontalOptions="End"
-                                    HeightRequest="20"
-                                    WidthRequest="20"
-                                    IsRunning="{Binding IsVerifying}" 
-                                    IsVisible="{Binding Isverifying}" />
                                 <Label
                                     Grid.Column="1"
                                     HorizontalOptions="Start"

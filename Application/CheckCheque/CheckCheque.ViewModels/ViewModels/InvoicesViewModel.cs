@@ -1,72 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using CheckCheque.Enums;
 using CheckCheque.Models;
+using CheckCheque.ViewModels.ViewModels;
 using Xamarin.Forms;
 
 namespace CheckCheque.ViewModels
 {
     public class InvoicesViewModel : BindableObject
     {
-        /// <summary>
-        /// Backing field to the <see cref="Invoices"/> property.
-        /// </summary>
-        private List<Invoice> invoices;
+        private ObservableCollection<InvoiceViewModel> invoiceViewModels;
 
-        /// <summary>
-        /// Gets or sets the list of <see cref="Invoice"/> objects.
-        /// </summary>
-        public List<Invoice> Invoices
+        public ObservableCollection<InvoiceViewModel> InvoiceViewModels
         {
             get
             {
-                return this.invoices;
+                return this.invoiceViewModels;
             }
             set
             {
-                if (this.invoices == value)
+                if (this.invoiceViewModels == value)
                 {
                     return;
                 }
 
-                this.invoices = value;
+                this.invoiceViewModels = value;
                 this.OnPropertyChanged();
             }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InvoicesViewModel"/> class.
-        /// </summary>
         public InvoicesViewModel()
         {
-            this.Invoices = new List<Invoice>();
+            this.InvoiceViewModels = new ObservableCollection<InvoiceViewModel>();
 
-            this.CreateNewInvoice(null);
-            this.CreateNewInvoice(null);
-            this.CreateNewInvoice(null);
+            this.CreateNewInvoice();
+            this.CreateNewInvoice();
+            this.CreateNewInvoice();
         }
 
-        #region Private methods
-        /// <summary>
-        /// Creates a new <see cref="Invoice"/>-object from the given scanned image.
-        /// </summary>
-        /// <param name="imageSource">An <see cref="ImageSource"/> of the scanned image.</param>
-        public void CreateNewInvoice(ImageSource imageSource)
+        private void CreateNewInvoice()
         {
-            //if (imageSource == default(ImageSource))
-            //{
-            //    throw new ArgumentNullException($"{nameof(imageSource)} cannot be null.");
-            //}
-
-            Invoice invoice = new Invoice(imageSource, (Guid.NewGuid()).ToString(), this.Invoices.Count + 1);
-
-            List<Invoice> newList = this.Invoices;
-            newList.Add(invoice);
-
-            this.Invoices = newList;
-
-            this.OnPropertyChanged(nameof(this.Invoices));
+            InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
+            this.InvoiceViewModels.Add(invoiceViewModel);
         }
-        #endregion Private methods
-
     }
 }

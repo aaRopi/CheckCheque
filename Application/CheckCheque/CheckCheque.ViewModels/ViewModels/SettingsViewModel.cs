@@ -8,7 +8,6 @@ namespace CheckCheque.ViewModels
     {
         private ObservableCollection<Setting> _settings;
 
-
         public ObservableCollection<Setting> Settings
         {
             get => _settings;
@@ -29,43 +28,43 @@ namespace CheckCheque.ViewModels
                 new Setting
                 {
                     Name = "Sync",
-                    ImageSource = "settings_sync_icon"
+                    //ImageSource = "settings_sync_icon"
                 },
 
                 new Setting
                 {
                     Name = "Scan",
-                    ImageSource = "settings_scan_icon"
+                    //ImageSource = "settings_scan_icon"
                 },
 
                 new Setting
                 {
                     Name = "Doc Export",
-                    ImageSource = "settings_docExport_icon"
+                    //ImageSource = "settings_docExport_icon"
                 },
 
                 new Setting
                 {
                     Name = "OCR",
-                    ImageSource = "settings_ocr_icon"
+                    //ImageSource = "settings_ocr_icon"
                 },
 
                 new Setting
                 {
                     Name = "Security & Backup",
-                    ImageSource = "settings_secnback_icon"
+                    //ImageSource = "settings_secnback_icon"
                 },
 
                 new Setting
                 {
                     Name = "Help",
-                    ImageSource = "settings_help_icon"
+                    //ImageSource = "settings_help_icon"
                 },
 
                 new Setting
                 {
                     Name = "Feedback",
-                    ImageSource = "settings_feedback_icon"
+                    //ImageSource = "settings_feedback_icon"
                 }
             };
         }

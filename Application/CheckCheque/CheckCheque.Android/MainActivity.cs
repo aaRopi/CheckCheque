@@ -3,7 +3,6 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Plugin.CurrentActivity;
-using Plugin.CrossPlatformTintedImage.Android;
 using Lottie.Forms.Droid;
 
 namespace CheckCheque.Droid
@@ -27,7 +26,6 @@ namespace CheckCheque.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             AnimationViewRenderer.Init();
-            TintedImageRenderer.Init();
             LoadApplication(new App());
         }
 
