@@ -76,7 +76,7 @@
         <Version>3.12.0</Version>
       </PackageReference>
       <PackageReference Include="Xamarin.Forms">
-        <Version>4.1.0.581479</Version>
+        <Version>4.1.0.673156</Version>
       </PackageReference>
       <PackageReference Include="Xamarin.HotReload">
         <Version>1.4.15</Version>
@@ -158,20 +158,13 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
-      <BundleResource Include="Resources\invoice_icon.png" />
-      <BundleResource Include="Resources\add_invoice_icon_100.png" />
       <BundleResource Include="Resources\settings_icon.png" />
       <BundleResource Include="Resources\check_icon.png" />
       <BundleResource Include="Resources\question_icon.png" />
       <BundleResource Include="Resources\wrong_icon.png" />
-      <BundleResource Include="Resources\add_invoice_icon_30.png" />
-      <BundleResource Include="Resources\invoice_icon_30.png" />
       <BundleResource Include="Resources\settings_icon_30.png" />
       <BundleResource Include="Resources\forward_icon.png" />
-      <BundleResource Include="Resources\camera_icon.png" />
-      <BundleResource Include="Resources\folder_icon.png" />
       <BundleResource Include="Resources\profile_icon.png" />
-      <BundleResource Include="Resources\upgrade_1_icon.png" />
       <BundleResource Include="Resources\settings_sync_icon.png" />
       <BundleResource Include="Resources\settings_scan_icon.png" />
       <BundleResource Include="Resources\settings_docExport_icon.png" />
@@ -182,14 +175,15 @@
       <BundleResource Include="Resources\lottie_camera_invoice_scan.json" />
       <BundleResource Include="Resources\lottie_file_folder_transfer.json" />
       <BundleResource Include="Resources\lottie_check_invoice.json" />
-      <BundleResource Include="Resources\file_upload_icon.png" />
-      <BundleResource Include="Resources\verify_invoice_icon_30.png" />
-      <BundleResource Include="Resources\send_invoice_icon_30.png" />
-      <BundleResource Include="Resources\add_invoice_icon_50.png" />
-      <BundleResource Include="Resources\camera_icon_100.png" />
-      <BundleResource Include="Resources\file_upload_icon_100.png" />
       <BundleResource Include="Resources\sign_and_send_invoice_icon.png" />
       <BundleResource Include="Resources\verify_invoice_icon.png" />
+      <BundleResource Include="Resources\your_invoices_icon_30.png" />
+      <BundleResource Include="Resources\your_invoices_icon.png" />
+      <BundleResource Include="Resources\send_verify_icon_30.png" />
+      <BundleResource Include="Resources\send_verify_icon.png" />
+      <BundleResource Include="Resources\camera_icon.png" />
+      <BundleResource Include="Resources\select_file_icon.png" />
+      <BundleResource Include="Resources\invoice_icon.png" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

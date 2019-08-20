@@ -17,11 +17,15 @@
             <converters:InverseBooleanConverter x:Key="InverseBoolConverter" />
             <converters:ValidityToImageSourceConverter x:Key="ValidityToImageSourceConverter" />
             <converters:ValidityToColorConverter x:Key="ValidityToColorConverter" />
-        </ResourceDictionary>
+            <!--<Color x:Key="BackgroundColor">#FFFFE0</Color>-->
+            <Color x:Key="BackgroundColor">#57F5D6</Color>
+            <!--<Color x:Key="LightBackgroundColor">#FFFE7A</Color>-->
+            <Color x:Key="LightBackgroundColor">#E9E464</Color>
+            </ResourceDictionary>
     </ContentPage.Resources>
 
-    
     <StackLayout
+        BackgroundColor="{StaticResource BackgroundColor}"
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
         <!-- Search bar for invoices -->
@@ -44,6 +48,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <Frame
+                            BackgroundColor="{x:StaticResource LightBackgroundColor}"
                             Margin="20, 5"
                             CornerRadius="5"
                             HeightRequest="60" >

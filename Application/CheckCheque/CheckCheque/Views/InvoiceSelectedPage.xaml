@@ -6,7 +6,8 @@
     Title="After invoice is selected"
     x:Name="Self">
     <ContentPage.Resources>
-        <Color x:Key="BackgroundColor">#FFFFE0</Color>
+        <!--<Color x:Key="BackgroundColor">#FFFFE0</Color>-->
+        <Color x:Key="BackgroundColor">#57F5D6</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
         <Color x:Key="ForegroundColor">Yellow</Color>
     </ContentPage.Resources>
@@ -84,7 +85,7 @@
                 Grid.Row="2"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="End"
-                HeightRequest="40"
+                HeightRequest="30"
                 CornerRadius="0"
                 HasShadow="False"
                 BackgroundColor="{StaticResource LightBackgroundColor}">
