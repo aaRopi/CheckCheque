@@ -14,11 +14,12 @@ namespace CheckCheque
             InitializeComponent();
 
             var tabPage = new XFTabbedPage();
+            tabPage.SelectedTabColor = Color.FromHex("1ABC9C");
             tabPage.Children.Add(
                 new NavigationPage(new SelectAppFlowPage())
                 {
                     Title = "Send/Verify Invoices",
-                    IconImageSource = "add_invoice_icon_30",
+                    IconImageSource = "send_verify_icon_30",
                     BarBackgroundColor = Color.GhostWhite,
                     BarTextColor = Color.Black
                 });
@@ -27,7 +28,7 @@ namespace CheckCheque
                 new NavigationPage(new InvoicesPage())
                 {
                     Title = "Your Invoices",
-                    IconImageSource = "invoice_icon_30",
+                    IconImageSource = "your_invoices_icon_30",
                     BarBackgroundColor = Color.GhostWhite,
                     BarTextColor = Color.Black
                 });

@@ -5,7 +5,8 @@
     x:Class="CheckCheque.Views.AddInvoicesPage"
     Title="Add Invoices">
     <ContentPage.Resources>
-        <Color x:Key="BackgroundColor">#FFFFE0</Color>
+        <!--<Color x:Key="BackgroundColor">#FFFFE0</Color>-->
+        <Color x:Key="BackgroundColor">#57F5D6</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
     </ContentPage.Resources>
     <ScrollView>
@@ -61,7 +62,7 @@
                         x:Name="OpenCameraButton"
                         WidthRequest="50"
                         HeightRequest="50"
-                        Source="camera_icon_100"
+                        Source="camera_icon"
                         BackgroundColor="{x:StaticResource LightBackgroundColor}"
                         Aspect="AspectFit"
                         Clicked="OnClickedAsync"/>
@@ -135,7 +136,7 @@
                         x:Name="OpenFilesButton"
                         WidthRequest="50"
                         HeightRequest="50"
-                        Source="file_upload_icon_100"
+                        Source="select_file_icon"
                         BackgroundColor="{x:StaticResource LightBackgroundColor}"
                         Aspect="AspectFit"
                         Clicked="OnClickedAsync"/>

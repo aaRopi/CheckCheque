@@ -26,6 +26,7 @@ namespace CheckCheque.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             AnimationViewRenderer.Init();
+
             LoadApplication(new App());
         }
 

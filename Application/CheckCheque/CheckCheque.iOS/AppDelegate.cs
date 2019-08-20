@@ -13,6 +13,7 @@ namespace CheckCheque.iOS
             Xamarin.Forms.Forms.Init();
 
             AnimationViewRenderer.Init();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(application, launchOptions);
