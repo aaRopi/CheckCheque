@@ -56,7 +56,7 @@ namespace CheckCheque.Views
             InvoiceName.Text = e.NewTextValue;
         }
 
-        private async void OnTapped(object sender, EventArgs args)
+        private void OnTapped(object sender, EventArgs args)
         {
             switch (_invoiceReason)
             {

@@ -5,7 +5,6 @@
     x:Class="CheckCheque.Views.AddInvoicesPage"
     Title="Add Invoices">
     <ContentPage.Resources>
-        <!--<Color x:Key="BackgroundColor">#FFFFE0</Color>-->
         <Color x:Key="BackgroundColor">#57F5D6</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
     </ContentPage.Resources>
@@ -14,7 +13,8 @@
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
             BackgroundColor="White"
-            RowSpacing="0">
+            RowSpacing="0"
+            ColumnSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="200" />
                 <RowDefinition Height="1" />
@@ -50,10 +50,13 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Spacing="20"
-                Margin="0, 20">
+                BackgroundColor="{StaticResource BackgroundColor}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
                 <Frame
                     WidthRequest="80"
                     HeightRequest="80"
+                    Margin="0, 20"
                     Padding="5"
                     BackgroundColor="{x:StaticResource LightBackgroundColor}"
                     HorizontalOptions="Center"
@@ -78,15 +81,14 @@
 
             <Button
                 x:Name="ShowMeHowButton"
-                Grid.Row="3"
-                Grid.Column="0"
+                Grid.Row="0"
+                Grid.Column="2"
+                Margin="0, 5"
                 Text="Show me how!"
-                BorderColor="Black"
-                BorderWidth="1"
-                WidthRequest="150"
-                HeightRequest="50"
-                HorizontalOptions="Center"
                 VerticalOptions="Start"
+                HorizontalOptions="End"
+                WidthRequest="90"
+                Style="{StaticResource Key=SecondaryButtonStyle}"
                 Clicked="OnClickedAsync"/>
 
             <!-- TODO: Hide when the app is done. -->
@@ -97,10 +99,10 @@
                 Text="Demo UI!"
                 BorderColor="Black"
                 BorderWidth="1"
-                WidthRequest="150"
-                HeightRequest="50"
-                HorizontalOptions="Center"
-                VerticalOptions="Start"
+                HeightRequest="32"
+                FontSize="Micro"
+                HorizontalOptions="End"
+                VerticalOptions="End"
                 Clicked="OnClickedAsync"/>
 
             <!-- Boxviews acting as borders -->
@@ -108,15 +110,24 @@
             <BoxView
                 Grid.Row="1"
                 Grid.Column="1"
-                Grid.RowSpan="3"
+                Grid.RowSpan="2"
                 Color="Gray"
                 WidthRequest="1" />
-            <!-- Horizontal border -->
+            <!-- First Horizontal border -->
             <BoxView
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
-                Color="Transparent"
+                Color="Gray"
+                VerticalOptions="Start"
+                HeightRequest="1" />
+            <!-- Second Horizontal border -->
+            <BoxView
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Color="Gray"
+                VerticalOptions="Start"
                 HeightRequest="1" />
 
             <!-- UI for selecting from the file storage -->
@@ -124,10 +135,13 @@
                 Grid.Row="2"
                 Grid.Column="2"
                 Spacing="20"
-                Margin="0, 20">
+                BackgroundColor="{StaticResource BackgroundColor}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
                 <Frame
                     WidthRequest="80"
                     HeightRequest="80"
+                    Margin="0, 20"
                     Padding="5"
                     BackgroundColor="{x:StaticResource LightBackgroundColor}"
                     HorizontalOptions="Center"
@@ -148,6 +162,33 @@
                     FontSize="Medium"
                     TextColor="Black"
                     HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <!-- UI for showing selected file -->
+            <StackLayout
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                HorizontalOptions="FillAndExpand">
+                <Label
+                    Margin="20"
+                    Text="Selected File:"
+                    TextColor="Black"
+                    FontSize="Small"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    HorizontalOptions="Start"
+                    HorizontalTextAlignment="Start"/>
+                <Entry
+                    x:Name="SelectedFileNameLabel"
+                    IsEnabled="False"
+                    TextColor="Black"
+                    Placeholder="No file selected..."
+                    PlaceholderColor="LightGray"
+                    VerticalOptions="Center"
+                    HorizontalOptions="FillAndExpand"/>
             </StackLayout>
         </Grid>
     </ScrollView>

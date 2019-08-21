@@ -2,7 +2,25 @@
 <Application
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:CheckCheque.Converters"
     x:Class="CheckCheque.App">
     <Application.Resources>
+
+        <!-- Secondary Button Style -->
+        <Style TargetType="Button" x:Key="SecondaryButtonStyle">
+            <Setter Property="BackgroundColor" Value="Cyan" />
+            <Setter Property="CornerRadius" Value="16" />
+            <Setter Property="HeightRequest" Value="32" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="FontSize" Value="Micro" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <converters:InverseBooleanConverter x:Key="InverseBoolConverter" />
+
+        <Color x:Key="BackgroundColor">#57F5D6</Color>
+        <Color x:Key="LightBackgroundColor">#E9E464</Color>
+
     </Application.Resources>
 </Application>

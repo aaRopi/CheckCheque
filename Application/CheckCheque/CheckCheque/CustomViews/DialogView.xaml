@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CheckCheque.CustomViews.DialogView"
+    xmlns:converters="clr-namespace:CheckCheque.Converters"
+    VerticalOptions="FillAndExpand"
+    HorizontalOptions="FillAndExpand"
+    x:Name="Self">
+    <ContentView.Resources>
+        <converters:InverseBooleanConverter x:Key="InverseBoolConverter" />
+
+        <Style TargetType="Frame" x:Key="LocalFrameStyle">
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="WidthRequest" Value="150" />
+            <Setter Property="HeightRequest" Value="150" />
+            <Setter Property="CornerRadius" Value="20" />
+        </Style>
+
+        <Style TargetType="Image" x:Key="LocalImageStyle">
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="WidthRequest" Value="120" />
+            <Setter Property="HeightRequest" Value="120" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="LocalLabelStyle">
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+
+    </ContentView.Resources>
+    <Grid>
+        <ContentView
+            BackgroundColor="#66000000"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand" />
+        <Frame
+            IsVisible="{Binding ShowSuccess, Source={x:Reference Self}}"
+            Style="{StaticResource LocalFrameStyle}"
+            BackgroundColor="#00FF00">
+            <StackLayout
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                <Image
+                    Style="{StaticResource LocalImageStyle}"
+                    Source="check_icon"/>
+                <Label
+                    Style="{StaticResource LocalLabelStyle}"
+                    Text="Success!"/>
+            </StackLayout>
+        </Frame>
+        <Frame
+            IsVisible="{Binding ShowSuccess, Source={x:Reference Self}, Converter={StaticResource InverseBoolConverter}}"
+            Style="{StaticResource LocalFrameStyle}"
+            BackgroundColor="#FF0000">
+            <StackLayout
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                <Image
+                    Style="{StaticResource LocalImageStyle}"
+                    Source="wrong_icon"/>
+                <Label
+                    Style="{StaticResource LocalLabelStyle}"
+                    Text="Error!"/>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentView>

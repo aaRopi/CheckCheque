@@ -14,13 +14,8 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:InverseBooleanConverter x:Key="InverseBoolConverter" />
             <converters:ValidityToImageSourceConverter x:Key="ValidityToImageSourceConverter" />
             <converters:ValidityToColorConverter x:Key="ValidityToColorConverter" />
-            <!--<Color x:Key="BackgroundColor">#FFFFE0</Color>-->
-            <Color x:Key="BackgroundColor">#57F5D6</Color>
-            <!--<Color x:Key="LightBackgroundColor">#FFFE7A</Color>-->
-            <Color x:Key="LightBackgroundColor">#E9E464</Color>
             </ResourceDictionary>
     </ContentPage.Resources>
 

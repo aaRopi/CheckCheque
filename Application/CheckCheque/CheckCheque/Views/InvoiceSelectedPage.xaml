@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="CheckCheque.Views.InvoiceSelectedPage"
+    xmlns:customControls="clr-namespace:CheckCheque.CustomViews"
     Title="After invoice is selected"
     x:Name="Self">
     <ContentPage.Resources>
@@ -103,6 +104,11 @@
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"/>
             </Frame>
+
+            <!-- Dialog View to show success or failure -->
+            <customControls:DialogView
+                Grid.Row="0"
+                Grid.RowSpan="3"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
