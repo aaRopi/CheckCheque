@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage
+<local:ContentBasePage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CheckCheque.Views"
+    xmlns:enums="clr-namespace:CheckCheque.Enums;assembly=CheckCheque.Core"
     x:Class="CheckCheque.Views.SelectAppFlowPage"
     Title="Send or Verify Invoices">
     <ContentPage.Resources>
-        <!--<Color x:Key="BackgroundColor">#FFFFE0</Color>-->
-        <Color x:Key="BackgroundColor">#57F5D6</Color>
-        <!--<Color x:Key="LightBackgroundColor">#FFFE7A</Color>-->
-        <Color x:Key="LightBackgroundColor">#E9E464</Color>
+        <Color x:Key="BackgroundColor">White</Color>
+        <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid
@@ -21,6 +21,13 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
+            <!--<Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Source="blockchain_background"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"/>-->
+
             <!-- Sign and send invoice button -->
             <Frame
                 Grid.Row="0"
@@ -31,7 +38,9 @@
                 HeightRequest="75"
                 BackgroundColor="{x:StaticResource LightBackgroundColor}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnTapped" />
+                    <TapGestureRecognizer
+                        Command="{Binding SetInvoiceReasonOnConceptCommand}"
+                        CommandParameter="{x:Static enums:InvoiceReason.SignAndSend}" />
                 </Frame.GestureRecognizers>
                 <StackLayout
                     Orientation="Horizontal"
@@ -59,7 +68,9 @@
                 HeightRequest="75"
                 BackgroundColor="{x:StaticResource LightBackgroundColor}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnTapped" />
+                    <TapGestureRecognizer
+                        Command="{Binding SetInvoiceReasonOnConceptCommand}"
+                        CommandParameter="{x:Static enums:InvoiceReason.Verify}" />
                 </Frame.GestureRecognizers>
                 <StackLayout
                     Orientation="Horizontal"
@@ -78,4 +89,4 @@
             </Frame>
         </Grid>
     </ContentPage.Content>
-</ContentPage>
+</local:ContentBasePage>

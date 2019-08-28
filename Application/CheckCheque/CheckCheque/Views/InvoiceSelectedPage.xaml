@@ -7,8 +7,7 @@
     Title="After invoice is selected"
     x:Name="Self">
     <ContentPage.Resources>
-        <!--<Color x:Key="BackgroundColor">#FFFFE0</Color>-->
-        <Color x:Key="BackgroundColor">#57F5D6</Color>
+        <Color x:Key="BackgroundColor">White</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
         <Color x:Key="ForegroundColor">Yellow</Color>
     </ContentPage.Resources>
@@ -45,7 +44,7 @@
                 </Frame>
                 <Label
                     x:Name="InvoiceName"
-                    Text="Invoice_Name-1"
+                    Text="{Binding InvoiceViewModel.InvoiceName}"
                     Margin="15"
                     FontAttributes="Italic"
                     FontSize="Medium"
@@ -72,7 +71,7 @@
                     HorizontalTextAlignment="Start"/>
                 <Entry
                     x:Name="InvoiceNameEntry"
-                    Text="Invoice_Name-1"
+                    Text="{Binding InvoiceViewModel.InvoiceName}"
                     TextChanged="OnEntryTextChanged"
                     Placeholder="Enter the name of the invoice..."
                     PlaceholderColor="LightGray"
@@ -95,7 +94,6 @@
                 </Frame.GestureRecognizers>
                 <Label
                     x:Name="InvoiceButton"
-                    Text="{Binding InvoiceButtonText, Source={x:Reference Self}}"
                     TextColor="Black"
                     FontAttributes="Bold"
                     FontSize="Large"
@@ -105,10 +103,13 @@
                     HorizontalTextAlignment="Center"/>
             </Frame>
 
-            <!-- Dialog View to show success or failure -->
+            <!-- Dialog View to show success or failureIsVisible="{Binding }"
+                ShowSuccess="{Binding }" -->
             <customControls:DialogView
                 Grid.Row="0"
-                Grid.RowSpan="3"/>
+                Grid.RowSpan="3"
+                IsVisible="False"
+                />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

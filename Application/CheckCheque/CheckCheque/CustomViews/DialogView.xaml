@@ -43,7 +43,7 @@
         <Frame
             IsVisible="{Binding ShowSuccess, Source={x:Reference Self}}"
             Style="{StaticResource LocalFrameStyle}"
-            BackgroundColor="#00FF00">
+            BackgroundColor="#2EB67D">
             <StackLayout
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand">
@@ -58,7 +58,7 @@
         <Frame
             IsVisible="{Binding ShowSuccess, Source={x:Reference Self}, Converter={StaticResource InverseBoolConverter}}"
             Style="{StaticResource LocalFrameStyle}"
-            BackgroundColor="#FF0000">
+            BackgroundColor="#E01E5A">
             <StackLayout
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand">

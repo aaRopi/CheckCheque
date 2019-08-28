@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using CheckCheque.Enums;
-using CheckCheque.Models;
 using CheckCheque.ViewModels.ViewModels;
 using Xamarin.Forms;
 
@@ -32,16 +30,6 @@ namespace CheckCheque.ViewModels
         public InvoicesViewModel()
         {
             this.InvoiceViewModels = new ObservableCollection<InvoiceViewModel>();
-
-            this.CreateNewInvoice();
-            this.CreateNewInvoice();
-            this.CreateNewInvoice();
-        }
-
-        private void CreateNewInvoice()
-        {
-            InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
-            this.InvoiceViewModels.Add(invoiceViewModel);
         }
     }
 }

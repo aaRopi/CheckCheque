@@ -1,5 +1,6 @@
 ﻿using System;
 using CheckCheque.Enums;
+using CheckCheque.ViewModels.ViewModels;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
@@ -9,21 +10,31 @@ namespace CheckCheque.Views
 {
     public partial class AddInvoicesPage : ContentPage
     {
-        private InvoiceReason _invoiceReason = InvoiceReason.Unknown;
+        private InvoiceViewModel _invoiceViewModel;
 
-        public AddInvoicesPage(InvoiceReason invoiceReason)
+        private InvoiceViewModel InvoiceViewModel
+        {
+            get => _invoiceViewModel;
+            set
+            {
+                if (_invoiceViewModel != value)
+                {
+                    _invoiceViewModel = value;
+
+                    BindingContext = _invoiceViewModel;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public AddInvoicesPage(InvoiceViewModel invoiceViewModel)
         {
             InitializeComponent();
 
-            if (invoiceReason == InvoiceReason.Unknown)
-            {
-                throw new ArgumentException($"{nameof(invoiceReason)} cannot be unknown.");
-            }
-
-            _invoiceReason = invoiceReason;
+            InvoiceViewModel = invoiceViewModel ?? throw new ArgumentNullException(nameof(invoiceViewModel));
 
             Title = "Add Invoices";
-            switch (_invoiceReason)
+            switch (InvoiceViewModel.Invoice.Reason)
             {
                 case InvoiceReason.SignAndSend:
                     Title = Title + " - Send";
@@ -34,11 +45,22 @@ namespace CheckCheque.Views
             }
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+        }
+
         async void OnClickedAsync(object sender, EventArgs eventArgs)
         {
             if (sender == DemoUIButton)
             {
-                await Navigation.PushAsync(new InvoiceSelectedPage(_invoiceReason));
+                await Navigation.PushAsync(new InvoiceSelectedPage(InvoiceViewModel));
                 return;
             }
 
@@ -101,7 +123,7 @@ namespace CheckCheque.Views
                 }
                 catch (Exception ex)
                 {
-                    System.Console.WriteLine("Exception choosing file: " + ex.ToString());
+                    Console.WriteLine("Exception choosing file: " + ex);
                 }
 
                 return;

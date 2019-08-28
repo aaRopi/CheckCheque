@@ -1,46 +1,29 @@
 ﻿using System;
 using CheckCheque.Enums;
+using CheckCheque.ViewModels.ViewModels;
 using Xamarin.Forms;
 
 namespace CheckCheque.Views
 {
     public partial class InvoiceSelectedPage : ContentPage
     {
-        private InvoiceReason _invoiceReason = InvoiceReason.Unknown;
-        private string _invoiceButtonText;
+        private InvoiceViewModel InvoiceViewModel { get; set; }
 
-        public string InvoiceButtonText
-        {
-            get => _invoiceButtonText;
-            set
-            {
-                if (_invoiceButtonText != value)
-                {
-                    _invoiceButtonText = value;
-                    OnPropertyChanged(nameof(InvoiceButtonText));
-                }
-            }
-        }
-
-        public InvoiceSelectedPage(InvoiceReason invoiceReason)
+        public InvoiceSelectedPage(InvoiceViewModel invoiceViewModel)
         {
             InitializeComponent();
 
-            if (invoiceReason == InvoiceReason.Unknown)
-            {
-                throw new ArgumentException($"{nameof(invoiceReason)} cannot be unknown.");
-            }
+            InvoiceViewModel = invoiceViewModel ?? throw new ArgumentNullException(nameof(invoiceViewModel));
 
-            _invoiceReason = invoiceReason;
-
-            Title = "Selected Invoice";
-            switch (_invoiceReason)
+            switch (InvoiceViewModel.Invoice.Reason)
             {
                 case InvoiceReason.SignAndSend:
-                    Title = InvoiceButtonText = "Sign and Send Invoice";
+                    Title = "Sign and Send Invoice";
+                    InvoiceButton.Text = "Sign And Send";
                     break;
                 case InvoiceReason.Verify:
-                    Title = InvoiceButtonText = "Verify Invoice";
+                    Title = "Verify Invoice";
+                    InvoiceButton.Text = "Verify";
                     break;
             }
 
@@ -58,10 +41,9 @@ namespace CheckCheque.Views
 
         private void OnTapped(object sender, EventArgs args)
         {
-            switch (_invoiceReason)
+            switch (InvoiceViewModel.Invoice.Reason)
             {
                 case InvoiceReason.SignAndSend:
-                    //await Navigation.PushModalAsync(new DialogPage());
                     break;
                 case InvoiceReason.Verify:
                     break;

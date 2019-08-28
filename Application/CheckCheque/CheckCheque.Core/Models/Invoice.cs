@@ -7,7 +7,7 @@ namespace CheckCheque.Models
     public class Invoice 
     {
         // reason of invoice creation
-        public InvoiceReason Reason { get; private set; } = InvoiceReason.Unknown;
+        public InvoiceReason Reason { get; set; } = InvoiceReason.Unknown;
 
         // local identification data
         public Guid Id { get; private set; }

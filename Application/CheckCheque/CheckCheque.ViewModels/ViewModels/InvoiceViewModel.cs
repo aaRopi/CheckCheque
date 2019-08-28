@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Windows.Input;
+using CheckCheque.Enums;
 using CheckCheque.Models;
 using Xamarin.Forms;
 
 namespace CheckCheque.ViewModels.ViewModels
 {
-    public class InvoiceViewModel : BindableObject
+    public class InvoiceViewModel : ViewModelBase
     {
         private Invoice _invoice;
 
@@ -23,10 +25,33 @@ namespace CheckCheque.ViewModels.ViewModels
 
         public string InvoiceName => Invoice.Name;
 
-        public InvoiceViewModel()
+        public ICommand SetInvoiceReasonOnConceptCommand => new Command<InvoiceReason>((InvoiceReason reason) =>
         {
-            // hack: for demo
-            Invoice = new Invoice(Enums.InvoiceReason.Concept, $"Invoice Name {new Random().Next(3, 17).ToString()}");
+            switch (reason)
+            {
+                case InvoiceReason.SignAndSend:
+                    Invoice.Reason = InvoiceReason.SignAndSend;
+                    InvoiceReasonSet?.Invoke(this, InvoiceReason.SignAndSend);
+                    break;
+                case InvoiceReason.Verify:
+                    Invoice.Reason = InvoiceReason.Verify;
+                    InvoiceReasonSet?.Invoke(this, InvoiceReason.Verify);
+                    break;
+                default:
+                    throw new ArgumentException("InvoiceReason has to be either SignAndSend or Verify");
+            }
+        });
+
+        public event EventHandler<InvoiceReason> InvoiceReasonSet;
+
+        public InvoiceViewModel(INavigation navigation) : this(navigation, InvoiceReason.Concept, "fake invoice 3000")
+        {
+
+        }
+
+        public InvoiceViewModel(INavigation navigation, InvoiceReason invoiceReason, string invoiceName) : base(navigation)
+        {
+            Invoice = new Invoice(invoiceReason, invoiceName);
         }
     }
 }

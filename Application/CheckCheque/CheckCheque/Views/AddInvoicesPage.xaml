@@ -5,7 +5,7 @@
     x:Class="CheckCheque.Views.AddInvoicesPage"
     Title="Add Invoices">
     <ContentPage.Resources>
-        <Color x:Key="BackgroundColor">#57F5D6</Color>
+        <Color x:Key="BackgroundColor">White</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
     </ContentPage.Resources>
     <ScrollView>
