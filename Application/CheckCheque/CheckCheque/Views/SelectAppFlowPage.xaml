@@ -15,22 +15,31 @@
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
             BackgroundColor="{StaticResource BackgroundColor}"
-            RowSpacing="20">
+            RowSpacing="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="*" />
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="150" />
             </Grid.RowDefinitions>
 
-            <!--<Image
+            <Image
                 Grid.Row="0"
-                Grid.RowSpan="2"
+                Grid.RowSpan="3"
                 Source="blockchain_background"
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="FillAndExpand"/>-->
+                VerticalOptions="Start"
+                HorizontalOptions="Start"/>
+
+            <Label
+                Grid.Row="0"
+                Text="Start a new invoice operation:"
+                FontAttributes="Italic"
+                FontSize="Large"
+                VerticalOptions="End"
+                HorizontalOptions="Center"/>
 
             <!-- Sign and send invoice button -->
             <Frame
-                Grid.Row="0"
+                Grid.Row="1"
                 Margin="20, 0"
                 x:Name="SignAndSendButton"
                 HorizontalOptions="FillAndExpand"
@@ -60,8 +69,8 @@
 
             <!-- Verify invoice button -->
             <Frame
-                Grid.Row="1"
-                Margin="20, 0"
+                Grid.Row="2"
+                Margin="20"
                 x:Name="VerifyButton"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="Center"
