@@ -2,10 +2,7 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="CheckCheque.Views.InvoiceSelectedPage"
-    xmlns:customControls="clr-namespace:CheckCheque.CustomViews"
-    Title="After invoice is selected"
-    x:Name="Self">
+    x:Class="CheckCheque.ConceptInvoice.InvoiceSelectedPage">
     <ContentPage.Resources>
         <Color x:Key="BackgroundColor">White</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
@@ -44,7 +41,7 @@
                 </Frame>
                 <Label
                     x:Name="InvoiceName"
-                    Text="{Binding InvoiceViewModel.InvoiceName}"
+                    Text="{Binding InvoiceName}"
                     Margin="15"
                     FontAttributes="Italic"
                     FontSize="Medium"
@@ -71,8 +68,9 @@
                     HorizontalTextAlignment="Start"/>
                 <Entry
                     x:Name="InvoiceNameEntry"
-                    Text="{Binding InvoiceViewModel.InvoiceName}"
-                    TextChanged="OnEntryTextChanged"
+                    Text="{Binding InvoiceName, Mode=TwoWay}"
+                    ReturnCommand="{Binding CheckInvoiceNameCommand}"
+                    ReturnCommandParameter="{Binding Text, Source={Reference InvoiceNameEntry}}"
                     Placeholder="Enter the name of the invoice..."
                     PlaceholderColor="LightGray"
                     VerticalOptions="Center"
@@ -90,10 +88,11 @@
                 HasShadow="False"
                 BackgroundColor="{StaticResource LightBackgroundColor}">
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnTapped" />
+                    <TapGestureRecognizer Command="{Binding InvoiceVerifyOrSignAndSendCommand}" />
                 </Frame.GestureRecognizers>
                 <Label
                     x:Name="InvoiceButton"
+                    Text="{Binding Invoice.Reason}"
                     TextColor="Black"
                     FontAttributes="Bold"
                     FontSize="Large"
@@ -105,11 +104,11 @@
 
             <!-- Dialog View to show success or failureIsVisible="{Binding }"
                 ShowSuccess="{Binding }" -->
-            <customControls:DialogView
+            <!--<customControls:DialogView
                 Grid.Row="0"
                 Grid.RowSpan="3"
                 IsVisible="False"
-                />
+                />-->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -18,6 +18,7 @@
         </Style>
 
         <converters:InverseBooleanConverter x:Key="InverseBoolConverter" />
+        <converters:StringNullOrEmptyToBoolConverter x:Key="StringNullOrEmptyToBoolConverter" />
 
         <Color x:Key="BackgroundColor">White</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>

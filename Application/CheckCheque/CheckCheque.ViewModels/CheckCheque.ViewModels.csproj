@@ -11,6 +11,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="ConceptInvoice\" />
     <Folder Include="UserInvoices\" />
+    <Folder Include="Others\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CheckCheque.Core\CheckCheque.Core.csproj" />
@@ -18,5 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
     <PackageReference Include="FreshMvvm" Version="3.0.0" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.18" />
   </ItemGroup>
 </Project>

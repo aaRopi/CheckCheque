@@ -2,11 +2,15 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:CheckCheque.Converters"
     x:Class="CheckCheque.ConceptInvoice.AddDigitalInvoicePage"
     Title="Add Invoices">
     <ContentPage.Resources>
         <Color x:Key="BackgroundColor">White</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
+
+        <converters:StringNullOrEmptyToBoolConverter x:Key="StringNullOrEmptyToBoolConverter" />
+
     </ContentPage.Resources>
     <ScrollView>
         <Grid
@@ -66,6 +70,8 @@
                         WidthRequest="50"
                         HeightRequest="50"
                         Source="camera_icon"
+                        Command="{Binding SelectDigitalInvoiceCommand}"
+                        CommandParameter="Camera"
                         BackgroundColor="{x:StaticResource LightBackgroundColor}"
                         Aspect="AspectFit"/>
                 </Frame>
@@ -87,19 +93,21 @@
                 VerticalOptions="Start"
                 HorizontalOptions="End"
                 WidthRequest="90"
+                Command="{Binding ShowScanningInstructionsCommand}"
                 Style="{StaticResource Key=SecondaryButtonStyle}"/>
 
-            <!-- TODO: Hide when the app is done. -->
+            <!-- Button to go to the next view in the flow. -->
             <Button
-                x:Name="DemoUIButton"
+                x:Name="GoToNextPageButton"
                 Grid.Row="3"
-                Grid.Column="2"
-                Text="Demo UI!"
-                BorderColor="Black"
-                BorderWidth="1"
-                HeightRequest="32"
-                FontSize="Micro"
-                HorizontalOptions="End"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Command="{Binding InvoiceFileSelectedCommand}"
+                Text="{Binding Invoice.Reason}"
+                IsVisible="{Binding SelectedFileName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
+                IsEnabled="{Binding SelectedFileName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
+                FontSize="Medium"
+                HorizontalOptions="Center"
                 VerticalOptions="End"/>
 
             <!-- Boxviews acting as borders -->
@@ -148,6 +156,8 @@
                         WidthRequest="50"
                         HeightRequest="50"
                         Source="select_file_icon"
+                        Command="{Binding SelectDigitalInvoiceCommand}"
+                        CommandParameter="FileSystem"
                         BackgroundColor="{x:StaticResource LightBackgroundColor}"
                         Aspect="AspectFit"/>
                 </Frame>
@@ -179,9 +189,10 @@
                     HorizontalTextAlignment="Start"/>
                 <Entry
                     x:Name="SelectedFileNameLabel"
-                    IsEnabled="False"
                     TextColor="Black"
+                    InputTransparent="True"
                     Placeholder="No file selected..."
+                    Text="{Binding SelectedFileName}"
                     PlaceholderColor="LightGray"
                     VerticalOptions="Center"
                     HorizontalOptions="FillAndExpand"/>

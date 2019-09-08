@@ -13,23 +13,31 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
-    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Splat" Version="8.1.1" />
     <PackageReference Include="Splat.ReactiveUIExtensions" Version="1.0.2" />
     <PackageReference Include="Xamarin.HotReload" Version="1.4.15" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="3.0.0" />
-    <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.0.135" />
     <PackageReference Include="FreshMvvm" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Converters\" />
-    <Folder Include="Views\" />
     <Folder Include="CustomViews\" />
     <Folder Include="Extensions\" />
     <Folder Include="ConceptInvoice\" />
     <Folder Include="UserInvoices\" />
+    <Folder Include="Others\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CheckCheque.ViewModels\CheckCheque.ViewModels.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Others\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Others\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
