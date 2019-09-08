@@ -9,11 +9,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="ConceptInvoice\" />
+    <Folder Include="UserInvoices\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CheckCheque.Core\CheckCheque.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
+    <PackageReference Include="FreshMvvm" Version="3.0.0" />
   </ItemGroup>
 </Project>

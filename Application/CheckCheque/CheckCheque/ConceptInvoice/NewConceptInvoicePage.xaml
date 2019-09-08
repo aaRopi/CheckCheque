@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:enums="clr-namespace:CheckCheque.Enums;assembly=CheckCheque.Core"
+    x:Class="CheckCheque.ConceptInvoice.NewConceptInvoicePage"
+    Title="Send or Verify Invoices">
+    <ContentPage.Resources>
+        <Color x:Key="BackgroundColor">White</Color>
+        <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
+    </ContentPage.Resources>
+    <Grid
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="150" />
+        </Grid.RowDefinitions>
+
+        <Image
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            Source="blockchain_background"
+            VerticalOptions="Start"
+            HorizontalOptions="Start"/>
+
+        <Label
+            Grid.Row="0"
+            Text="Start a new invoice operation:"
+            FontAttributes="Italic"
+            FontSize="Large"
+            VerticalOptions="End"
+            HorizontalOptions="Center"/>
+
+        <!-- Sign and send invoice button -->
+        <Frame
+            Grid.Row="1"
+            Margin="20, 0"
+            x:Name="SignAndSendButton"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center"
+            HeightRequest="75"
+            BackgroundColor="{x:StaticResource LightBackgroundColor}">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding SetInvoiceReasonOnConceptCommand}"
+                    CommandParameter="{x:Static enums:InvoiceReason.SignAndSend}" />
+            </Frame.GestureRecognizers>
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    Source="sign_and_send_invoice_icon"/>
+                <Label
+                    Text="Sign and send invoice"
+                    Margin="10, 0"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- Verify invoice button -->
+        <Frame
+            Grid.Row="2"
+            Margin="20"
+            x:Name="VerifyButton"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center"
+            HeightRequest="75"
+            BackgroundColor="{x:StaticResource LightBackgroundColor}">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding SetInvoiceReasonOnConceptCommand}"
+                    CommandParameter="{x:Static enums:InvoiceReason.Verify}" />
+            </Frame.GestureRecognizers>
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    Source="verify_invoice_icon"/>
+                <Label
+                    Text="Verify invoice"
+                    Margin="10, 0"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"/>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

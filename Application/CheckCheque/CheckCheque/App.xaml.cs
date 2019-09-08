@@ -1,4 +1,10 @@
-﻿using CheckCheque.Views;
+﻿using CheckCheque.ConceptInvoice;
+using CheckCheque.Extensions;
+using CheckCheque.UserInvoices;
+using CheckCheque.ViewModels.ConceptInvoice;
+using CheckCheque.ViewModels.UserInvoices;
+using CheckCheque.Views;
+using FreshMvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -13,6 +19,7 @@ namespace CheckCheque
         {
             InitializeComponent();
 
+            /*
             var tabPage = new XFTabbedPage();
             tabPage.SelectedTabColor = Color.FromHex("1ABC9C");
             tabPage.Children.Add(
@@ -36,6 +43,16 @@ namespace CheckCheque
             tabPage.On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
 
             this.MainPage = tabPage;
+            */
+
+
+            RegisterViewAndViewModelMappings();
+            FreshPageModelResolver.PageModelMapper = new MyFreshPageModelMapper();
+
+            var tabbedNavigation = new FreshTabbedNavigationContainer();
+            tabbedNavigation.AddTab<NewConceptInvoiceViewModel>("Send/Verify Invoices", "send_verify_icon_30");
+            tabbedNavigation.AddTab<UserInvoicesViewModel>("Your Invoices", "your_invoices_icon_30");
+            MainPage = tabbedNavigation;
         }
 
         protected override void OnStart()
@@ -51,6 +68,14 @@ namespace CheckCheque
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+
+        private void RegisterViewAndViewModelMappings()
+        {
+            MyFreshPageModelMapper.Mappings.Add(typeof(NewConceptInvoiceViewModel), typeof(NewConceptInvoicePage));
+            MyFreshPageModelMapper.Mappings.Add(typeof(UserInvoicesViewModel), typeof(UserInvoicesPage));
+            MyFreshPageModelMapper.Mappings.Add(typeof(AddDigitalInvoiceViewModel), typeof(AddDigitalInvoicePage));
         }
     }
 }
