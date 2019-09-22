@@ -38,12 +38,14 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
-        public ICommand CheckInvoiceNameCommand => new Command<string>(async (string newInvoiceName) =>
+        public ICommand InvoiceNameTextChangedCommand => new Command<TextChangedEventArgs>(async (TextChangedEventArgs eventArgs) =>
         {
-            if (string.IsNullOrEmpty(newInvoiceName))
+            if (string.IsNullOrEmpty(eventArgs.NewTextValue))
             {
                 await CoreMethods.DisplayAlert("Error", "Invoice name cannot be empty", "Ok");
             }
+
+            InvoiceName = eventArgs.OldTextValue;
         });
 
         public ICommand InvoiceVerifyOrSignAndSendCommand => new Command(async () =>

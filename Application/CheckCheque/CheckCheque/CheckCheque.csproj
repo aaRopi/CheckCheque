@@ -26,6 +26,7 @@
     <Folder Include="ConceptInvoice\" />
     <Folder Include="UserInvoices\" />
     <Folder Include="Others\" />
+    <Folder Include="Behaviors\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CheckCheque.ViewModels\CheckCheque.ViewModels.csproj" />

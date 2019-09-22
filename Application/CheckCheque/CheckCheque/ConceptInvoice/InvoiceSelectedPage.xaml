@@ -2,6 +2,7 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:CheckCheque.Behaviors"
     x:Class="CheckCheque.ConceptInvoice.InvoiceSelectedPage">
     <ContentPage.Resources>
         <Color x:Key="BackgroundColor">White</Color>
@@ -68,14 +69,18 @@
                     HorizontalTextAlignment="Start"/>
                 <Entry
                     x:Name="InvoiceNameEntry"
-                    Text="{Binding InvoiceName, Mode=TwoWay}"
-                    ReturnCommand="{Binding CheckInvoiceNameCommand}"
-                    ReturnCommandParameter="{Binding Text, Source={Reference InvoiceNameEntry}}"
+                    Text="{Binding InvoiceName}"
                     Placeholder="Enter the name of the invoice..."
                     PlaceholderColor="LightGray"
                     VerticalOptions="Center"
                     HorizontalOptions="StartAndExpand"
-                    HorizontalTextAlignment="Start"/>
+                    HorizontalTextAlignment="Start">
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="TextChanged"
+                            Command="{Binding InvoiceNameTextChangedCommand}" />
+                    </Entry.Behaviors>
+                </Entry>
             </StackLayout>
 
             <!-- Action button -->

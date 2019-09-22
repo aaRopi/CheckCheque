@@ -7,5 +7,10 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Enums\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="UIVP.Protocol.Core.Iota" Version="0.1.1" />
   </ItemGroup>
 </Project>
