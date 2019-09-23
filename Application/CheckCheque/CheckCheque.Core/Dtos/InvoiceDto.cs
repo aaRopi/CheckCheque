@@ -1,14 +1,12 @@
-﻿using System;
-using System.Globalization;
-using CheckCheque.Enums;
+﻿using CheckCheque.Enums;
 using CheckCheque.Models;
 using ServerInvoice = UIVP.Protocol.Core.Entity.Invoice;
 
 namespace CheckCheque.Core.Dtos
 {
-    internal class InvoiceDto
+    internal static class InvoiceDto
     {
-        internal object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        internal static ServerInvoice Convert(object value)
         {
             var invoice = value as Invoice;
             if (invoice == null)
@@ -25,7 +23,7 @@ namespace CheckCheque.Core.Dtos
             return serverInvoice;
         }
 
-        internal object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        internal static Invoice ConvertBack(object value)
         {
             var serverInvoice = value as ServerInvoice;
             if (serverInvoice == null)
