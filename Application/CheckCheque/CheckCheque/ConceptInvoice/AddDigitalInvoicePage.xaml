@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:CheckCheque.Converters"
+    xmlns:customViews="clr-namespace:CheckCheque.CustomViews"
     x:Class="CheckCheque.ConceptInvoice.AddDigitalInvoicePage"
     Title="Add Invoices">
     <ContentPage.Resources>
@@ -197,6 +198,18 @@
                     VerticalOptions="Center"
                     HorizontalOptions="FillAndExpand"/>
             </StackLayout>
+
+            <customViews:InvoiceDetailsDialogView
+                IsVisible="{Binding ShowParsedInvoiceDetails}"
+                InvoiceAmount="{Binding InvoiceAmount}"
+                BankAccountNumber="{Binding InvoiceBankAccountNumber}"
+                IssuerAddress="{Binding InvoiceIssuerAddress}"
+                KvkNumber="{Binding InvoiceKvkNumber}"
+                OkCommand="{Binding HideInvoiceDetailsAndShowNextStepCommand}"
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.RowSpan="4"
+                Grid.ColumnSpan="3"/>
         </Grid>
     </ScrollView>
 </ContentPage>
