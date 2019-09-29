@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using CheckCheque.Core.Services.Interfaces;
 using CheckCheque.Enums;
 using CheckCheque.Models;
 using FreshMvvm;
@@ -38,6 +39,8 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
+        public IInvoiceService InvoiceService => DependencyService.Get<IInvoiceService>();
+
         public ICommand InvoiceNameTextChangedCommand => new Command<TextChangedEventArgs>(async (TextChangedEventArgs eventArgs) =>
         {
             if (string.IsNullOrEmpty(eventArgs.NewTextValue))
@@ -45,7 +48,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 await CoreMethods.DisplayAlert("Error", "Invoice name cannot be empty", "Ok");
             }
 
-            InvoiceName = eventArgs.OldTextValue;
+            InvoiceName = eventArgs.NewTextValue;
         });
 
         public ICommand InvoiceVerifyOrSignAndSendCommand => new Command(async () =>
@@ -57,7 +60,8 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
             if (Invoice.Reason == InvoiceReason.Verify)
             {
-                await CoreMethods.DisplayAlert("Verify", "Verifying", "Ok");
+                var status = await InvoiceService.VerifyInvoiceAsync(Invoice);
+                await CoreMethods.DisplayAlert("Verification Status", status.ToString(), "Ok");
             }
         });
 

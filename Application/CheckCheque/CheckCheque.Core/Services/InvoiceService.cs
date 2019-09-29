@@ -1,20 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CheckCheque.Core.Dtos;
 using CheckCheque.Core.Enums;
+using CheckCheque.Core.Services.Interfaces;
 using CheckCheque.Models;
+using RestSharp;
+using Tangle.Net.ProofOfWork;
+using Tangle.Net.Repository;
+using Tangle.Net.Repository.Client;
+using UIVP.Protocol.Core.Iota.Repository;
 using UIVP.Protocol.Core.Repository;
 using UIVP.Protocol.Core.Services;
+using Xamarin.Forms;
+using ServerInvoice = UIVP.Protocol.Core.Entity.Invoice;
+using ServerInvoiceRepository = UIVP.Protocol.Core.Repository.InvoiceRepository;
 
+[assembly: Dependency(typeof(CheckCheque.Core.Services.InvoiceService))]
 namespace CheckCheque.Core.Services
 {
-    public class InvoiceService
+    internal class InvoiceService : IInvoiceService
     {
-        public InvoiceRepository InvoiceRepository { get; }
+        public ServerInvoiceRepository InvoiceRepository { get; }
 
-        public InvoiceService(InvoiceRepository invoiceRepository)
+        public InvoiceService(ServerInvoiceRepository invoiceRepository)
         {
             InvoiceRepository = invoiceRepository ?? throw new ArgumentNullException($"{nameof(invoiceRepository)} cannot be null");
+        }
+
+        public InvoiceService() : this(new IotaInvoiceRepository(
+                new RestIotaRepository(
+                new FallbackIotaClient(new List<string> { "https://nodes.devnet.thetangle.org:443" }, 5000),
+                new PoWService(new CpuPearlDiver())),
+                new KvkPublicKeyRepository(new RestClient("https://pactwrapper.azurewebsites.net/"))))
+        {
+
         }
 
         public async Task<InvoiceVerificationStatus> VerifyInvoiceAsync(Invoice invoice)
@@ -38,14 +58,24 @@ namespace CheckCheque.Core.Services
                 throw new ArgumentNullException($"{nameof(filePath)} cannot be empty or null.");
             }
 
-            // TODO: get from SecureStorage, but before that get from secure api
-            var apiUri = "https://kvkinvoicescan.cognitiveservices.azure.com/vision/v2.0/ocr";
-            var subscriptionKey = "41a0a15e78204dd08ef3ad6528595bd3";
+            var apiUri = ServicesConfig.VisionApiUri;
+            var subscriptionKey = ServicesConfig.VisionApiSubscriptionKey;
 
             var imageInvoiceParser = new ImageInvoiceParser(apiUri, subscriptionKey);
-            var serverInvoice = await imageInvoiceParser.ParseInvoiceAsync(filePath);
+            ServerInvoice serverInvoice = null;
 
-            return InvoiceDto.ConvertBack(serverInvoice);
+            try
+            {
+                serverInvoice = await imageInvoiceParser.ParseInvoiceAsync(filePath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return serverInvoice != null ? InvoiceDto.ConvertBack(serverInvoice) : null;
         }
+
+        public async Task<Invoice> ParseInvoiceDataFromFile(string filePath) => throw new NotImplementedException("");
     }
 }

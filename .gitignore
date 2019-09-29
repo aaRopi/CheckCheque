@@ -8,7 +8,8 @@
 *.sln.docstates
 
 # Api connection strings
-connections.config
+special_server_connections.json
+ServicesConfig.cs
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

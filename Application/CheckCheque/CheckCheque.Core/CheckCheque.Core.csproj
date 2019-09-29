@@ -9,8 +9,12 @@
     <Folder Include="Enums\" />
     <Folder Include="Dtos\" />
     <Folder Include="Services\" />
+    <Folder Include="Services\Interfaces\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="UIVP.Protocol.Core.Iota" Version="0.1.1" />
+    <PackageReference Include="UIVP.Protocol.Core.Iota" Version="0.1.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
   </ItemGroup>
 </Project>

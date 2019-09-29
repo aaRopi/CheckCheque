@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CheckCheque.Core.Services.Interfaces;
 using CheckCheque.Models;
 using CheckCheque.ViewModels.Others;
 using FreshMvvm;
@@ -41,6 +42,38 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
+        private bool _showParsedInvoiceDetails;
+        public bool ShowParsedInvoiceDetails
+        {
+            get => _showParsedInvoiceDetails;
+            private set
+            {
+                if (_showParsedInvoiceDetails != value)
+                {
+                    _showParsedInvoiceDetails = value;
+
+                    RaisePropertyChanged(nameof(InvoiceAmount));
+                    RaisePropertyChanged(nameof(InvoiceBankAccountNumber));
+                    RaisePropertyChanged(nameof(InvoiceIssuerAddress));
+                    RaisePropertyChanged(nameof(InvoiceKvkNumber));
+
+                    RaisePropertyChanged(nameof(ShowParsedInvoiceDetails));
+                }
+            }
+        }
+
+        public double InvoiceAmount => Invoice.Amount;
+        public string InvoiceBankAccountNumber => Invoice.BankAccountNumber;
+        public string InvoiceIssuerAddress => Invoice.IssuerAddress;
+        public string InvoiceKvkNumber => Invoice.KvkNumber;
+        public IInvoiceService InvoiceService { get; private set; }
+
+        public ICommand HideInvoiceDetailsAndShowNextStepCommand => new Command(() =>
+        {
+            ShowParsedInvoiceDetails = false;
+            SelectedFileName = Invoice.FileName;
+        });
+
         public ICommand ShowScanningInstructionsCommand => new Command(async () =>
         {
             await CoreMethods.PushPageModel<ShowInstructionsViewModel>(ShowInstructionsViewModel.ShowScanningInstructions);
@@ -62,6 +95,8 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 {
                     return;
                 }
+
+                _ = Task.Run(async () => { await ParseImageForInvoiceDataAsync(filePath); });
             }
 
             if (methodOfSelection == "FileSystem")
@@ -74,7 +109,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
 
             Invoice.FileName = filePath;
-            SelectedFileName = Invoice.FileName;
         });
 
         public ICommand InvoiceFileSelectedCommand => new Command(async () =>
@@ -99,6 +133,34 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             else
             {
                 throw new ArgumentException($"{nameof(initData)} cannot be null! This viewmodel will be useless then!");
+            }
+
+            InvoiceService = DependencyService.Get<IInvoiceService>();
+        }
+
+        private async Task ParseImageForInvoiceDataAsync(string filePath)
+        {
+            if (InvoiceService != null)
+            {
+                try
+                {
+                    var invoice = await InvoiceService.ParseInvoiceDataFromImage(filePath);
+                    if (invoice != null)
+                    {
+                        Invoice.Amount = invoice.Amount;
+                        Invoice.BankAccountNumber = invoice.BankAccountNumber;
+                        Invoice.KvkNumber = invoice.KvkNumber;
+                        Invoice.IssuerAddress = invoice.IssuerAddress;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await CoreMethods.DisplayAlert("Error", ex.Message, "Ok");
+                }
+                finally
+                {
+                    ShowParsedInvoiceDetails = true;
+                }
             }
         }
 
