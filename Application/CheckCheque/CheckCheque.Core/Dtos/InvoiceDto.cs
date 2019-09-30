@@ -6,7 +6,7 @@ namespace CheckCheque.Core.Dtos
 {
     internal static class InvoiceDto
     {
-        internal static ServerInvoice Convert(object value)
+        internal static ServerInvoice Convert(Invoice value)
         {
             var invoice = value as Invoice;
             if (invoice == null)
@@ -23,7 +23,7 @@ namespace CheckCheque.Core.Dtos
             return serverInvoice;
         }
 
-        internal static Invoice ConvertBack(object value)
+        internal static Invoice ConvertBack(ServerInvoice value)
         {
             var serverInvoice = value as ServerInvoice;
             if (serverInvoice == null)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using CheckCheque.Core.Dtos;
 using CheckCheque.Core.Enums;
@@ -21,21 +22,26 @@ namespace CheckCheque.Core.Services
 {
     internal class InvoiceService : IInvoiceService
     {
-        public ServerInvoiceRepository InvoiceRepository { get; }
+        private ServerInvoiceRepository InvoiceRepository { get; }
+
+        private IPublicKeyRepository PublicKeyRepository { get; }
 
         public InvoiceService(ServerInvoiceRepository invoiceRepository)
         {
             InvoiceRepository = invoiceRepository ?? throw new ArgumentNullException($"{nameof(invoiceRepository)} cannot be null");
         }
 
-        public InvoiceService() : this(new IotaInvoiceRepository(
-                new RestIotaRepository(
-                new FallbackIotaClient(new List<string> { "https://nodes.devnet.thetangle.org:443" }, 5000),
-                new PoWService(new CpuPearlDiver())),
-                new KvkPublicKeyRepository(new RestClient("https://pactwrapper.azurewebsites.net/"))))
+        public InvoiceService(IIotaRepository iotaRepository, IPublicKeyRepository publicKeyRepository)
+            : this(new IotaInvoiceRepository(iotaRepository, publicKeyRepository))
         {
-
+            PublicKeyRepository = publicKeyRepository ?? throw new ArgumentNullException($"{nameof(publicKeyRepository)} cannot be null");
         }
+
+        public InvoiceService() : this(new RestIotaRepository(
+                new FallbackIotaClient(new List<string> { ServicesConfig.IotaClientApiUri }, ServicesConfig.IotaClientTimeoutMilliseconds),
+                new PoWService(new CpuPearlDiver())),
+                new KvkPublicKeyRepository(new RestClient(ServicesConfig.KvkApiUri)))
+        { }
 
         public async Task<InvoiceVerificationStatus> VerifyInvoiceAsync(Invoice invoice)
         {
@@ -46,9 +52,23 @@ namespace CheckCheque.Core.Services
             if (serverInvoice == null)
                 return InvoiceVerificationStatus.Unknown;
 
+            // TODO wrap in try-catch
             var verificationStatus = await InvoiceRepository.VerifyInvoiceAsync(serverInvoice);
 
             return InvoiceVerificationStatusDto.Convert(verificationStatus);
+        }
+
+        public async Task<InvoicePublishStatus> PublishInvoiceAsync(Invoice invoice)
+        {
+            var cngKey = CngKey.Import(Convert.FromBase64String(ServicesConfig.PrivateKeyPayload), CngKeyBlobFormat.EccFullPrivateBlob);
+
+            // TODO check with Sebastian if we need to register the company as well..
+            //await PublicKeyRepository.RegisterCompanyPublicKeyAsync(ServicesConfig.CompanyKvkNumber, cngKey);
+
+            // TODO wrap in try-catch
+            var publishStatus = await InvoiceRepository.PublishInvoiceAsync(InvoiceDto.Convert(invoice), cngKey);
+
+            return InvoicePublishStatusDto.Convert(publishStatus);
         }
 
         public async Task<Invoice> ParseInvoiceDataFromImage(string filePath)
