@@ -12,6 +12,7 @@
     <Folder Include="ConceptInvoice\" />
     <Folder Include="UserInvoices\" />
     <Folder Include="Others\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CheckCheque.Core\CheckCheque.Core.csproj" />

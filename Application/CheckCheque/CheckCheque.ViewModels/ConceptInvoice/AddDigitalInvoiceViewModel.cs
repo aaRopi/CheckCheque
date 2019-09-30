@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CheckCheque.Core.Repositories.Interfaces;
 using CheckCheque.Core.Services.Interfaces;
 using CheckCheque.Models;
 using CheckCheque.ViewModels.Others;
@@ -52,21 +53,74 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 {
                     _showParsedInvoiceDetails = value;
 
-                    RaisePropertyChanged(nameof(InvoiceAmount));
-                    RaisePropertyChanged(nameof(InvoiceBankAccountNumber));
-                    RaisePropertyChanged(nameof(InvoiceIssuerAddress));
-                    RaisePropertyChanged(nameof(InvoiceKvkNumber));
+                    InvoiceAmount = $"{Invoice.Amount}";
+                    InvoiceBankAccountNumber = Invoice.BankAccountNumber;
+                    InvoiceIssuerAddress = Invoice.IssuerAddress;
+                    InvoiceKvkNumber = Invoice.KvkNumber;
 
                     RaisePropertyChanged(nameof(ShowParsedInvoiceDetails));
                 }
             }
         }
 
-        public double InvoiceAmount => Invoice.Amount;
-        public string InvoiceBankAccountNumber => Invoice.BankAccountNumber;
-        public string InvoiceIssuerAddress => Invoice.IssuerAddress;
-        public string InvoiceKvkNumber => Invoice.KvkNumber;
+        private string _invoiceAmount;
+        public string InvoiceAmount
+        {
+            get => _invoiceAmount;
+            set
+            {
+                if (_invoiceAmount != value)
+                {
+                    _invoiceAmount = value;
+                    RaisePropertyChanged(nameof(InvoiceAmount));
+                }
+            }
+        }
+
+        private string _invoiceBankAccountNumber;
+        public string InvoiceBankAccountNumber
+        {
+            get => _invoiceBankAccountNumber;
+            set
+            {
+                if (_invoiceBankAccountNumber != value)
+                {
+                    _invoiceBankAccountNumber = value;
+                    RaisePropertyChanged(nameof(InvoiceBankAccountNumber));
+                }
+            }
+        }
+
+        private string _invoiceIssuerAddress;
+        public string InvoiceIssuerAddress
+        {
+            get => _invoiceIssuerAddress;
+            set
+            {
+                if (_invoiceIssuerAddress != value)
+                {
+                    _invoiceIssuerAddress = value;
+                    RaisePropertyChanged(nameof(InvoiceIssuerAddress));
+                }
+            }
+        }
+
+        private string _invoiceKvkNumber;
+        public string InvoiceKvkNumber
+        {
+            get => _invoiceKvkNumber;
+            set
+            {
+                if (_invoiceKvkNumber != value)
+                {
+                    _invoiceKvkNumber = value;
+                    RaisePropertyChanged(nameof(InvoiceKvkNumber));
+                }
+            }
+        }
+
         public IInvoiceService InvoiceService { get; private set; }
+        public IInvoicesRepository InvoicesRepository { get; private set; }
 
         public ICommand HideInvoiceDetailsAndShowNextStepCommand => new Command(() =>
         {
@@ -106,6 +160,8 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 {
                     return;
                 }
+
+                _ = Task.Run(async () => { await ParseFileForInvoiceDataAsync(filePath); });
             }
 
             Invoice.FileName = filePath;
@@ -136,6 +192,37 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
 
             InvoiceService = DependencyService.Get<IInvoiceService>();
+            InvoicesRepository = DependencyService.Get<IInvoicesRepository>();
+        }
+
+        private async Task ParseFileForInvoiceDataAsync(string filePath)
+        {
+            if (InvoiceService == null)
+            {
+                return;
+            }
+
+            try
+            {
+                var invoice = await InvoiceService.ParseInvoiceDataFromFile(filePath);
+                if (invoice != null)
+                {
+                    Invoice.Amount = invoice.Amount;
+                    Invoice.BankAccountNumber = invoice.BankAccountNumber;
+                    Invoice.KvkNumber = invoice.KvkNumber;
+                    Invoice.IssuerAddress = invoice.IssuerAddress;
+
+                    InvoicesRepository.AddOrUpdateInvoice(Invoice);
+                }
+            }
+            catch (Exception ex)
+            {
+                await CoreMethods.DisplayAlert("Error", ex.Message, "Ok");
+            }
+            finally
+            {
+                ShowParsedInvoiceDetails = true;
+            }
         }
 
         private async Task ParseImageForInvoiceDataAsync(string filePath)
@@ -151,6 +238,8 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                         Invoice.BankAccountNumber = invoice.BankAccountNumber;
                         Invoice.KvkNumber = invoice.KvkNumber;
                         Invoice.IssuerAddress = invoice.IssuerAddress;
+
+                        InvoicesRepository.AddOrUpdateInvoice(Invoice);
                     }
                 }
                 catch (Exception ex)
@@ -170,17 +259,26 @@ namespace CheckCheque.ViewModels.ConceptInvoice
         {
             await CrossMedia.Current.Initialize();
 
-            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            if ((!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) && !CrossMedia.Current.IsPickPhotoSupported)
             {
-                await CoreMethods.DisplayAlert("Error: No Camera", ":( No camera available.", "Ok");
+                await CoreMethods.DisplayAlert("Error: No Camera or photos", ":( No camera or photos available.", "Ok");
                 return null;
             }
 
-            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            Plugin.Media.Abstractions.MediaFile file = null;
+
+            if (CrossMedia.Current.IsCameraAvailable)
             {
-                Directory = "InvoicePhotos",
-                Name = Invoice.Name
-            });
+                file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                {
+                    Directory = "InvoicePhotos",
+                    Name = Invoice.Name
+                });
+            }
+            else if (CrossMedia.Current.IsPickPhotoSupported)
+            {
+                file = await CrossMedia.Current.PickPhotoAsync();
+            }
 
             if (file == null)
             {

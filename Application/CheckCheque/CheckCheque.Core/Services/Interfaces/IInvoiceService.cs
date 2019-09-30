@@ -8,6 +8,10 @@ namespace CheckCheque.Core.Services.Interfaces
     {
         Task<InvoiceVerificationStatus> VerifyInvoiceAsync(Invoice invoice);
 
+        Task<InvoicePublishStatus> PublishInvoiceAsync(Invoice invoice);
+
         Task<Invoice> ParseInvoiceDataFromImage(string filePath);
+
+        Task<Invoice> ParseInvoiceDataFromFile(string filePath);
     }
 }
