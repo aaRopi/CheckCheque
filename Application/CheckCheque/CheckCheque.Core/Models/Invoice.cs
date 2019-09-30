@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using CheckCheque.Enums;
+using SQLite;
 
 namespace CheckCheque.Models
 {
+    [Table("Invoices")]
     public class Invoice 
     {
         // reason of invoice creation
         public InvoiceReason Reason { get; set; } = InvoiceReason.Unknown;
 
         // local identification data
-        public Guid Id { get; private set; }
+        [PrimaryKey, AutoIncrement, Column("_id")]
+        public int Id { get; set; }
+
         public string FileName { get; set; }
         public string Name { get; set; }
 
@@ -25,13 +29,18 @@ namespace CheckCheque.Models
         public string KvkNumber { get; set; }
 
         // possibility of extension
+        [Ignore]
         public Dictionary<string, object> InvoiceDataKeyValuePairs { get; set; }
+
+        public Invoice()
+        {
+            Reason = InvoiceReason.Unknown;
+        }
 
         public Invoice(InvoiceReason invoiceReason, string invoiceName)
         {
             Reason = invoiceReason;
             Name = invoiceName;
-            Id = new Guid();
         }
     }
 }

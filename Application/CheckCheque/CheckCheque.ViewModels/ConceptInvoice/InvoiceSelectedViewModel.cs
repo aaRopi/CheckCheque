@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using CheckCheque.Core.Repositories.Interfaces;
 using CheckCheque.Core.Services.Interfaces;
 using CheckCheque.Enums;
 using CheckCheque.Models;
@@ -39,7 +40,8 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
-        public IInvoiceService InvoiceService => DependencyService.Get<IInvoiceService>();
+        public IInvoiceService InvoiceService { get; private set; }
+        public IInvoicesRepository InvoicesRepository { get; private set; }
 
         public ICommand InvoiceNameTextChangedCommand => new Command<TextChangedEventArgs>(async (TextChangedEventArgs eventArgs) =>
         {
@@ -55,7 +57,8 @@ namespace CheckCheque.ViewModels.ConceptInvoice
         {
             if (Invoice.Reason == InvoiceReason.SignAndSend)
             {
-                await CoreMethods.DisplayAlert("SignAndSend", "Signing and sending", "Ok");
+                var status = await InvoiceService.PublishInvoiceAsync(Invoice);
+                await CoreMethods.DisplayAlert("Publishing status", status.ToString(), "Ok");
             }
 
             if (Invoice.Reason == InvoiceReason.Verify)
@@ -89,6 +92,9 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             {
                 throw new ArgumentException($"{nameof(initData)} does not have the file path set! The viewmodel should not have this Invoice object!");
             }
+
+            InvoiceService = DependencyService.Get<IInvoiceService>();
+            InvoicesRepository = DependencyService.Get<IInvoicesRepository>();
         }
     }
 }

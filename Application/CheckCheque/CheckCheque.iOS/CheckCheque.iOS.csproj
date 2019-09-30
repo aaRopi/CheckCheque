@@ -80,13 +80,16 @@
         <Version>4.2.0.815419</Version>
       </PackageReference>
       <PackageReference Include="Xamarin.HotReload">
-        <Version>1.4.19</Version>
+        <Version>1.5.2</Version>
       </PackageReference>
       <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
         <Version>3.0.1</Version>
       </PackageReference>
       <PackageReference Include="Xamarin.Plugin.FilePicker">
         <Version>2.1.34</Version>
+      </PackageReference>
+      <PackageReference Include="sqlite-net-pcl">
+        <Version>1.6.292</Version>
       </PackageReference>
     </ItemGroup>
     <ItemGroup>

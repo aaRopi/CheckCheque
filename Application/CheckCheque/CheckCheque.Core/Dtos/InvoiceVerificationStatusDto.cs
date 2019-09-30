@@ -5,17 +5,11 @@ namespace CheckCheque.Core.Dtos
 {
     internal static class InvoiceVerificationStatusDto
     {
-        internal static InvoiceVerificationStatus Convert(object value)
+        internal static InvoiceVerificationStatus Convert(VerificationStatus value)
         {
-            var validStatus = value is VerificationStatus;
-            if (!validStatus)
-            {
-                return InvoiceVerificationStatus.Unknown;
-            }
-
             var status = InvoiceVerificationStatus.Unknown;
 
-            switch ((VerificationStatus)value)
+            switch (value)
             {
                 case VerificationStatus.Success:
                     status = InvoiceVerificationStatus.Success;

@@ -2,8 +2,59 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="CheckCheque.UserInvoices.UserInvoicesPage">
+    x:Class="CheckCheque.UserInvoices.UserInvoicesPage"
+    Title="Your Invoices">
     <ContentPage.Content>
-        
+        <ListView
+            ItemsSource="{Binding GroupedInvoices}"
+            IsGroupingEnabled="True"
+            GroupDisplayBinding="{Binding Key}"
+            RowHeight="75"
+            IsPullToRefreshEnabled="True"
+            RefreshCommand="{Binding RefreshInvoicesCommand}"
+            IsRefreshing="{Binding Refreshing}"
+            HasUnevenRows="True"
+            SelectionMode="None"
+            SeparatorVisibility="None">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="StartAndExpand"
+                            HeightRequest="20"
+                            Margin="10, 0"
+                            FontSize="Large"
+                            Text="{Binding Key}" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame
+                            Margin="10, 2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="20" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Text="{Binding Name}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Text="{Binding IssuerAddress}" />
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Footer>
+                <Label />
+            </ListView.Footer>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>
