@@ -44,7 +44,6 @@ namespace CheckCheque
             // Handle when your app resumes
         }
 
-
         private void RegisterViewAndViewModelMappings()
         {
             MyFreshPageModelMapper.Mappings.Add(typeof(NewConceptInvoiceViewModel), typeof(NewConceptInvoicePage));
@@ -52,6 +51,7 @@ namespace CheckCheque
             MyFreshPageModelMapper.Mappings.Add(typeof(AddDigitalInvoiceViewModel), typeof(AddDigitalInvoicePage));
             MyFreshPageModelMapper.Mappings.Add(typeof(ShowInstructionsViewModel), typeof(ShowInstructionsPage));
             MyFreshPageModelMapper.Mappings.Add(typeof(InvoiceSelectedViewModel), typeof(InvoiceSelectedPage));
+            MyFreshPageModelMapper.Mappings.Add(typeof(InvoiceDetailViewModel), typeof(InvoiceDetailPage));
         }
     }
 }

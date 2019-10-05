@@ -12,7 +12,7 @@ namespace CheckCheque.Core.Repositories
 {
     internal class InvoicesRepository : IInvoicesRepository
     {
-        private List<Invoice> Invoices { get; }
+        private List<Invoice> Invoices { get; set; }
         private SQLiteConnection Database { get; }
 
         internal InvoicesRepository(string dbPath)
@@ -42,7 +42,7 @@ namespace CheckCheque.Core.Repositories
 
         public IList<Invoice> GetInvoices()
         {
-            return Invoices;
+            return Invoices = Database.Table<Invoice>().ToList();
         }
     }
 }

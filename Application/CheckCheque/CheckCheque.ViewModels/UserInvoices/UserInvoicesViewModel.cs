@@ -54,6 +54,17 @@ namespace CheckCheque.ViewModels.UserInvoices
             Refreshing = false;
         });
 
+        public ICommand ShowInvoiceDetailCommand => new Command<ItemTappedEventArgs>(async (ItemTappedEventArgs args) =>
+        {
+            var invoice = args.Item as Invoice;
+            if (invoice == null)
+            {
+                return;
+            }
+
+            await CoreMethods.PushPageModel<InvoiceDetailViewModel>(invoice);
+        });
+
         protected IInvoicesRepository InvoicesRepository { get; private set; }
 
         public override void Init(object initData)

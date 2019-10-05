@@ -106,14 +106,6 @@
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"/>
             </Frame>
-
-            <!-- Dialog View to show success or failureIsVisible="{Binding }"
-                ShowSuccess="{Binding }" -->
-            <!--<customControls:DialogView
-                Grid.Row="0"
-                Grid.RowSpan="3"
-                IsVisible="False"
-                />-->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

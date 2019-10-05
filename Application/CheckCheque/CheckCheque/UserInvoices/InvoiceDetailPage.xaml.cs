@@ -5,12 +5,11 @@ using Xamarin.Forms;
 
 namespace CheckCheque.UserInvoices
 {
-    public partial class UserInvoicesPage : ContentPage
+    public partial class InvoiceDetailPage : ContentPage
     {
-        public UserInvoicesPage()
+        public InvoiceDetailPage()
         {
             InitializeComponent();
-            NavigationPage.SetBackButtonTitle(this, string.Empty);
         }
     }
 }
