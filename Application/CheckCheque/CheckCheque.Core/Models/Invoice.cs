@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CheckCheque.Core.Enums;
 using CheckCheque.Enums;
 using SQLite;
 
@@ -8,13 +9,12 @@ namespace CheckCheque.Models
     [Table("Invoices")]
     public class Invoice 
     {
-        // reason of invoice creation
-        public InvoiceReason Reason { get; set; } = InvoiceReason.Unknown;
-
         // local identification data
         [PrimaryKey, AutoIncrement, Column("_id")]
         public int Id { get; set; }
 
+        public InvoiceReason Reason { get; set; } = InvoiceReason.Unknown;
+        public DigitalInvoiceFileType FileType { get; set; } = DigitalInvoiceFileType.Unknown;
         public string FileName { get; set; }
         public string Name { get; set; }
 

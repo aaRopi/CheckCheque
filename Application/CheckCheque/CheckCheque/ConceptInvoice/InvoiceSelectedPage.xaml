@@ -41,7 +41,7 @@
                         Aspect="AspectFit"/>
                 </Frame>
                 <Label
-                    x:Name="InvoiceName"
+                    x:Name="InvoiceNameLabel"
                     Text="{Binding InvoiceName}"
                     Margin="15"
                     FontAttributes="Italic"
@@ -69,7 +69,7 @@
                     HorizontalTextAlignment="Start"/>
                 <Entry
                     x:Name="InvoiceNameEntry"
-                    Text="{Binding InvoiceName}"
+                    Text="{Binding Text, Source={x:Reference InvoiceNameLabel}}"
                     Placeholder="Enter the name of the invoice..."
                     PlaceholderColor="LightGray"
                     VerticalOptions="Center"

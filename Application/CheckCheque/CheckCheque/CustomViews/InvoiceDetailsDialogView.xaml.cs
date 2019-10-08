@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CheckCheque.CustomViews
@@ -77,17 +76,5 @@ namespace CheckCheque.CustomViews
         {
             InitializeComponent();
         }
-
-        //private static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        //{
-        //    var thisView = bindable as InvoiceDetailsDialogView;
-        //    if (thisView == null)
-        //    {
-        //        return;
-        //    }
-
-        //    var newInvoiceAmount = newValue as string;
-        //    thisView.InvoiceAmount = newInvoiceAmount;
-        //}
     }
 }

@@ -34,7 +34,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 if (_invoiceName != value)
                 {
                     _invoiceName = value;
-                    Invoice.Name = _invoiceName;
                     RaisePropertyChanged(nameof(InvoiceName));
                 }
             }
@@ -45,16 +44,20 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
         public ICommand InvoiceNameTextChangedCommand => new Command<TextChangedEventArgs>(async (TextChangedEventArgs eventArgs) =>
         {
-            if (string.IsNullOrEmpty(eventArgs.NewTextValue))
-            {
-                await CoreMethods.DisplayAlert("Error", "Invoice name cannot be empty", "Ok");
-            }
-
             InvoiceName = eventArgs.NewTextValue;
         });
 
         public ICommand InvoiceVerifyOrSignAndSendCommand => new Command(async () =>
         {
+            if (string.IsNullOrEmpty(InvoiceName))
+            {
+                await CoreMethods.DisplayAlert("Error", "Invoice name cannot be empty", "Ok");
+                return;
+            }
+
+            Invoice.Name = InvoiceName;
+            InvoicesRepository.AddOrUpdateInvoice(Invoice);
+
             if (Invoice.Reason == InvoiceReason.SignAndSend)
             {
                 var status = await InvoiceService.PublishInvoiceAsync(Invoice);

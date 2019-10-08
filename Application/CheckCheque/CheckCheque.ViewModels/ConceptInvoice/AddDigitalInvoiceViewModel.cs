@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CheckCheque.Core.Enums;
 using CheckCheque.Core.Repositories.Interfaces;
 using CheckCheque.Core.Services.Interfaces;
 using CheckCheque.Models;
@@ -125,6 +126,14 @@ namespace CheckCheque.ViewModels.ConceptInvoice
         public ICommand HideInvoiceDetailsAndShowNextStepCommand => new Command(() =>
         {
             ShowParsedInvoiceDetails = false;
+
+            Invoice.Amount = Double.Parse(InvoiceAmount);
+            Invoice.BankAccountNumber = InvoiceBankAccountNumber;
+            Invoice.IssuerAddress = InvoiceIssuerAddress;
+            Invoice.KvkNumber = InvoiceKvkNumber;
+
+            InvoicesRepository.AddOrUpdateInvoice(Invoice);
+
             SelectedFileName = Invoice.FileName;
         });
 
@@ -142,7 +151,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
             string filePath = "";
 
-            if (methodOfSelection == "Camera")
+            if (methodOfSelection.Equals("Camera", StringComparison.InvariantCultureIgnoreCase))
             {
                 filePath = await TakePhotoAsync();
                 if (filePath == null)
@@ -150,10 +159,11 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                     return;
                 }
 
+                Invoice.FileType = DigitalInvoiceFileType.Image;
                 _ = Task.Run(async () => { await ParseImageForInvoiceDataAsync(filePath); });
             }
 
-            if (methodOfSelection == "FileSystem")
+            if (methodOfSelection.Equals("FileSystem", StringComparison.InvariantCultureIgnoreCase))
             {
                 filePath = await SelectFileFromFileStorageAsync();
                 if (filePath == null)
@@ -161,6 +171,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                     return;
                 }
 
+                Invoice.FileType = DigitalInvoiceFileType.Image;
                 _ = Task.Run(async () => { await ParseFileForInvoiceDataAsync(filePath); });
             }
 
