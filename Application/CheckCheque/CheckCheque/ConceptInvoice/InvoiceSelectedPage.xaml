@@ -60,7 +60,7 @@
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand">
                 <Label
-                    Text="Name your invoice:"
+                    Text="Your invoice:"
                     FontAttributes="Bold"
                     FontSize="Large"
                     VerticalOptions="Center"
@@ -70,16 +70,17 @@
                 <Entry
                     x:Name="InvoiceNameEntry"
                     Text="{Binding Text, Source={x:Reference InvoiceNameLabel}}"
+                    IsEnabled="False"
                     Placeholder="Enter the name of the invoice..."
                     PlaceholderColor="LightGray"
                     VerticalOptions="Center"
                     HorizontalOptions="StartAndExpand"
                     HorizontalTextAlignment="Start">
-                    <Entry.Behaviors>
+                    <!--<Entry.Behaviors>
                         <behaviors:EventToCommandBehavior
                             EventName="TextChanged"
                             Command="{Binding InvoiceNameTextChangedCommand}" />
-                    </Entry.Behaviors>
+                    </Entry.Behaviors>-->
                 </Entry>
             </StackLayout>
 

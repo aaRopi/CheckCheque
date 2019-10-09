@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:CheckCheque.Behaviors"
+    x:Class="CheckCheque.CustomViews.InvoiceDetailsView"
+    x:Name="ThisInvoiceDetailsView">
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Text="Invoice details"
+            FontAttributes="Bold"
+            FontSize="Large"/>
+
+        <!-- Name -->
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            VerticalOptions="Center"
+            Text="Name:"/>
+        <Entry
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding InvoiceName, Source={x:Reference ThisInvoiceDetailsView}}"/>
+
+        <!-- Amount -->
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            VerticalOptions="Center"
+            Text="Total amount:"/>
+        <Entry
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding InvoiceAmount, Source={x:Reference ThisInvoiceDetailsView}}"
+            Keyboard="Numeric">
+            <Entry.Behaviors>
+                <behaviors:NumericValidationBehavior />
+            </Entry.Behaviors>
+        </Entry>
+
+        <!-- Bank account number -->
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            VerticalOptions="Center"
+            Text="BAN:"/>
+        <Entry
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding BankAccountNumber, Source={x:Reference ThisInvoiceDetailsView}}"/>
+
+        <!-- Issuer address -->
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            VerticalOptions="Center"
+            Text="Issuer address:"/>
+        <Entry
+            Grid.Row="4"
+            Grid.Column="1"
+            Text="{Binding IssuerAddress, Source={x:Reference ThisInvoiceDetailsView}}"/>
+
+        <!-- Kvk Number -->
+        <Label
+            Grid.Row="5"
+            Grid.Column="0"
+            VerticalOptions="Center"
+            Text="Kvk number: "/>
+        <Entry
+            Grid.Row="5"
+            Grid.Column="1"
+            Text="{Binding KvkNumber, Source={x:Reference ThisInvoiceDetailsView}}"/>
+    </Grid>
+</ContentView>

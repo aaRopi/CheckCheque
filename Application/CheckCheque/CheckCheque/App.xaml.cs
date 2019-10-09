@@ -21,8 +21,8 @@ namespace CheckCheque
             RegisterViewAndViewModelMappings();
             FreshPageModelResolver.PageModelMapper = new MyFreshPageModelMapper();
 
-            var tabbedNavigation = new FreshTabbedNavigationContainer();
-            tabbedNavigation.AddTab<NewConceptInvoiceViewModel>("Send/Verify Invoices", "send_verify_icon_30");
+            var tabbedNavigation = new FreshTabbedNavigationContainer("MainTabbedNav");
+            tabbedNavigation.AddTab<NewConceptInvoiceViewModel>("Sign/Verify Invoices", "send_verify_icon_30");
             tabbedNavigation.AddTab<UserInvoicesViewModel>("Your Invoices", "your_invoices_icon_30");
 
             tabbedNavigation.On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);

@@ -64,6 +64,20 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
+        private string _invoiceName;
+        public string InvoiceName
+        {
+            get => _invoiceName;
+            set
+            {
+                if (_invoiceName != value)
+                {
+                    _invoiceName = value;
+                    RaisePropertyChanged(nameof(InvoiceName));
+                }
+            }
+        }
+
         private string _invoiceAmount;
         public string InvoiceAmount
         {
@@ -123,20 +137,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
         public IInvoiceService InvoiceService { get; private set; }
         public IInvoicesRepository InvoicesRepository { get; private set; }
 
-        public ICommand HideInvoiceDetailsAndShowNextStepCommand => new Command(() =>
-        {
-            ShowParsedInvoiceDetails = false;
-
-            Invoice.Amount = Double.Parse(InvoiceAmount);
-            Invoice.BankAccountNumber = InvoiceBankAccountNumber;
-            Invoice.IssuerAddress = InvoiceIssuerAddress;
-            Invoice.KvkNumber = InvoiceKvkNumber;
-
-            InvoicesRepository.AddOrUpdateInvoice(Invoice);
-
-            SelectedFileName = Invoice.FileName;
-        });
-
         public ICommand ShowScanningInstructionsCommand => new Command(async () =>
         {
             await CoreMethods.PushPageModel<ShowInstructionsViewModel>(ShowInstructionsViewModel.ShowScanningInstructions);
@@ -185,7 +185,20 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 await CoreMethods.DisplayAlert("Error", "Please select a file for the invoice first", "Ok");
             }
 
+            Invoice.Name = InvoiceName;
+            Invoice.Amount = Double.Parse(InvoiceAmount);
+            Invoice.BankAccountNumber = InvoiceBankAccountNumber;
+            Invoice.KvkNumber = InvoiceKvkNumber;
+            Invoice.IssuerAddress = InvoiceIssuerAddress;
+
+            InvoicesRepository.AddOrUpdateInvoice(Invoice);
+
             await CoreMethods.PushPageModel<InvoiceSelectedViewModel>(Invoice);
+        });
+
+        public ICommand DismissInvoiceOperationCommand => new Command(async () =>
+        {
+            await CoreMethods.PopModalNavigationService();
         });
 
         public override void Init(object initData)
@@ -206,6 +219,16 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             InvoicesRepository = DependencyService.Get<IInvoicesRepository>();
         }
 
+        protected override void ViewIsDisappearing(object sender, EventArgs e)
+        {
+            base.ViewIsDisappearing(sender, e);
+        }
+
+        public override void ReverseInit(object returnedData)
+        {
+            base.ReverseInit(returnedData);
+        }
+
         private async Task ParseFileForInvoiceDataAsync(string filePath)
         {
             if (InvoiceService == null)
@@ -222,8 +245,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                     Invoice.BankAccountNumber = invoice.BankAccountNumber;
                     Invoice.KvkNumber = invoice.KvkNumber;
                     Invoice.IssuerAddress = invoice.IssuerAddress;
-
-                    InvoicesRepository.AddOrUpdateInvoice(Invoice);
                 }
             }
             catch (Exception ex)
@@ -249,8 +270,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                         Invoice.BankAccountNumber = invoice.BankAccountNumber;
                         Invoice.KvkNumber = invoice.KvkNumber;
                         Invoice.IssuerAddress = invoice.IssuerAddress;
-
-                        InvoicesRepository.AddOrUpdateInvoice(Invoice);
                     }
                 }
                 catch (Exception ex)
@@ -297,8 +316,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 return null;
             }
 
-            await CoreMethods.DisplayAlert("Image File Location", file.Path, "Ok");
-
             return file.Path;
         }
 
@@ -319,8 +336,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
                 Console.WriteLine("File name chosen: " + fileName);
                 Console.WriteLine("File data: " + contents);
-
-                await CoreMethods.DisplayAlert("Digital File Location", fileData.FilePath, "Ok");
 
                 return fileData.FilePath;
             }

@@ -44,5 +44,15 @@ namespace CheckCheque.Core.Repositories
         {
             return Invoices = Database.Table<Invoice>().ToList();
         }
+
+        public bool DeleteInvoice(Invoice invoice)
+        {
+            if (Invoices.Any(i => i.Id == invoice.Id))
+                Database.Delete(invoice);
+            else
+                return false;
+
+            return true;
+        }
     }
 }

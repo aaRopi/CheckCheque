@@ -65,6 +65,18 @@ namespace CheckCheque.ViewModels.UserInvoices
             await CoreMethods.PushPageModel<InvoiceDetailViewModel>(invoice);
         });
 
+        public ICommand DeleteInvoiceLocallyCommand => new Command<Invoice>(async (invoice) =>
+        {
+            if (invoice == null)
+                return;
+
+            var success = InvoicesRepository.DeleteInvoice(invoice);
+            if (success)
+                RefreshInvoicesCommand.Execute(this);
+            else
+                await CoreMethods.DisplayAlert("Something went wrong", "Could not delete invoice, please try again later..", "Ok");
+        });
+
         protected IInvoicesRepository InvoicesRepository { get; private set; }
 
         public override void Init(object initData)

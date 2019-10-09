@@ -43,9 +43,10 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             await CoreMethods.PushPageModel<AddDigitalInvoiceViewModel>(Invoice);
         });
 
-
-        public NewConceptInvoiceViewModel()
+        public override void Init(object initData)
         {
+            base.Init(initData);
+
             Invoice = new Invoice(InvoiceReason.Concept, "New concept invoice");
         }
     }

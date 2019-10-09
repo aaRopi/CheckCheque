@@ -42,10 +42,10 @@ namespace CheckCheque.ViewModels.ConceptInvoice
         public IInvoiceService InvoiceService { get; private set; }
         public IInvoicesRepository InvoicesRepository { get; private set; }
 
-        public ICommand InvoiceNameTextChangedCommand => new Command<TextChangedEventArgs>(async (TextChangedEventArgs eventArgs) =>
-        {
-            InvoiceName = eventArgs.NewTextValue;
-        });
+        //public ICommand InvoiceNameTextChangedCommand => new Command<TextChangedEventArgs>(async (TextChangedEventArgs eventArgs) =>
+        //{
+        //    InvoiceName = eventArgs.NewTextValue;
+        //});
 
         public ICommand InvoiceVerifyOrSignAndSendCommand => new Command(async () =>
         {
@@ -54,18 +54,19 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 await CoreMethods.DisplayAlert("Error", "Invoice name cannot be empty", "Ok");
                 return;
             }
-
-            Invoice.Name = InvoiceName;
-            InvoicesRepository.AddOrUpdateInvoice(Invoice);
-
+            
             if (Invoice.Reason == InvoiceReason.SignAndSend)
             {
+                Invoice.LastSignedAndSent = DateTime.UtcNow;
+
                 var status = await InvoiceService.PublishInvoiceAsync(Invoice);
                 await CoreMethods.DisplayAlert("Publishing status", status.ToString(), "Ok");
             }
 
             if (Invoice.Reason == InvoiceReason.Verify)
             {
+                Invoice.LastVerified = DateTime.UtcNow;
+
                 var status = await InvoiceService.VerifyInvoiceAsync(Invoice);
                 await CoreMethods.DisplayAlert("Verification Status", status.ToString(), "Ok");
             }

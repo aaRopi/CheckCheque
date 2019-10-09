@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:enums="clr-namespace:CheckCheque.Enums;assembly=CheckCheque.Core"
     x:Class="CheckCheque.ConceptInvoice.NewConceptInvoicePage"
-    Title="Send or Verify Invoices">
+    Title="Sign or Verify Invoices">
     <ContentPage.Resources>
         <Color x:Key="BackgroundColor">White</Color>
-        <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
+        <Color x:Key="LightBackgroundColor">#40FFFE7A</Color>
     </ContentPage.Resources>
     <Grid
         VerticalOptions="FillAndExpand"
@@ -29,7 +29,7 @@
 
         <Label
             Grid.Row="0"
-            Text="Start a new invoice operation:"
+            Text="Select an option:"
             FontAttributes="Italic"
             FontSize="Large"
             VerticalOptions="End"
@@ -43,6 +43,7 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="Center"
             HeightRequest="75"
+            HasShadow="False"
             BackgroundColor="{x:StaticResource LightBackgroundColor}">
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer
@@ -73,6 +74,7 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="Center"
             HeightRequest="75"
+            HasShadow="False"
             BackgroundColor="{x:StaticResource LightBackgroundColor}">
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer
