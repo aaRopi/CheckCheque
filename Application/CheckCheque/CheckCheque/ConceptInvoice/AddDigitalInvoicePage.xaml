@@ -156,7 +156,7 @@
                 KvkNumber="{Binding InvoiceKvkNumber, Mode=OneWayToSource}"/>
 
             <!-- Button to go to the next view in the flow. -->
-            <Button
+            <!--<Button
                 x:Name="GoToNextPageButton"
                 Grid.Row="4"
                 Grid.Column="0"
@@ -167,7 +167,36 @@
                 IsEnabled="{Binding InvoiceName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
                 FontSize="Medium"
                 HorizontalOptions="Center"
-                VerticalOptions="End"/>
+                VerticalOptions="End"/>-->
+            <!-- Action button -->
+            <Frame
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End"
+                HeightRequest="50"
+                Padding="0"
+                CornerRadius="0"
+                HasShadow="False"
+                IsVisible="{Binding InvoiceName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
+                BackgroundColor="{StaticResource LightBackgroundColor}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding InvoiceVerifyOrSignAndSendCommand}" />
+                </Frame.GestureRecognizers>
+                <Label
+                    x:Name="InvoiceButton"
+                    Text="{Binding Invoice.Reason}"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Margin="0"
+                    FontSize="Large"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"/>
+            </Frame>
         </Grid>
     </ScrollView>
 </ContentPage>

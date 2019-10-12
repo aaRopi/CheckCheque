@@ -179,11 +179,12 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             Invoice.FileName = filePath;
         });
 
-        public ICommand InvoiceFileSelectedCommand => new Command(async () =>
+        public ICommand InvoiceVerifyOrSignAndSendCommand => new Command(async () =>
         {
-            if (string.IsNullOrEmpty(Invoice.FileName))
+            if (string.IsNullOrEmpty(InvoiceName))
             {
-                await CoreMethods.DisplayAlert("Error", "Please select a file for the invoice first", "Ok");
+                await CoreMethods.DisplayAlert("Error", "Invoice name cannot be empty", "Ok");
+                return;
             }
 
             Invoice.Name = InvoiceName;
@@ -194,15 +195,46 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
             InvoicesRepository.AddOrUpdateInvoice(Invoice);
 
-            await CoreMethods.PushPageModel<InvoiceSelectedViewModel>(Invoice);
+            if (Invoice.Reason == InvoiceReason.SignAndSend)
+            {
+                Invoice.LastSignedAndSent = DateTime.UtcNow;
+
+                var status = await InvoiceService.PublishInvoiceAsync(Invoice);
+                await CoreMethods.DisplayAlert("Publishing status", status.ToString(), "Ok");
+            }
+
+            if (Invoice.Reason == InvoiceReason.Verify)
+            {
+                Invoice.LastVerified = DateTime.UtcNow;
+
+                var status = await InvoiceService.VerifyInvoiceAsync(Invoice);
+                await CoreMethods.DisplayAlert("Verification Status", status.ToString(), "Ok");
+            }
+
+            await CoreMethods.PopPageModel(true);
         });
 
-        public ICommand DismissInvoiceOperationCommand => new Command(() =>
+        //public ICommand InvoiceFileSelectedCommand => new Command(async () =>
+        //{
+        //    if (string.IsNullOrEmpty(Invoice.FileName))
+        //    {
+        //        await CoreMethods.DisplayAlert("Error", "Please select a file for the invoice first", "Ok");
+        //    }
+
+        //    Invoice.Name = InvoiceName;
+        //    Invoice.Amount = Double.Parse(InvoiceAmount);
+        //    Invoice.BankAccountNumber = InvoiceBankAccountNumber;
+        //    Invoice.KvkNumber = InvoiceKvkNumber;
+        //    Invoice.IssuerAddress = InvoiceIssuerAddress;
+
+        //    InvoicesRepository.AddOrUpdateInvoice(Invoice);
+
+        //    await CoreMethods.PushPageModel<InvoiceSelectedViewModel>(Invoice);
+        //});
+
+        public ICommand DismissInvoiceOperationCommand => new Command(async () =>
         {
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                await CoreMethods.PopPageModel(true);
-            });
+            await CoreMethods.PopPageModel(true);
         });
 
         public override void Init(object initData)

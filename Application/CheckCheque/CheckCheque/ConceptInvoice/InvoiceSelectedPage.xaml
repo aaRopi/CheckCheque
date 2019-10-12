@@ -4,6 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:CheckCheque.Behaviors"
     x:Class="CheckCheque.ConceptInvoice.InvoiceSelectedPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Close"
+            Command="{Binding DismissInvoiceOperationCommand}"
+            Order="Primary" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Color x:Key="BackgroundColor">White</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>

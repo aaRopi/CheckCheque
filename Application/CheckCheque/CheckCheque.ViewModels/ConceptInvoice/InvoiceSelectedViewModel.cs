@@ -42,10 +42,10 @@ namespace CheckCheque.ViewModels.ConceptInvoice
         public IInvoiceService InvoiceService { get; private set; }
         public IInvoicesRepository InvoicesRepository { get; private set; }
 
-        //public ICommand InvoiceNameTextChangedCommand => new Command<TextChangedEventArgs>(async (TextChangedEventArgs eventArgs) =>
-        //{
-        //    InvoiceName = eventArgs.NewTextValue;
-        //});
+        public ICommand DismissInvoiceOperationCommand => new Command(async () =>
+        {
+            await CoreMethods.PopPageModel(true);
+        });
 
         public ICommand InvoiceVerifyOrSignAndSendCommand => new Command(async () =>
         {

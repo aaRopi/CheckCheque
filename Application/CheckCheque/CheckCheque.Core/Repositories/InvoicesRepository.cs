@@ -34,6 +34,8 @@ namespace CheckCheque.Core.Repositories
 
         public void AddOrUpdateInvoice(Invoice invoice)
         {
+            GetInvoices();
+
             if (Invoices.Any(i => i.Id == invoice.Id))
                 Database.Update(invoice);
             else

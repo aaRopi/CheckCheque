@@ -17,7 +17,10 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                     throw new ArgumentException("InvoiceReason has to be either SignAndSend or Verify");
             }
 
-            await CoreMethods.PushPageModel<AddDigitalInvoiceViewModel>(reason, true);
+            //await CoreMethods.PushPageModel<AddDigitalInvoiceViewModel>(reason, true);
+            var addDigitalInvoicePage = FreshPageModelResolver.ResolvePageModel<AddDigitalInvoiceViewModel>(reason);
+            var basicNavContainer = new FreshNavigationContainer(addDigitalInvoicePage, "AddNewInvoicePage");
+            await CoreMethods.PushNewNavigationServiceModal(basicNavContainer, new FreshBasePageModel[] { addDigitalInvoicePage.GetModel() });
         });
     }
 }

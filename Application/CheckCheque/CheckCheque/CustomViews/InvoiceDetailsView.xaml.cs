@@ -8,7 +8,7 @@ namespace CheckCheque.CustomViews
             nameof(InvoiceName),
             typeof(string),
             typeof(InvoiceDetailsDialogView),
-            "$invoice name");
+            string.Empty);
 
         public static readonly BindableProperty InvoiceAmountProperty = BindableProperty.Create(
             nameof(InvoiceAmount),
