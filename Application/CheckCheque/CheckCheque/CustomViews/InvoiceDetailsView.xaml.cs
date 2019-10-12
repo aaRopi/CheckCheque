@@ -10,11 +10,11 @@ namespace CheckCheque.CustomViews
             typeof(InvoiceDetailsDialogView),
             string.Empty);
 
-        public static readonly BindableProperty InvoiceAmountProperty = BindableProperty.Create(
-            nameof(InvoiceAmount),
+        public static readonly BindableProperty InvoiceNumberProperty = BindableProperty.Create(
+            nameof(InvoiceNumber),
             typeof(string),
             typeof(InvoiceDetailsDialogView),
-            "$invoice amount");
+            "$invoice number");
 
         public static readonly BindableProperty BankAccountNumberProperty = BindableProperty.Create(
             nameof(BankAccountNumber),
@@ -40,10 +40,10 @@ namespace CheckCheque.CustomViews
             set { SetValue(InvoiceNameProperty, value); }
         }
 
-        public string InvoiceAmount
+        public string InvoiceNumber
         {
-            get { return (string)GetValue(InvoiceAmountProperty); }
-            set { SetValue(InvoiceAmountProperty, value); }
+            get { return (string)GetValue(InvoiceNumberProperty); }
+            set { SetValue(InvoiceNumberProperty, value); }
         }
 
         public string BankAccountNumber

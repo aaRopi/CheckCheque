@@ -20,7 +20,7 @@ namespace CheckCheque.ViewModels.UserInvoices
 
                     RaisePropertyChanged(nameof(InvoiceName));
                     RaisePropertyChanged(nameof(InvoiceFileName));
-                    RaisePropertyChanged(nameof(InvoiceAmount));
+                    RaisePropertyChanged(nameof(InvoiceNumber));
                     RaisePropertyChanged(nameof(InvoiceBAN));
                     RaisePropertyChanged(nameof(InvoiceIA));
                     RaisePropertyChanged(nameof(InvoiceKvkNumber));
@@ -34,7 +34,7 @@ namespace CheckCheque.ViewModels.UserInvoices
         public string InvoiceReason => Invoice?.Reason.ToString();
         public string InvoiceFileName => Invoice?.FileName;
 
-        public string InvoiceAmount => $"{Invoice?.Amount}";
+        public string InvoiceNumber => Invoice.InvoiceNumber; 
         public string InvoiceBAN => Invoice?.BankAccountNumber;
         public string InvoiceIA => Invoice?.IssuerAddress;
         public string InvoiceKvkNumber => Invoice?.KvkNumber;

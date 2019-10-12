@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using CheckCheque.Core.Dtos;
 using CheckCheque.Core.Enums;
@@ -20,6 +19,8 @@ using ServerInvoice = UIVP.Protocol.Core.Entity.Invoice;
 using ServerInvoiceRepository = UIVP.Protocol.Core.Repository.InvoiceRepository;
 using Syncfusion.Pdf.Parsing;
 using System.Linq;
+using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Crypto;
 
 [assembly: Dependency(typeof(CheckCheque.Core.Services.InvoiceService))]
 namespace CheckCheque.Core.Services
@@ -56,10 +57,19 @@ namespace CheckCheque.Core.Services
             if (serverInvoice == null)
                 return InvoiceVerificationStatus.Unknown;
 
-            // TODO wrap in try-catch
-            var verificationStatus = await InvoiceRepository.VerifyInvoiceAsync(serverInvoice);
+            InvoiceVerificationStatus verificationStatus = InvoiceVerificationStatus.Unknown;
 
-            return InvoiceVerificationStatusDto.Convert(verificationStatus);
+            try
+            {
+                var serverVerificationStatus = await InvoiceRepository.VerifyInvoiceAsync(serverInvoice);
+                verificationStatus = InvoiceVerificationStatusDto.Convert(serverVerificationStatus);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return verificationStatus;
         }
 
         public async Task<InvoicePublishStatus> PublishInvoiceAsync(Invoice invoice)
@@ -68,8 +78,11 @@ namespace CheckCheque.Core.Services
 
             try
             {
-                var cngKey = CngKey.Import(Convert.FromBase64String(ServicesConfig.PrivateKeyPayload), CngKeyBlobFormat.EccFullPrivateBlob);
-                var serverPublishStatus = await InvoiceRepository.PublishInvoiceAsync(InvoiceDto.Convert(invoice), cngKey);
+                var publicKey = PublicKeyFactory.CreateKey(Convert.FromBase64String(ServicesConfig.PublicKeyPayload));
+                var privateKey = PrivateKeyFactory.CreateKey(Convert.FromBase64String(ServicesConfig.PrivateKeyPayload));
+
+                var keyPair = new AsymmetricCipherKeyPair(publicKey, privateKey);
+                var serverPublishStatus = await InvoiceRepository.PublishInvoiceAsync(InvoiceDto.Convert(invoice), keyPair);
                 publishStatus = InvoicePublishStatusDto.Convert(serverPublishStatus);
             }
             catch (Exception ex)
@@ -115,7 +128,7 @@ namespace CheckCheque.Core.Services
             var kvkNumber = string.Empty;
             var bankAccount = string.Empty;
             var address = string.Empty;
-            var amount = 0.00d;
+            var number = string.Empty;
 
             try
             {
@@ -147,17 +160,6 @@ namespace CheckCheque.Core.Services
                         {
                             line.WordCollection.Skip(1).Take(line.WordCollection.Count - 1).ToList().ForEach(w => address += $" {w.Text}");
                         }
-
-                        if (word.Text.ToLower() == "total")
-                        {
-                            var possibleAmount = line.WordCollection.Last().Text;
-
-                            if (possibleAmount.Contains('.'))
-                            {
-                                double.TryParse(possibleAmount.Replace('.', ','), out amount);
-                            }
-                        }
-
                     }
                 }
 
@@ -169,7 +171,7 @@ namespace CheckCheque.Core.Services
                 Console.WriteLine(ex.Message);
             }
 
-            return new Invoice { Amount = amount, BankAccountNumber = bankAccount, KvkNumber = kvkNumber, IssuerAddress = address };
+            return new Invoice { InvoiceNumber = number, BankAccountNumber = bankAccount, KvkNumber = kvkNumber, IssuerAddress = address };
         }
     }
 }

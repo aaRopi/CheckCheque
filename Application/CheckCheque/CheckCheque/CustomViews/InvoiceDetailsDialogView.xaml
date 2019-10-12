@@ -53,7 +53,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="0"
-                    Text="Amount: " />
+                    Text="Invoice number: " />
                 <Label
                     Grid.Row="2"
                     Grid.Column="0"
@@ -67,16 +67,12 @@
                     Grid.Column="0"
                     Text="KvK Number: " />
                 <Entry
-                    x:Name="InvoiceAmountEntry"
+                    x:Name="InvoiceNumberEntry"
                     Grid.Row="1"
                     Grid.Column="1"
                     Keyboard="Numeric"
-                    Text="{Binding InvoiceAmount, Source={x:Reference ThisInvoiceDetailsDialogView}}"
-                    IsEnabled="False">
-                    <Entry.Behaviors>
-                        <behaviors:NumericValidationBehavior />
-                    </Entry.Behaviors>
-                </Entry>
+                    Text="{Binding InvoiceNumber, Source={x:Reference ThisInvoiceDetailsDialogView}}"
+                    IsEnabled="False"/>
                 <Entry
                     x:Name="BankAccountNumberEntry"
                     Grid.Row="2"
@@ -95,7 +91,11 @@
                     Grid.Column="1"
                     Keyboard="Numeric"
                     Text="{Binding KvkNumber, Source={x:Reference ThisInvoiceDetailsDialogView}}"
-                    IsEnabled="False" />
+                    IsEnabled="False" >
+                    <Entry.Behaviors>
+                        <behaviors:NumericValidationBehavior />
+                    </Entry.Behaviors>
+                    </Entry>
                 <Button
                     Grid.Row="5"
                     Grid.Column="0"

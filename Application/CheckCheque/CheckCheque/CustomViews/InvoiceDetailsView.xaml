@@ -40,21 +40,16 @@
             Grid.Column="1"
             Text="{Binding InvoiceName, Source={x:Reference ThisInvoiceDetailsView}}"/>
 
-        <!-- Amount -->
+        <!-- Invoice number -->
         <Label
             Grid.Row="2"
             Grid.Column="0"
             VerticalOptions="Center"
-            Text="Total amount:"/>
+            Text="Invoice number:"/>
         <Entry
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding InvoiceAmount, Source={x:Reference ThisInvoiceDetailsView}}"
-            Keyboard="Numeric">
-            <Entry.Behaviors>
-                <behaviors:NumericValidationBehavior />
-            </Entry.Behaviors>
-        </Entry>
+            Text="{Binding InvoiceNumber, Source={x:Reference ThisInvoiceDetailsView}}"/>
 
         <!-- Bank account number -->
         <Label
@@ -87,6 +82,11 @@
         <Entry
             Grid.Row="5"
             Grid.Column="1"
-            Text="{Binding KvkNumber, Source={x:Reference ThisInvoiceDetailsView}}"/>
+            Text="{Binding KvkNumber, Source={x:Reference ThisInvoiceDetailsView}}"
+            Keyboard="Numeric">
+            <Entry.Behaviors>
+                <behaviors:NumericValidationBehavior />
+            </Entry.Behaviors>
+        </Entry>
     </Grid>
 </ContentView>

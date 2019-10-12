@@ -55,7 +55,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 {
                     _showParsedInvoiceDetails = value;
 
-                    InvoiceAmount = $"{Invoice.Amount}";
+                    InvoiceNumber = Invoice.InvoiceNumber;
                     InvoiceBankAccountNumber = Invoice.BankAccountNumber;
                     InvoiceIssuerAddress = Invoice.IssuerAddress;
                     InvoiceKvkNumber = Invoice.KvkNumber;
@@ -79,16 +79,16 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
-        private string _invoiceAmount;
-        public string InvoiceAmount
+        private string _invoiceNumber;
+        public string InvoiceNumber
         {
-            get => _invoiceAmount;
+            get => _invoiceNumber;
             set
             {
-                if (_invoiceAmount != value)
+                if (_invoiceNumber != value)
                 {
-                    _invoiceAmount = value;
-                    RaisePropertyChanged(nameof(InvoiceAmount));
+                    _invoiceNumber = value;
+                    RaisePropertyChanged(nameof(InvoiceNumber));
                 }
             }
         }
@@ -188,7 +188,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
 
             Invoice.Name = InvoiceName;
-            Invoice.Amount = Double.Parse(InvoiceAmount);
+            Invoice.InvoiceNumber = InvoiceNumber;
             Invoice.BankAccountNumber = InvoiceBankAccountNumber;
             Invoice.KvkNumber = InvoiceKvkNumber;
             Invoice.IssuerAddress = InvoiceIssuerAddress;
@@ -222,7 +222,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
         //    }
 
         //    Invoice.Name = InvoiceName;
-        //    Invoice.Amount = Double.Parse(InvoiceAmount);
+        //    Invoice.InvoiceNumber = InvoiceNumber;
         //    Invoice.BankAccountNumber = InvoiceBankAccountNumber;
         //    Invoice.KvkNumber = InvoiceKvkNumber;
         //    Invoice.IssuerAddress = InvoiceIssuerAddress;
@@ -268,7 +268,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 var invoice = await InvoiceService.ParseInvoiceDataFromFile(filePath);
                 if (invoice != null)
                 {
-                    Invoice.Amount = invoice.Amount;
+                    Invoice.InvoiceNumber = invoice.InvoiceNumber;
                     Invoice.BankAccountNumber = invoice.BankAccountNumber;
                     Invoice.KvkNumber = invoice.KvkNumber;
                     Invoice.IssuerAddress = invoice.IssuerAddress;
@@ -293,7 +293,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                     var invoice = await InvoiceService.ParseInvoiceDataFromImage(filePath);
                     if (invoice != null)
                     {
-                        Invoice.Amount = invoice.Amount;
+                        Invoice.InvoiceNumber = invoice.InvoiceNumber;
                         Invoice.BankAccountNumber = invoice.BankAccountNumber;
                         Invoice.KvkNumber = invoice.KvkNumber;
                         Invoice.IssuerAddress = invoice.IssuerAddress;

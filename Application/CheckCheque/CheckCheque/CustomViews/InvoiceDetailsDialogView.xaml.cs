@@ -5,11 +5,11 @@ namespace CheckCheque.CustomViews
 {
     public partial class InvoiceDetailsDialogView : ContentView
     {
-        public static readonly BindableProperty InvoiceAmountProperty = BindableProperty.Create(
-            nameof(InvoiceAmount),
+        public static readonly BindableProperty InvoiceNumberProperty = BindableProperty.Create(
+            nameof(InvoiceNumber),
             typeof(string),
             typeof(InvoiceDetailsDialogView),
-            "$invoice amount");
+            "$invoice number");
 
         public static readonly BindableProperty BankAccountNumberProperty = BindableProperty.Create(
             nameof(BankAccountNumber),
@@ -35,10 +35,10 @@ namespace CheckCheque.CustomViews
             typeof(InvoiceDetailsDialogView),
             null);
 
-        public string InvoiceAmount
+        public string InvoiceNumber
         {
-            get { return (string)GetValue(InvoiceAmountProperty); }
-            set { SetValue(InvoiceAmountProperty, value); }
+            get { return (string)GetValue(InvoiceNumberProperty); }
+            set { SetValue(InvoiceNumberProperty, value); }
         }
 
         public string BankAccountNumber
@@ -67,9 +67,9 @@ namespace CheckCheque.CustomViews
 
         public ICommand EnterManuallyCommand => new Command(() =>
         {
-            InvoiceAmountEntry.IsEnabled = BankAccountNumberEntry.IsEnabled = IssuerAddressEntry.IsEnabled = KvkNumberEntry.IsEnabled = true;
+            InvoiceNumberEntry.IsEnabled = BankAccountNumberEntry.IsEnabled = IssuerAddressEntry.IsEnabled = KvkNumberEntry.IsEnabled = true;
 
-            InvoiceAmountEntry.Focus();
+            InvoiceNumberEntry.Focus();
         });
 
         public InvoiceDetailsDialogView()

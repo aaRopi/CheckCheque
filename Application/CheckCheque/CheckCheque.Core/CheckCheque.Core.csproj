@@ -14,7 +14,7 @@
     <Folder Include="Repositories\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="UIVP.Protocol.Core.Iota" Version="0.1.2" />
+    <PackageReference Include="UIVP.Protocol.Core.Iota" Version="0.2.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Syncfusion.Xamarin.Pdf" Version="17.3.0.14" />
