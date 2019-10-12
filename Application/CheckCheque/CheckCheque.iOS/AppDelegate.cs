@@ -11,7 +11,6 @@ namespace CheckCheque.iOS
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             Xamarin.Forms.Forms.Init();
-
             AnimationViewRenderer.Init();
 
             LoadApplication(new App());

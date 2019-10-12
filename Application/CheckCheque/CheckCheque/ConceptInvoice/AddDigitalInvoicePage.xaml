@@ -149,11 +149,11 @@
                 Grid.ColumnSpan="3"
                 Margin="5, 10"
                 IsVisible="{Binding ShowParsedInvoiceDetails}"
-                InvoiceName="{Binding InvoiceName, Mode=TwoWay}"
-                InvoiceAmount="{Binding InvoiceAmount, Mode=TwoWay}"
-                BankAccountNumber="{Binding InvoiceBankAccountNumber, Mode=TwoWay}"
-                IssuerAddress="{Binding InvoiceIssuerAddress, Mode=TwoWay}"
-                KvkNumber="{Binding InvoiceKvkNumber, Mode=TwoWay}"/>
+                InvoiceName="{Binding InvoiceName, Mode=OneWayToSource}"
+                InvoiceAmount="{Binding InvoiceAmount, Mode=OneWayToSource}"
+                BankAccountNumber="{Binding InvoiceBankAccountNumber, Mode=OneWayToSource}"
+                IssuerAddress="{Binding InvoiceIssuerAddress, Mode=OneWayToSource}"
+                KvkNumber="{Binding InvoiceKvkNumber, Mode=OneWayToSource}"/>
 
             <!-- Button to go to the next view in the flow. -->
             <Button

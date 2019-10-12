@@ -4,6 +4,7 @@ using System.Windows.Input;
 using CheckCheque.Core.Enums;
 using CheckCheque.Core.Repositories.Interfaces;
 using CheckCheque.Core.Services.Interfaces;
+using CheckCheque.Enums;
 using CheckCheque.Models;
 using CheckCheque.ViewModels.Others;
 using FreshMvvm;
@@ -196,37 +197,31 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             await CoreMethods.PushPageModel<InvoiceSelectedViewModel>(Invoice);
         });
 
-        public ICommand DismissInvoiceOperationCommand => new Command(async () =>
+        public ICommand DismissInvoiceOperationCommand => new Command(() =>
         {
-            await CoreMethods.PopModalNavigationService();
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await CoreMethods.PopPageModel(true);
+            });
         });
 
         public override void Init(object initData)
         {
             base.Init(initData);
 
-            var invoice = initData as Invoice;
-            if (invoice != null)
+            var isValidInvoiceReason = initData is InvoiceReason;
+            if (isValidInvoiceReason && (InvoiceReason)initData != InvoiceReason.Concept || (InvoiceReason)initData != InvoiceReason.Unknown)
             {
-                Invoice = invoice;
+                Invoice = new Invoice();
+                Invoice.Reason = (InvoiceReason)initData;
             }
             else
             {
-                throw new ArgumentException($"{nameof(initData)} cannot be null! This viewmodel will be useless then!");
+                throw new ArgumentException($"{nameof(initData)} is not the correct reason type! This viewmodel will be useless then!");
             }
 
             InvoiceService = DependencyService.Get<IInvoiceService>();
             InvoicesRepository = DependencyService.Get<IInvoicesRepository>();
-        }
-
-        protected override void ViewIsDisappearing(object sender, EventArgs e)
-        {
-            base.ViewIsDisappearing(sender, e);
-        }
-
-        public override void ReverseInit(object returnedData)
-        {
-            base.ReverseInit(returnedData);
         }
 
         private async Task ParseFileForInvoiceDataAsync(string filePath)

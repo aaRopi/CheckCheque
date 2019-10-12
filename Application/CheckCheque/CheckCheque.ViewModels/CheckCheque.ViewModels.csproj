@@ -18,7 +18,7 @@
     <ProjectReference Include="..\CheckCheque.Core\CheckCheque.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062" />
     <PackageReference Include="FreshMvvm" Version="3.0.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.34" />
