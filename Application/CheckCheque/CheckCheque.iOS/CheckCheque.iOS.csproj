@@ -188,7 +188,8 @@
       <BundleResource Include="Resources\camera_icon.png" />
       <BundleResource Include="Resources\select_file_icon.png" />
       <BundleResource Include="Resources\invoice_icon.png" />
-      <BundleResource Include="Resources\blockchain_background.png" />
+      <BundleResource Include="Resources\blockchain_background.jpg" />
+      <BundleResource Include="Resources\main_page_logo.PNG" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

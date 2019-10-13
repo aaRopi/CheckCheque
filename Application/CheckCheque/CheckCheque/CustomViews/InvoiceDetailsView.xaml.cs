@@ -14,25 +14,25 @@ namespace CheckCheque.CustomViews
             nameof(InvoiceNumber),
             typeof(string),
             typeof(InvoiceDetailsDialogView),
-            "$invoice number");
+            "2019-076");
 
         public static readonly BindableProperty BankAccountNumberProperty = BindableProperty.Create(
             nameof(BankAccountNumber),
             typeof(string),
             typeof(InvoiceDetailsDialogView),
-            "$bank account number");
+            "NL63ABNA0265980487");
 
         public static readonly BindableProperty IssuerAddressProperty = BindableProperty.Create(
             nameof(IssuerAddress),
             typeof(string),
             typeof(InvoiceDetailsDialogView),
-            "$issuer address");
+            "Stationsweg 20, 9726 AZ Groningen, The Netherlands");
 
         public static readonly BindableProperty KvkNumberProperty = BindableProperty.Create(
             nameof(KvkNumber),
             typeof(string),
             typeof(InvoiceDetailsDialogView),
-            "$kvk number");
+            "401196200");
 
         public string InvoiceName
         {

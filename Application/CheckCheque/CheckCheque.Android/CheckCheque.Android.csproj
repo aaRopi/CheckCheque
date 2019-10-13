@@ -210,7 +210,11 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\blockchain_background.png">
+    <AndroidResource Include="Resources\drawable\blockchain_background.jpg">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\main_page_logo.PNG">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

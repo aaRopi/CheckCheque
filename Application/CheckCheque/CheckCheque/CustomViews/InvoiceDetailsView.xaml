@@ -56,7 +56,7 @@
             Grid.Row="3"
             Grid.Column="0"
             VerticalOptions="Center"
-            Text="BAN:"/>
+            Text="IBAN:"/>
         <Entry
             Grid.Row="3"
             Grid.Column="1"

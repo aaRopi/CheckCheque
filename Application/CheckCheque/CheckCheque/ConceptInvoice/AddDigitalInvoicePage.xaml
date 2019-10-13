@@ -197,6 +197,13 @@
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"/>
             </Frame>
+
+            <customViews:BusyDialogView
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.RowSpan="5"
+                Grid.ColumnSpan="3"
+                IsVisible="{Binding ShowBusyStatus}" />
         </Grid>
     </ScrollView>
 </ContentPage>

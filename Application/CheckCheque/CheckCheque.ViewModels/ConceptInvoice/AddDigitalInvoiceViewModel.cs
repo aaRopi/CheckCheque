@@ -135,6 +135,20 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
+        private bool _showBusyStatus;
+        public bool ShowBusyStatus
+        {
+            get => _showBusyStatus;
+            set
+            {
+                if (_showBusyStatus != value)
+                {
+                    _showBusyStatus = value;
+                    RaisePropertyChanged(nameof(ShowBusyStatus));
+                }
+            }
+        }
+
         public IInvoiceService InvoiceService { get; private set; }
         public IInvoicesRepository InvoicesRepository { get; private set; }
 
@@ -195,11 +209,15 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
             InvoicesRepository.AddOrUpdateInvoice(Invoice);
 
+            ShowBusyStatus = true;
+
             if (Invoice.Reason == InvoiceReason.SignAndSend)
             {
                 Invoice.LastSignedAndSent = DateTime.UtcNow;
 
                 var status = await InvoiceService.PublishInvoiceAsync(Invoice);
+                ShowBusyStatus = false;
+
                 await CoreMethods.DisplayAlert("Publishing status", status.ToString(), "Ok");
             }
 
@@ -208,9 +226,12 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 Invoice.LastVerified = DateTime.UtcNow;
 
                 var status = await InvoiceService.VerifyInvoiceAsync(Invoice);
+                ShowBusyStatus = false;
+
                 await CoreMethods.DisplayAlert("Verification Status", status.ToString(), "Ok");
             }
 
+            ShowBusyStatus = false;
             await CoreMethods.PopPageModel(true);
         });
 

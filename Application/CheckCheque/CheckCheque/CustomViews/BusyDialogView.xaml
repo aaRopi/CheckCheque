@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CheckCheque.CustomViews.BusyDialogView"
+    VerticalOptions="FillAndExpand"
+    HorizontalOptions="FillAndExpand">
+    <ContentView.Resources>
+        <Style TargetType="Frame" x:Key="LocalFrameStyle">
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="WidthRequest" Value="90" />
+            <Setter Property="HeightRequest" Value="90" />
+            <Setter Property="CornerRadius" Value="20" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="LocalLabelStyle">
+            <Setter Property="VerticalOptions" Value="EndAndExpand" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="Default" />
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+    </ContentView.Resources>
+    <Grid>
+        <ContentView
+            BackgroundColor="#66000000"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand" />
+        <Frame
+            Style="{StaticResource LocalFrameStyle}">
+            <StackLayout
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                <ActivityIndicator
+                    IsRunning="True" />
+                <Label
+                    Style="{StaticResource LocalLabelStyle}"
+                    Text="Working..."/>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentView>
