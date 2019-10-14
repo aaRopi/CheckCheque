@@ -2,14 +2,16 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:CheckCheque.Behaviors"
     x:Class="CheckCheque.UserInvoices.UserInvoicesPage"
-    Title="Your Invoices">
+    Title="Your Invoices"
+    x:Name="ThisUserInvoicesPage">
     <ContentPage.Content>
-        <ListView
+        <!-- Rowheight=100 -->
+        <ListView 
             ItemsSource="{Binding GroupedInvoices}"
             IsGroupingEnabled="True"
             GroupDisplayBinding="{Binding Key}"
-            RowHeight="75"
             IsPullToRefreshEnabled="True"
             RefreshCommand="{Binding RefreshInvoicesCommand}"
             IsRefreshing="{Binding Refreshing}"
@@ -18,35 +20,65 @@
             SeparatorVisibility="None">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <Label
-                            VerticalOptions="CenterAndExpand"
-                            HorizontalOptions="StartAndExpand"
-                            HeightRequest="20"
-                            Margin="10, 0"
-                            FontSize="Large"
-                            Text="{Binding Key}" />
+                    <ViewCell
+                        Height="30">
+                        <StackLayout
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            BackgroundColor="LightGray"
+                            HeightRequest="30">
+                            <Label
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"
+                                Margin="15, 5"
+                                FontSize="Default"
+                                Text="{Binding Key}" />
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
+                    <ViewCell
+                        Height="100">
+                        <ViewCell.ContextActions>
+                            <MenuItem
+                                Command="{Binding BindingContext.DeleteInvoiceLocallyCommand, Source={x:Reference ThisUserInvoicesPage}}"
+                                CommandParameter="{Binding .}"
+                                Text="Delete"
+                                IsDestructive="True" />
+                        </ViewCell.ContextActions>
                         <Frame
-                            Margin="10, 2">
+                            Margin="10">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="20" />
                                 </Grid.RowDefinitions>
-                                <Label
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
                                     Grid.Row="0"
                                     Grid.Column="0"
-                                    Text="{Binding Name}" />
-                                <Label
+                                    Spacing="10">
+                                    <Label
+                                        Text="Invoice Name: " />
+                                    <Label
+                                        Text="{Binding Name}" />
+                                </StackLayout>
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
                                     Grid.Row="1"
                                     Grid.Column="0"
-                                    Text="{Binding IssuerAddress}" />
+                                    Spacing="10">
+                                    <Label
+                                        Text="Invoice Id: " />
+                                    <Label
+                                        Text="{Binding Id}" />
+                                </StackLayout>
                             </Grid>
                         </Frame>
                     </ViewCell>
@@ -55,6 +87,11 @@
             <ListView.Footer>
                 <Label />
             </ListView.Footer>
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    EventName="ItemTapped"
+                    Command="{Binding ShowInvoiceDetailCommand}" />
+            </ListView.Behaviors>
         </ListView>
     </ContentPage.Content>
 </ContentPage>

@@ -6,6 +6,12 @@
     xmlns:customViews="clr-namespace:CheckCheque.CustomViews"
     x:Class="CheckCheque.ConceptInvoice.AddDigitalInvoicePage"
     Title="Add Invoices">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Close"
+            Command="{Binding DismissInvoiceOperationCommand}"
+            Order="Primary" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Color x:Key="BackgroundColor">White</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
@@ -21,10 +27,11 @@
             RowSpacing="0"
             ColumnSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="200" />
+                <RowDefinition Height="75" />
                 <RowDefinition Height="1" />
                 <RowDefinition Height="200" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -85,56 +92,21 @@
                     HorizontalOptions="Center"/>
             </StackLayout>
 
-            <Button
-                x:Name="ShowMeHowButton"
-                Grid.Row="0"
-                Grid.Column="2"
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
                 Margin="0, 5"
-                Text="Show me how!"
-                VerticalOptions="Start"
-                HorizontalOptions="End"
-                WidthRequest="90"
-                Command="{Binding ShowScanningInstructionsCommand}"
-                Style="{StaticResource Key=SecondaryButtonStyle}"/>
-
-            <!-- Button to go to the next view in the flow. -->
-            <Button
-                x:Name="GoToNextPageButton"
-                Grid.Row="3"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                Command="{Binding InvoiceFileSelectedCommand}"
-                Text="{Binding Invoice.Reason}"
-                IsVisible="{Binding SelectedFileName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
-                IsEnabled="{Binding SelectedFileName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
-                FontSize="Medium"
+                TextDecorations="Underline"
+                Text="(Show me how!)"
+                FontSize="Micro"
+                VerticalOptions="End"
                 HorizontalOptions="Center"
-                VerticalOptions="End"/>
-
-            <!-- Boxviews acting as borders -->
-            <!-- Vertical border -->
-            <BoxView
-                Grid.Row="1"
-                Grid.Column="1"
-                Grid.RowSpan="2"
-                Color="Gray"
-                WidthRequest="1" />
-            <!-- First Horizontal border -->
-            <BoxView
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                Color="Gray"
-                VerticalOptions="Start"
-                HeightRequest="1" />
-            <!-- Second Horizontal border -->
-            <BoxView
-                Grid.Row="3"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                Color="Gray"
-                VerticalOptions="Start"
-                HeightRequest="1" />
+                WidthRequest="90" >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding ShowScanningInstructionsCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
 
             <!-- UI for selecting from the file storage -->
             <StackLayout
@@ -171,45 +143,67 @@
                     HorizontalOptions="Center"/>
             </StackLayout>
 
-            <!-- UI for showing selected file -->
-            <StackLayout
+            <customViews:InvoiceDetailsView
                 Grid.Row="3"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
-                Orientation="Horizontal"
-                VerticalOptions="Center"
-                HorizontalOptions="FillAndExpand">
+                Margin="5, 10"
+                IsVisible="{Binding ShowParsedInvoiceDetails}"
+                InvoiceName="{Binding InvoiceName, Mode=OneWayToSource}"
+                InvoiceNumber="{Binding InvoiceNumber, Mode=OneWayToSource}"
+                BankAccountNumber="{Binding InvoiceBankAccountNumber, Mode=OneWayToSource}"
+                IssuerAddress="{Binding InvoiceIssuerAddress, Mode=OneWayToSource}"
+                KvkNumber="{Binding InvoiceKvkNumber, Mode=OneWayToSource}"/>
+
+            <!-- Button to go to the next view in the flow. -->
+            <!--<Button
+                x:Name="GoToNextPageButton"
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Command="{Binding InvoiceFileSelectedCommand}"
+                Text="{Binding Invoice.Reason}"
+                IsVisible="{Binding InvoiceName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
+                IsEnabled="{Binding InvoiceName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                VerticalOptions="End"/>-->
+            <!-- Action button -->
+            <Frame
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End"
+                HeightRequest="50"
+                Padding="0"
+                CornerRadius="0"
+                HasShadow="False"
+                IsVisible="{Binding InvoiceName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
+                BackgroundColor="{StaticResource LightBackgroundColor}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding InvoiceVerifyOrSignAndSendCommand}" />
+                </Frame.GestureRecognizers>
                 <Label
-                    Margin="20"
-                    Text="Selected File:"
+                    x:Name="InvoiceButton"
+                    Text="{Binding Invoice.Reason}"
                     TextColor="Black"
-                    FontSize="Small"
+                    FontAttributes="Bold"
+                    Margin="0"
+                    FontSize="Large"
                     VerticalOptions="Center"
                     VerticalTextAlignment="Center"
-                    HorizontalOptions="Start"
-                    HorizontalTextAlignment="Start"/>
-                <Entry
-                    x:Name="SelectedFileNameLabel"
-                    TextColor="Black"
-                    InputTransparent="True"
-                    Placeholder="No file selected..."
-                    Text="{Binding SelectedFileName}"
-                    PlaceholderColor="LightGray"
-                    VerticalOptions="Center"
-                    HorizontalOptions="FillAndExpand"/>
-            </StackLayout>
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"/>
+            </Frame>
 
-            <customViews:InvoiceDetailsDialogView
-                IsVisible="{Binding ShowParsedInvoiceDetails}"
-                InvoiceAmount="{Binding InvoiceAmount, Mode=TwoWay}"
-                BankAccountNumber="{Binding InvoiceBankAccountNumber, Mode=TwoWay}"
-                IssuerAddress="{Binding InvoiceIssuerAddress, Mode=TwoWay}"
-                KvkNumber="{Binding InvoiceKvkNumber, Mode=TwoWay}"
-                OkCommand="{Binding HideInvoiceDetailsAndShowNextStepCommand}"
+            <customViews:BusyDialogView
                 Grid.Row="0"
                 Grid.Column="0"
-                Grid.RowSpan="4"
-                Grid.ColumnSpan="3"/>
+                Grid.RowSpan="5"
+                Grid.ColumnSpan="3"
+                IsVisible="{Binding ShowBusyStatus}" />
         </Grid>
     </ScrollView>
 </ContentPage>

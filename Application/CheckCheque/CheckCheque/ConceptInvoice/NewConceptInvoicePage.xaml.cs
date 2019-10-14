@@ -7,6 +7,7 @@ namespace CheckCheque.ConceptInvoice
         public NewConceptInvoicePage()
         {
             InitializeComponent();
+            NavigationPage.SetBackButtonTitle(this, string.Empty);
         }
     }
 }

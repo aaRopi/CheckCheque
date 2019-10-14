@@ -34,7 +34,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 if (_invoiceName != value)
                 {
                     _invoiceName = value;
-                    Invoice.Name = _invoiceName;
                     RaisePropertyChanged(nameof(InvoiceName));
                 }
             }
@@ -43,26 +42,31 @@ namespace CheckCheque.ViewModels.ConceptInvoice
         public IInvoiceService InvoiceService { get; private set; }
         public IInvoicesRepository InvoicesRepository { get; private set; }
 
-        public ICommand InvoiceNameTextChangedCommand => new Command<TextChangedEventArgs>(async (TextChangedEventArgs eventArgs) =>
+        public ICommand DismissInvoiceOperationCommand => new Command(async () =>
         {
-            if (string.IsNullOrEmpty(eventArgs.NewTextValue))
-            {
-                await CoreMethods.DisplayAlert("Error", "Invoice name cannot be empty", "Ok");
-            }
-
-            InvoiceName = eventArgs.NewTextValue;
+            await CoreMethods.PopPageModel(true);
         });
 
         public ICommand InvoiceVerifyOrSignAndSendCommand => new Command(async () =>
         {
+            if (string.IsNullOrEmpty(InvoiceName))
+            {
+                await CoreMethods.DisplayAlert("Error", "Invoice name cannot be empty", "Ok");
+                return;
+            }
+            
             if (Invoice.Reason == InvoiceReason.SignAndSend)
             {
+                Invoice.LastSignedAndSent = DateTime.UtcNow;
+
                 var status = await InvoiceService.PublishInvoiceAsync(Invoice);
                 await CoreMethods.DisplayAlert("Publishing status", status.ToString(), "Ok");
             }
 
             if (Invoice.Reason == InvoiceReason.Verify)
             {
+                Invoice.LastVerified = DateTime.UtcNow;
+
                 var status = await InvoiceService.VerifyInvoiceAsync(Invoice);
                 await CoreMethods.DisplayAlert("Verification Status", status.ToString(), "Ok");
             }

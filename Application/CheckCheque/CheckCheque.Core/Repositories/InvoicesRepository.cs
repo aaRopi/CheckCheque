@@ -12,7 +12,7 @@ namespace CheckCheque.Core.Repositories
 {
     internal class InvoicesRepository : IInvoicesRepository
     {
-        private List<Invoice> Invoices { get; }
+        private List<Invoice> Invoices { get; set; }
         private SQLiteConnection Database { get; }
 
         internal InvoicesRepository(string dbPath)
@@ -34,6 +34,8 @@ namespace CheckCheque.Core.Repositories
 
         public void AddOrUpdateInvoice(Invoice invoice)
         {
+            GetInvoices();
+
             if (Invoices.Any(i => i.Id == invoice.Id))
                 Database.Update(invoice);
             else
@@ -42,7 +44,17 @@ namespace CheckCheque.Core.Repositories
 
         public IList<Invoice> GetInvoices()
         {
-            return Invoices;
+            return Invoices = Database.Table<Invoice>().ToList();
+        }
+
+        public bool DeleteInvoice(Invoice invoice)
+        {
+            if (Invoices.Any(i => i.Id == invoice.Id))
+                Database.Delete(invoice);
+            else
+                return false;
+
+            return true;
         }
     }
 }

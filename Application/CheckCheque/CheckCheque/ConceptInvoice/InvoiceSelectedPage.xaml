@@ -4,6 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:CheckCheque.Behaviors"
     x:Class="CheckCheque.ConceptInvoice.InvoiceSelectedPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Close"
+            Command="{Binding DismissInvoiceOperationCommand}"
+            Order="Primary" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Color x:Key="BackgroundColor">White</Color>
         <Color x:Key="LightBackgroundColor">#FFFE7A</Color>
@@ -41,7 +47,7 @@
                         Aspect="AspectFit"/>
                 </Frame>
                 <Label
-                    x:Name="InvoiceName"
+                    x:Name="InvoiceNameLabel"
                     Text="{Binding InvoiceName}"
                     Margin="15"
                     FontAttributes="Italic"
@@ -60,7 +66,7 @@
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand">
                 <Label
-                    Text="Name your invoice:"
+                    Text="Your invoice:"
                     FontAttributes="Bold"
                     FontSize="Large"
                     VerticalOptions="Center"
@@ -69,17 +75,18 @@
                     HorizontalTextAlignment="Start"/>
                 <Entry
                     x:Name="InvoiceNameEntry"
-                    Text="{Binding InvoiceName}"
+                    Text="{Binding Text, Source={x:Reference InvoiceNameLabel}}"
+                    IsEnabled="False"
                     Placeholder="Enter the name of the invoice..."
                     PlaceholderColor="LightGray"
                     VerticalOptions="Center"
                     HorizontalOptions="StartAndExpand"
                     HorizontalTextAlignment="Start">
-                    <Entry.Behaviors>
+                    <!--<Entry.Behaviors>
                         <behaviors:EventToCommandBehavior
                             EventName="TextChanged"
                             Command="{Binding InvoiceNameTextChangedCommand}" />
-                    </Entry.Behaviors>
+                    </Entry.Behaviors>-->
                 </Entry>
             </StackLayout>
 
@@ -106,14 +113,6 @@
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"/>
             </Frame>
-
-            <!-- Dialog View to show success or failureIsVisible="{Binding }"
-                ShowSuccess="{Binding }" -->
-            <!--<customControls:DialogView
-                Grid.Row="0"
-                Grid.RowSpan="3"
-                IsVisible="False"
-                />-->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

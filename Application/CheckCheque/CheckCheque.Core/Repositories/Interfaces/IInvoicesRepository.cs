@@ -8,5 +8,7 @@ namespace CheckCheque.Core.Repositories.Interfaces
         IList<Invoice> GetInvoices();
 
         void AddOrUpdateInvoice(Invoice invoice);
+
+        bool DeleteInvoice(Invoice invoice);
     }
 }

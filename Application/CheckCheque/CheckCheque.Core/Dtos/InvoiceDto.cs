@@ -15,7 +15,7 @@ namespace CheckCheque.Core.Dtos
             }
 
             var serverInvoice = new ServerInvoice();
-            serverInvoice.Amount = invoice.Amount;
+            serverInvoice.InvoiceNumber = invoice.InvoiceNumber;
             serverInvoice.BankAccountNumber = invoice.BankAccountNumber;
             serverInvoice.KvkNumber = invoice.KvkNumber;
             serverInvoice.IssuerAddress = invoice.IssuerAddress;
@@ -32,7 +32,7 @@ namespace CheckCheque.Core.Dtos
             }
 
             var invoice = new Invoice(InvoiceReason.Unknown, "New server invoice");
-            invoice.Amount = serverInvoice.Amount;
+            invoice.InvoiceNumber = serverInvoice.InvoiceNumber;
             invoice.BankAccountNumber = serverInvoice.BankAccountNumber;
             invoice.KvkNumber = serverInvoice.KvkNumber;
             invoice.IssuerAddress = serverInvoice.IssuerAddress;

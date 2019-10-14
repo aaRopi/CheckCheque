@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckCheque.Android", "CheckCheque.Android\CheckCheque.Android.csproj", "{6AE1D8A2-149C-4A54-B3C8-13526D8F3E1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckCheque.UITests", "CheckCheque.UITests\CheckCheque.UITests.csproj", "{CDBFE5F4-9651-4301-84BA-BE331772BB80}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckCheque", "CheckCheque\CheckCheque.csproj", "{8773CDC6-9229-4426-917A-A3BD83AE9E1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckCheque.iOS", "CheckCheque.iOS\CheckCheque.iOS.csproj", "{6AEA0179-1C60-46AF-91D3-0C40F81E295A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckCheque.iOS.UITests", "CheckCheque.iOS.UITests\CheckCheque.iOS.UITests.csproj", "{745EDBC9-2C32-4604-9F37-4BB579E73274}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckCheque.ViewModels", "CheckCheque.ViewModels\CheckCheque.ViewModels.csproj", "{D401FDAD-3FBD-4EA3-A6E0-A39628A0EA80}"
 EndProject
@@ -37,18 +33,6 @@ Global
 		{6AE1D8A2-149C-4A54-B3C8-13526D8F3E1D}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{6AE1D8A2-149C-4A54-B3C8-13526D8F3E1D}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{6AE1D8A2-149C-4A54-B3C8-13526D8F3E1D}.Release|iPhone.Build.0 = Release|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{CDBFE5F4-9651-4301-84BA-BE331772BB80}.Release|iPhone.Build.0 = Release|Any CPU
 		{8773CDC6-9229-4426-917A-A3BD83AE9E1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8773CDC6-9229-4426-917A-A3BD83AE9E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8773CDC6-9229-4426-917A-A3BD83AE9E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -73,18 +57,6 @@ Global
 		{6AEA0179-1C60-46AF-91D3-0C40F81E295A}.Debug|iPhone.Build.0 = Debug|iPhone
 		{6AEA0179-1C60-46AF-91D3-0C40F81E295A}.Release|iPhone.ActiveCfg = Release|iPhone
 		{6AEA0179-1C60-46AF-91D3-0C40F81E295A}.Release|iPhone.Build.0 = Release|iPhone
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Release|Any CPU.Build.0 = Release|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{745EDBC9-2C32-4604-9F37-4BB579E73274}.Release|iPhone.Build.0 = Release|Any CPU
 		{D401FDAD-3FBD-4EA3-A6E0-A39628A0EA80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D401FDAD-3FBD-4EA3-A6E0-A39628A0EA80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D401FDAD-3FBD-4EA3-A6E0-A39628A0EA80}.Release|Any CPU.ActiveCfg = Release|Any CPU

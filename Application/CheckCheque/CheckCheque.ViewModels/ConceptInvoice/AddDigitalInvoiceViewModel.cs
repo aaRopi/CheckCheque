@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CheckCheque.Core.Enums;
 using CheckCheque.Core.Repositories.Interfaces;
 using CheckCheque.Core.Services.Interfaces;
+using CheckCheque.Enums;
 using CheckCheque.Models;
 using CheckCheque.ViewModels.Others;
 using FreshMvvm;
@@ -53,7 +55,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 {
                     _showParsedInvoiceDetails = value;
 
-                    InvoiceAmount = $"{Invoice.Amount}";
+                    InvoiceNumber = Invoice.InvoiceNumber;
                     InvoiceBankAccountNumber = Invoice.BankAccountNumber;
                     InvoiceIssuerAddress = Invoice.IssuerAddress;
                     InvoiceKvkNumber = Invoice.KvkNumber;
@@ -63,16 +65,30 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
-        private string _invoiceAmount;
-        public string InvoiceAmount
+        private string _invoiceName;
+        public string InvoiceName
         {
-            get => _invoiceAmount;
+            get => _invoiceName;
             set
             {
-                if (_invoiceAmount != value)
+                if (_invoiceName != value)
                 {
-                    _invoiceAmount = value;
-                    RaisePropertyChanged(nameof(InvoiceAmount));
+                    _invoiceName = value;
+                    RaisePropertyChanged(nameof(InvoiceName));
+                }
+            }
+        }
+
+        private string _invoiceNumber;
+        public string InvoiceNumber
+        {
+            get => _invoiceNumber;
+            set
+            {
+                if (_invoiceNumber != value)
+                {
+                    _invoiceNumber = value;
+                    RaisePropertyChanged(nameof(InvoiceNumber));
                 }
             }
         }
@@ -119,14 +135,22 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
+        private bool _showBusyStatus;
+        public bool ShowBusyStatus
+        {
+            get => _showBusyStatus;
+            set
+            {
+                if (_showBusyStatus != value)
+                {
+                    _showBusyStatus = value;
+                    RaisePropertyChanged(nameof(ShowBusyStatus));
+                }
+            }
+        }
+
         public IInvoiceService InvoiceService { get; private set; }
         public IInvoicesRepository InvoicesRepository { get; private set; }
-
-        public ICommand HideInvoiceDetailsAndShowNextStepCommand => new Command(() =>
-        {
-            ShowParsedInvoiceDetails = false;
-            SelectedFileName = Invoice.FileName;
-        });
 
         public ICommand ShowScanningInstructionsCommand => new Command(async () =>
         {
@@ -142,7 +166,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
             string filePath = "";
 
-            if (methodOfSelection == "Camera")
+            if (methodOfSelection.Equals("Camera", StringComparison.InvariantCultureIgnoreCase))
             {
                 filePath = await TakePhotoAsync();
                 if (filePath == null)
@@ -150,10 +174,11 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                     return;
                 }
 
+                Invoice.FileType = DigitalInvoiceFileType.Image;
                 _ = Task.Run(async () => { await ParseImageForInvoiceDataAsync(filePath); });
             }
 
-            if (methodOfSelection == "FileSystem")
+            if (methodOfSelection.Equals("FileSystem", StringComparison.InvariantCultureIgnoreCase))
             {
                 filePath = await SelectFileFromFileStorageAsync();
                 if (filePath == null)
@@ -161,34 +186,91 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                     return;
                 }
 
+                Invoice.FileType = DigitalInvoiceFileType.Image;
                 _ = Task.Run(async () => { await ParseFileForInvoiceDataAsync(filePath); });
             }
 
             Invoice.FileName = filePath;
         });
 
-        public ICommand InvoiceFileSelectedCommand => new Command(async () =>
+        public ICommand InvoiceVerifyOrSignAndSendCommand => new Command(async () =>
         {
-            if (string.IsNullOrEmpty(Invoice.FileName))
+            if (string.IsNullOrEmpty(InvoiceName))
             {
-                await CoreMethods.DisplayAlert("Error", "Please select a file for the invoice first", "Ok");
+                await CoreMethods.DisplayAlert("Error", "Invoice name cannot be empty", "Ok");
+                return;
             }
 
-            await CoreMethods.PushPageModel<InvoiceSelectedViewModel>(Invoice);
+            Invoice.Name = InvoiceName;
+            Invoice.InvoiceNumber = InvoiceNumber;
+            Invoice.BankAccountNumber = InvoiceBankAccountNumber;
+            Invoice.KvkNumber = InvoiceKvkNumber;
+            Invoice.IssuerAddress = InvoiceIssuerAddress;
+
+            InvoicesRepository.AddOrUpdateInvoice(Invoice);
+
+            ShowBusyStatus = true;
+
+            if (Invoice.Reason == InvoiceReason.SignAndSend)
+            {
+                Invoice.LastSignedAndSent = DateTime.UtcNow;
+
+                var status = await InvoiceService.PublishInvoiceAsync(Invoice);
+                ShowBusyStatus = false;
+
+                await CoreMethods.DisplayAlert("Publishing status", status.ToString(), "Ok");
+            }
+
+            if (Invoice.Reason == InvoiceReason.Verify)
+            {
+                Invoice.LastVerified = DateTime.UtcNow;
+
+                var status = await InvoiceService.VerifyInvoiceAsync(Invoice);
+                ShowBusyStatus = false;
+
+                await CoreMethods.DisplayAlert("Verification Status", status.ToString(), "Ok");
+            }
+
+            ShowBusyStatus = false;
+            await CoreMethods.PopPageModel(true);
+        });
+
+        //public ICommand InvoiceFileSelectedCommand => new Command(async () =>
+        //{
+        //    if (string.IsNullOrEmpty(Invoice.FileName))
+        //    {
+        //        await CoreMethods.DisplayAlert("Error", "Please select a file for the invoice first", "Ok");
+        //    }
+
+        //    Invoice.Name = InvoiceName;
+        //    Invoice.InvoiceNumber = InvoiceNumber;
+        //    Invoice.BankAccountNumber = InvoiceBankAccountNumber;
+        //    Invoice.KvkNumber = InvoiceKvkNumber;
+        //    Invoice.IssuerAddress = InvoiceIssuerAddress;
+
+        //    InvoicesRepository.AddOrUpdateInvoice(Invoice);
+
+        //    await CoreMethods.PushPageModel<InvoiceSelectedViewModel>(Invoice);
+        //});
+
+        public ICommand DismissInvoiceOperationCommand => new Command(async () =>
+        {
+            await CoreMethods.PopPageModel(true);
         });
 
         public override void Init(object initData)
         {
             base.Init(initData);
 
-            var invoice = initData as Invoice;
-            if (invoice != null)
+            var isValidInvoiceReason = initData is InvoiceReason;
+            if (isValidInvoiceReason && (InvoiceReason)initData != InvoiceReason.Concept || (InvoiceReason)initData != InvoiceReason.Unknown)
             {
-                Invoice = invoice;
+                Invoice = new Invoice();
+                Invoice.Reason = (InvoiceReason)initData;
             }
             else
             {
-                throw new ArgumentException($"{nameof(initData)} cannot be null! This viewmodel will be useless then!");
+                throw new ArgumentException($"{nameof(initData)} is not the correct reason type! This viewmodel will be useless then!");
             }
 
             InvoiceService = DependencyService.Get<IInvoiceService>();
@@ -207,12 +289,10 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 var invoice = await InvoiceService.ParseInvoiceDataFromFile(filePath);
                 if (invoice != null)
                 {
-                    Invoice.Amount = invoice.Amount;
+                    Invoice.InvoiceNumber = invoice.InvoiceNumber;
                     Invoice.BankAccountNumber = invoice.BankAccountNumber;
                     Invoice.KvkNumber = invoice.KvkNumber;
                     Invoice.IssuerAddress = invoice.IssuerAddress;
-
-                    InvoicesRepository.AddOrUpdateInvoice(Invoice);
                 }
             }
             catch (Exception ex)
@@ -234,12 +314,10 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                     var invoice = await InvoiceService.ParseInvoiceDataFromImage(filePath);
                     if (invoice != null)
                     {
-                        Invoice.Amount = invoice.Amount;
+                        Invoice.InvoiceNumber = invoice.InvoiceNumber;
                         Invoice.BankAccountNumber = invoice.BankAccountNumber;
                         Invoice.KvkNumber = invoice.KvkNumber;
                         Invoice.IssuerAddress = invoice.IssuerAddress;
-
-                        InvoicesRepository.AddOrUpdateInvoice(Invoice);
                     }
                 }
                 catch (Exception ex)
@@ -286,8 +364,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 return null;
             }
 
-            await CoreMethods.DisplayAlert("Image File Location", file.Path, "Ok");
-
             return file.Path;
         }
 
@@ -308,8 +384,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
                 Console.WriteLine("File name chosen: " + fileName);
                 Console.WriteLine("File data: " + contents);
-
-                await CoreMethods.DisplayAlert("Digital File Location", fileData.FilePath, "Ok");
 
                 return fileData.FilePath;
             }

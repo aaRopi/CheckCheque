@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CheckCheque.UserInvoices.InvoiceDetailPage"
+    Title="Invoice details">
+    <ContentPage.Resources>
+        <Style
+            TargetType="Label"
+            x:Key="DataLabelStyle">
+            <Setter Property="Margin" Value="10, 5, 0, 0" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+
+        <Style
+            TargetType="Label"
+            x:Key="DataStyle">
+            <Setter Property="Margin" Value="10, 5, 0, 0" />
+            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="TextColor" Value="DarkOliveGreen" />
+            <Setter Property="MaxLines" Value="0" />
+            <Setter Property="LineBreakMode" Value="MiddleTruncation" />
+        </Style>
+    </ContentPage.Resources>
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <!-- Data Labels -->
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Invoice Name"
+            Style="{StaticResource DataLabelStyle}"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Invoice Reason"
+            Style="{StaticResource DataLabelStyle}"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="File"
+            Style="{StaticResource DataLabelStyle}" />
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Invoice number"
+            Style="{StaticResource DataLabelStyle}" />
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            Text="Bank Account Number"
+            Style="{StaticResource DataLabelStyle}" />
+        <Label
+            Grid.Row="5"
+            Grid.Column="0"
+            Text="Issuer Address"
+            Style="{StaticResource DataLabelStyle}" />
+        <Label
+            Grid.Row="6"
+            Grid.Column="0"
+            Text="Kvk Number"
+            Style="{StaticResource DataLabelStyle}" />
+
+        <!-- Vertical Border -->
+        <BoxView
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.RowSpan="7"
+            BackgroundColor="Black"
+            WidthRequest="1" />
+
+        <!-- Data -->
+        <Label
+            Grid.Row="0"
+            Grid.Column="2"
+            Text="{Binding InvoiceName}"
+            Style="{StaticResource DataStyle}"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="2"
+            Text="{Binding InvoiceReason}"
+            Style="{StaticResource DataStyle}"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="2"
+            Text="{Binding InvoiceFileName}"
+            Style="{StaticResource DataStyle}"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="2"
+            Text="{Binding InvoiceNumber}"
+            Style="{StaticResource DataStyle}"/>
+        <Label
+            Grid.Row="4"
+            Grid.Column="2"
+            Text="{Binding InvoiceBAN}"
+            Style="{StaticResource DataStyle}"/>
+        <Label
+            Grid.Row="5"
+            Grid.Column="2"
+            Text="{Binding InvoiceIA}"
+            Style="{StaticResource DataStyle}"/>
+        <Label
+            Grid.Row="6"
+            Grid.Column="2"
+            Text="{Binding InvoiceKvkNumber}"
+            Style="{StaticResource DataStyle}"/>
+    </Grid>
+</ContentPage>

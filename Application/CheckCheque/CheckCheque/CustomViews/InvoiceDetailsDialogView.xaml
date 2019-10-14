@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="CheckCheque.CustomViews.InvoiceDetailsDialogView"
     xmlns:converters="clr-namespace:CheckCheque.Converters"
+    xmlns:behaviors="clr-namespace:CheckCheque.Behaviors"
     VerticalOptions="FillAndExpand"
     HorizontalOptions="FillAndExpand"
     x:Name="ThisInvoiceDetailsDialogView">
@@ -52,7 +53,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="0"
-                    Text="Amount: " />
+                    Text="Invoice number: " />
                 <Label
                     Grid.Row="2"
                     Grid.Column="0"
@@ -66,11 +67,11 @@
                     Grid.Column="0"
                     Text="KvK Number: " />
                 <Entry
-                    x:Name="InvoiceAmountEntry"
+                    x:Name="InvoiceNumberEntry"
                     Grid.Row="1"
                     Grid.Column="1"
                     Keyboard="Numeric"
-                    Text="{Binding InvoiceAmount, Source={x:Reference ThisInvoiceDetailsDialogView}}"
+                    Text="{Binding InvoiceNumber, Source={x:Reference ThisInvoiceDetailsDialogView}}"
                     IsEnabled="False"/>
                 <Entry
                     x:Name="BankAccountNumberEntry"
@@ -90,9 +91,12 @@
                     Grid.Column="1"
                     Keyboard="Numeric"
                     Text="{Binding KvkNumber, Source={x:Reference ThisInvoiceDetailsDialogView}}"
-                    IsEnabled="False" />
+                    IsEnabled="False" >
+                    <Entry.Behaviors>
+                        <behaviors:NumericValidationBehavior />
+                    </Entry.Behaviors>
+                    </Entry>
                 <Button
-                    IsVisible="False"
                     Grid.Row="5"
                     Grid.Column="0"
                     Text="Enter manually"
