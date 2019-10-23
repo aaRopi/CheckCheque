@@ -6,9 +6,9 @@ namespace CheckCheque.ViewModels
 {
     public class SettingsViewModel : BindableObject
     {
-        private ObservableCollection<Setting> _settings;
+        private ObservableCollection<Settings> _settings;
 
-        public ObservableCollection<Setting> Settings
+        public ObservableCollection<Settings> Settings
         {
             get => _settings;
             set
@@ -23,50 +23,7 @@ namespace CheckCheque.ViewModels
 
         public SettingsViewModel()
         {
-            this.Settings = new ObservableCollection<Setting>
-            {
-                new Setting
-                {
-                    Name = "Sync",
-                    //ImageSource = "settings_sync_icon"
-                },
-
-                new Setting
-                {
-                    Name = "Scan",
-                    //ImageSource = "settings_scan_icon"
-                },
-
-                new Setting
-                {
-                    Name = "Doc Export",
-                    //ImageSource = "settings_docExport_icon"
-                },
-
-                new Setting
-                {
-                    Name = "OCR",
-                    //ImageSource = "settings_ocr_icon"
-                },
-
-                new Setting
-                {
-                    Name = "Security & Backup",
-                    //ImageSource = "settings_secnback_icon"
-                },
-
-                new Setting
-                {
-                    Name = "Help",
-                    //ImageSource = "settings_help_icon"
-                },
-
-                new Setting
-                {
-                    Name = "Feedback",
-                    //ImageSource = "settings_feedback_icon"
-                }
-            };
+            this.Settings = new ObservableCollection<Settings>();
         }
     }
 }

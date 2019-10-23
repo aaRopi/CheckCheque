@@ -6,17 +6,34 @@ using CheckCheque.Core.Repositories.Interfaces;
 using CheckCheque.Core.Services.Interfaces;
 using CheckCheque.Enums;
 using CheckCheque.Models;
+using CheckCheque.Models.Settings;
 using CheckCheque.ViewModels.Others;
 using FreshMvvm;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CheckCheque.ViewModels.ConceptInvoice
 {
     public class AddDigitalInvoiceViewModel: FreshBasePageModel
     {
+        #region Properties
+        private bool _userHasAllowedInvoiceDataUse;
+        public bool UserHasAllowedInvoiceDataUse
+        {
+            get => _userHasAllowedInvoiceDataUse;
+            set
+            {
+                if (_userHasAllowedInvoiceDataUse != value)
+                {
+                    _userHasAllowedInvoiceDataUse = value;
+                    RaisePropertyChanged(nameof(UserHasAllowedInvoiceDataUse));
+                }
+            }
+        }
+
         private Invoice _invoice;
         public Invoice Invoice
         {
@@ -148,10 +165,12 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 }
             }
         }
-
+        
         public IInvoiceService InvoiceService { get; private set; }
         public IInvoicesRepository InvoicesRepository { get; private set; }
+        #endregion Properties
 
+        #region Commands
         public ICommand ShowScanningInstructionsCommand => new Command(async () =>
         {
             await CoreMethods.PushPageModel<ShowInstructionsViewModel>(ShowInstructionsViewModel.ShowScanningInstructions);
@@ -235,30 +254,13 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             await CoreMethods.PopPageModel(true);
         });
 
-        //public ICommand InvoiceFileSelectedCommand => new Command(async () =>
-        //{
-        //    if (string.IsNullOrEmpty(Invoice.FileName))
-        //    {
-        //        await CoreMethods.DisplayAlert("Error", "Please select a file for the invoice first", "Ok");
-        //    }
-
-        //    Invoice.Name = InvoiceName;
-        //    Invoice.InvoiceNumber = InvoiceNumber;
-        //    Invoice.BankAccountNumber = InvoiceBankAccountNumber;
-        //    Invoice.KvkNumber = InvoiceKvkNumber;
-        //    Invoice.IssuerAddress = InvoiceIssuerAddress;
-
-        //    InvoicesRepository.AddOrUpdateInvoice(Invoice);
-
-        //    await CoreMethods.PushPageModel<InvoiceSelectedViewModel>(Invoice);
-        //});
-
         public ICommand DismissInvoiceOperationCommand => new Command(async () =>
         {
             await CoreMethods.PopPageModel(true);
         });
+        #endregion Commands
 
-        public override void Init(object initData)
+        public override async void Init(object initData)
         {
             base.Init(initData);
 
@@ -275,6 +277,62 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
             InvoiceService = DependencyService.Get<IInvoiceService>();
             InvoicesRepository = DependencyService.Get<IInvoicesRepository>();
+
+            try
+            {
+                var userPermissionInString = await SecureStorage.GetAsync(Settings.UserPermissionForInvoiceDataKey);
+                if (string.IsNullOrEmpty(userPermissionInString))
+                {
+                    try
+                    {
+                        await SecureStorage.SetAsync(Settings.UserPermissionForInvoiceDataKey, Boolean.FalseString);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Could not set UserPermissionForInvoiceDataKey to FalseString in SecureStorage: " + ex.Message);
+                    }
+                    finally
+                    {
+                        UserHasAllowedInvoiceDataUse = false;
+                    }
+                }
+                else
+                {
+                    UserHasAllowedInvoiceDataUse = userPermissionInString.Equals(Boolean.TrueString);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Could not retrieve UserPermissionForInvoiceDataKey from SecureStorage: " + ex.Message);
+            }
+        }
+
+        protected override async void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
+
+            if (Invoice.Reason == InvoiceReason.SignAndSend && !UserHasAllowedInvoiceDataUse)
+            {
+                // user wants to sign and send, but has not granted us permission to use invoice data
+                bool permissionGranted = await CoreMethods.DisplayAlert("Grant Permission",
+                    "Do you approve that this invoice number, your company's address, your bank account and your KvK number are used to verify the invoice authenticity?",
+                    "Agree", "Deny");
+
+                try
+                {
+                    await SecureStorage.SetAsync(Settings.UserPermissionForInvoiceDataKey,
+                        permissionGranted ? Boolean.TrueString : Boolean.FalseString);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error storing permission granted in SecureStorage " + ex.Message);
+                }
+                finally
+                {
+                    if (!permissionGranted)
+                        await CoreMethods.PopPageModel(true);
+                }
+            }
         }
 
         private async Task ParseFileForInvoiceDataAsync(string filePath)
