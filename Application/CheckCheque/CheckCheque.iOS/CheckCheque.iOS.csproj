@@ -25,6 +25,8 @@
         <MtouchArch>x86_64</MtouchArch>
         <MtouchLink>None</MtouchLink>
         <MtouchDebug>true</MtouchDebug>
+        <CodesignKey>iPhone Developer</CodesignKey>
+        <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
         <DebugType>none</DebugType>
@@ -190,6 +192,8 @@
       <BundleResource Include="Resources\invoice_icon.png" />
       <BundleResource Include="Resources\blockchain_background.jpg" />
       <BundleResource Include="Resources\main_page_logo.PNG" />
+      <BundleResource Include="Resources\error.png" />
+      <BundleResource Include="Resources\success.png" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
