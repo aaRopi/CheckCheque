@@ -198,7 +198,8 @@
                 Grid.RowSpan="5"
                 Grid.ColumnSpan="3"
                 IsVisible="{Binding ShowInvoiceOperationStatus}"
-                ShowSuccess="{Binding InvoiceOperationIsSuccessful}"/>
+                ShowSuccess="{Binding InvoiceOperationIsSuccessful}"
+                InvoiceOperationResult="{Binding InvoiceOperationResult}"/>
         </Grid>
     </ScrollView>
 </ContentPage>

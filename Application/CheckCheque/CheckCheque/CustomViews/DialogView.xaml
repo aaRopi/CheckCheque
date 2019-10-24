@@ -13,8 +13,8 @@
         <Style TargetType="Frame" x:Key="LocalFrameStyle">
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="WidthRequest" Value="150" />
-            <Setter Property="HeightRequest" Value="150" />
+            <Setter Property="WidthRequest" Value="200" />
+            <Setter Property="HeightRequest" Value="200" />
             <Setter Property="CornerRadius" Value="20" />
         </Style>
 
@@ -51,7 +51,7 @@
                     Source="success.png"/>
                 <Label
                     Style="{StaticResource LocalLabelStyle}"
-                    Text="Success!"/>
+                    Text="{Binding InvoiceOperationResult, Source={x:Reference Self}}"/>
             </StackLayout>
         </Frame>
         <Frame
@@ -65,7 +65,7 @@
                     Source="error.png"/>
                 <Label
                     Style="{StaticResource LocalLabelStyle}"
-                    Text="Error!"/>
+                    Text="{Binding InvoiceOperationResult, Source={x:Reference Self}}"/>
             </StackLayout>
         </Frame>
     </Grid>
