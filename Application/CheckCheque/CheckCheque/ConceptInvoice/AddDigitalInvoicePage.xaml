@@ -147,7 +147,7 @@
                 Grid.Row="3"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
-                Margin="5, 10"
+                Margin="5, 25"
                 IsVisible="{Binding ShowParsedInvoiceDetails}"
                 InvoiceName="{Binding InvoiceName, Mode=OneWayToSource}"
                 InvoiceNumber="{Binding InvoiceNumber, Mode=OneWayToSource}"
