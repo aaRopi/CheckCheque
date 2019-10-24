@@ -34,6 +34,34 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
+        private bool _invoiceOperationIsSuccessful;
+        public bool InvoiceOperationIsSuccessful
+        {
+            get => _invoiceOperationIsSuccessful;
+            set
+            {
+                if (_invoiceOperationIsSuccessful != value)
+                {
+                    _invoiceOperationIsSuccessful = value;
+                    RaisePropertyChanged(nameof(InvoiceOperationIsSuccessful));
+                }
+            }
+        }
+
+        private bool _showInvoiceOperationStatus;
+        public bool ShowInvoiceOperationStatus
+        {
+            get => _showInvoiceOperationStatus;
+            set
+            {
+                if (_showInvoiceOperationStatus != value)
+                {
+                    _showInvoiceOperationStatus = value;
+                    RaisePropertyChanged(nameof(ShowInvoiceOperationStatus));
+                }
+            }
+        }
+
         private Invoice _invoice;
         public Invoice Invoice
         {
@@ -237,7 +265,8 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 var status = await InvoiceService.PublishInvoiceAsync(Invoice);
                 ShowBusyStatus = false;
 
-                await CoreMethods.DisplayAlert("Publishing status", status.ToString(), "Ok");
+                InvoiceOperationIsSuccessful = status == InvoicePublishStatus.Success;
+                //await CoreMethods.DisplayAlert("Publishing status", status.ToString(), "Ok");
             }
 
             if (Invoice.Reason == InvoiceReason.Verify)
@@ -247,10 +276,15 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 var status = await InvoiceService.VerifyInvoiceAsync(Invoice);
                 ShowBusyStatus = false;
 
-                await CoreMethods.DisplayAlert("Verification Status", status.ToString(), "Ok");
+                InvoiceOperationIsSuccessful = status == InvoiceVerificationStatus.Success;
+                //await CoreMethods.DisplayAlert("Verification Status", status.ToString(), "Ok");
             }
 
             ShowBusyStatus = false;
+            ShowInvoiceOperationStatus = true;
+            await Task.Delay(2000);
+            ShowInvoiceOperationStatus = false;
+
             await CoreMethods.PopPageModel(true);
         });
 
@@ -317,6 +351,8 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 bool permissionGranted = await CoreMethods.DisplayAlert("Grant Permission",
                     "Do you approve that this invoice number, your company's address, your bank account and your KvK number are used to verify the invoice authenticity?",
                     "Agree", "Deny");
+
+                UserHasAllowedInvoiceDataUse = permissionGranted;
 
                 try
                 {

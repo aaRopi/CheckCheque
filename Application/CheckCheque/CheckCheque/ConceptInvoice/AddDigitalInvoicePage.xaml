@@ -155,19 +155,6 @@
                 IssuerAddress="{Binding InvoiceIssuerAddress, Mode=OneWayToSource}"
                 KvkNumber="{Binding InvoiceKvkNumber, Mode=OneWayToSource}"/>
 
-            <!-- Button to go to the next view in the flow. -->
-            <!--<Button
-                x:Name="GoToNextPageButton"
-                Grid.Row="4"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                Command="{Binding InvoiceFileSelectedCommand}"
-                Text="{Binding Invoice.Reason}"
-                IsVisible="{Binding InvoiceName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
-                IsEnabled="{Binding InvoiceName, Converter={StaticResource StringNullOrEmptyToBoolConverter}, FallbackValue=False}"
-                FontSize="Medium"
-                HorizontalOptions="Center"
-                VerticalOptions="End"/>-->
             <!-- Action button -->
             <Frame
                 Grid.Row="4"
@@ -204,6 +191,14 @@
                 Grid.RowSpan="5"
                 Grid.ColumnSpan="3"
                 IsVisible="{Binding ShowBusyStatus}" />
+
+            <customViews:DialogView
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.RowSpan="5"
+                Grid.ColumnSpan="3"
+                IsVisible="{Binding ShowInvoiceOperationStatus}"
+                ShowSuccess="{Binding InvoiceOperationIsSuccessful}"/>
         </Grid>
     </ScrollView>
 </ContentPage>

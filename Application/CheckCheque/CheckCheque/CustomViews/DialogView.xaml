@@ -42,14 +42,13 @@
             HorizontalOptions="FillAndExpand" />
         <Frame
             IsVisible="{Binding ShowSuccess, Source={x:Reference Self}}"
-            Style="{StaticResource LocalFrameStyle}"
-            BackgroundColor="#2EB67D">
+            Style="{StaticResource LocalFrameStyle}">
             <StackLayout
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand">
                 <Image
                     Style="{StaticResource LocalImageStyle}"
-                    Source="check_icon"/>
+                    Source="success.png"/>
                 <Label
                     Style="{StaticResource LocalLabelStyle}"
                     Text="Success!"/>
@@ -57,14 +56,13 @@
         </Frame>
         <Frame
             IsVisible="{Binding ShowSuccess, Source={x:Reference Self}, Converter={StaticResource InverseBoolConverter}}"
-            Style="{StaticResource LocalFrameStyle}"
-            BackgroundColor="#E01E5A">
+            Style="{StaticResource LocalFrameStyle}">
             <StackLayout
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand">
                 <Image
                     Style="{StaticResource LocalImageStyle}"
-                    Source="wrong_icon"/>
+                    Source="error.png"/>
                 <Label
                     Style="{StaticResource LocalLabelStyle}"
                     Text="Error!"/>
