@@ -280,7 +280,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 ShowBusyStatus = false;
 
                 InvoiceOperationIsSuccessful = status == InvoicePublishStatus.Success;
-                InvoiceOperationResult = InvoiceOperationIsSuccessful ? "Sign and Sent!" : "Something went wrong :(";
+                InvoiceOperationResult = InvoiceOperationIsSuccessful ? "Signed and Sent!" : "Something went wrong :(";
             }
 
             if (Invoice.Reason == InvoiceReason.Verify)
