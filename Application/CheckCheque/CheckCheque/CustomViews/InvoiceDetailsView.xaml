@@ -7,14 +7,16 @@
     x:Name="ThisInvoiceDetailsView">
     <Grid
         HorizontalOptions="FillAndExpand"
-        VerticalOptions="FillAndExpand">
+        VerticalOptions="FillAndExpand"
+        MinimumHeightRequest="350"
+        RowSpacing="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

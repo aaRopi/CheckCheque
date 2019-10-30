@@ -48,6 +48,20 @@ namespace CheckCheque.ViewModels.ConceptInvoice
             }
         }
 
+        private string _invoiceOperationResult;
+        public string InvoiceOperationResult
+        {
+            get => _invoiceOperationResult;
+            set
+            {
+                if (_invoiceOperationResult != value)
+                {
+                    _invoiceOperationResult = value;
+                    RaisePropertyChanged(nameof(InvoiceOperationResult));
+                }
+            }
+        }
+
         private bool _showInvoiceOperationStatus;
         public bool ShowInvoiceOperationStatus
         {
@@ -266,7 +280,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 ShowBusyStatus = false;
 
                 InvoiceOperationIsSuccessful = status == InvoicePublishStatus.Success;
-                //await CoreMethods.DisplayAlert("Publishing status", status.ToString(), "Ok");
+                InvoiceOperationResult = InvoiceOperationIsSuccessful ? "Signed and Sent!" : "Something went wrong :(";
             }
 
             if (Invoice.Reason == InvoiceReason.Verify)
@@ -277,7 +291,7 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                 ShowBusyStatus = false;
 
                 InvoiceOperationIsSuccessful = status == InvoiceVerificationStatus.Success;
-                //await CoreMethods.DisplayAlert("Verification Status", status.ToString(), "Ok");
+                InvoiceOperationResult = InvoiceOperationIsSuccessful ? "Valid Invoice" : "Cannot verify invoice";
             }
 
             ShowBusyStatus = false;
@@ -311,34 +325,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
             InvoiceService = DependencyService.Get<IInvoiceService>();
             InvoicesRepository = DependencyService.Get<IInvoicesRepository>();
-
-            try
-            {
-                var userPermissionInString = await SecureStorage.GetAsync(Settings.UserPermissionForInvoiceDataKey);
-                if (string.IsNullOrEmpty(userPermissionInString))
-                {
-                    try
-                    {
-                        await SecureStorage.SetAsync(Settings.UserPermissionForInvoiceDataKey, Boolean.FalseString);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Could not set UserPermissionForInvoiceDataKey to FalseString in SecureStorage: " + ex.Message);
-                    }
-                    finally
-                    {
-                        UserHasAllowedInvoiceDataUse = false;
-                    }
-                }
-                else
-                {
-                    UserHasAllowedInvoiceDataUse = userPermissionInString.Equals(Boolean.TrueString);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Could not retrieve UserPermissionForInvoiceDataKey from SecureStorage: " + ex.Message);
-            }
         }
 
         protected override async void ViewIsAppearing(object sender, EventArgs e)
