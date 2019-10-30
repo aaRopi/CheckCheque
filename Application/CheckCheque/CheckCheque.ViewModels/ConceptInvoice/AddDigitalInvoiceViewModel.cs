@@ -325,34 +325,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
 
             InvoiceService = DependencyService.Get<IInvoiceService>();
             InvoicesRepository = DependencyService.Get<IInvoicesRepository>();
-
-            //try
-            //{
-            //    var userPermissionInString = await SecureStorage.GetAsync(Settings.UserPermissionForInvoiceDataKey);
-            //    if (string.IsNullOrEmpty(userPermissionInString))
-            //    {
-            //        try
-            //        {
-            //            await SecureStorage.SetAsync(Settings.UserPermissionForInvoiceDataKey, Boolean.FalseString);
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            Console.WriteLine("Could not set UserPermissionForInvoiceDataKey to FalseString in SecureStorage: " + ex.Message);
-            //        }
-            //        finally
-            //        {
-            //            UserHasAllowedInvoiceDataUse = false;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        UserHasAllowedInvoiceDataUse = userPermissionInString.Equals(Boolean.TrueString);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine("Could not retrieve UserPermissionForInvoiceDataKey from SecureStorage: " + ex.Message);
-            //}
         }
 
         protected override async void ViewIsAppearing(object sender, EventArgs e)
@@ -383,13 +355,6 @@ namespace CheckCheque.ViewModels.ConceptInvoice
                         await CoreMethods.PopPageModel(true);
                 }
             }
-        }
-
-        protected override void ViewIsDisappearing(object sender, EventArgs e)
-        {
-            base.ViewIsDisappearing(sender, e);
-
-            ShowInvoiceOperationStatus = false;
         }
 
         private async Task ParseFileForInvoiceDataAsync(string filePath)
